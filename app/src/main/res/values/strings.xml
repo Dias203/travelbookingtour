@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">travel_app</string>
+    <string name="introTitle">Explorer the<font color='#3f95ec'>\nWorld </font>with us</string>
+
+    <string name="subIntro">Travel booking application helps users\n
+        book flights and hotels at convenient, all-inclusive prices.</string>
+
+    <string name="login">Login</string>
+    <string name="login_admin">Login with Admin</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Sign Up</string>
+    <string name="click_to_login">Already have an account? <font color='#3F95EC'>Login </font></string>
+    <string name="click_to_register">Don\'t have an account? <font color='#3F95EC'>Sign Up </font> </string>
+    <string name="logout">LOGOUT</string>
+    <string name="forgot_password"> <font color="#A9A8A8"> Forgot Password? </font> </string>
+</resources>
