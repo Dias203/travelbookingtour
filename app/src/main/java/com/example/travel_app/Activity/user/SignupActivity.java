@@ -62,10 +62,10 @@ public class SignupActivity extends BaseActivity {
             password = String.valueOf(binding.password.getText()).trim();
 
             if(TextUtils.isEmpty(email)){
-                Toast.makeText(this, "Enter email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nhập địa chỉ email!", Toast.LENGTH_SHORT).show();
             }
             if(TextUtils.isEmpty(password)){
-                Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nhập password!", Toast.LENGTH_SHORT).show();
             }
 
 //            mAuth.createUserWithEmailAndPassword(email, password)
@@ -91,7 +91,7 @@ public class SignupActivity extends BaseActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(SignupActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
                             DocumentReference df = fStore.collection("Users").document(user.getUid());
                             Map<String, Object> userInfo = new HashMap<>();
                             userInfo.put("UserEmail", email);
@@ -107,7 +107,7 @@ public class SignupActivity extends BaseActivity {
             ).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(SignupActivity.this, "Failed to Create Account", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Tạo tài khoản thất bại", Toast.LENGTH_SHORT).show();
                 }
             });
 

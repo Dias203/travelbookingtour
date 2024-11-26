@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity {
                     new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                             checkUserAccessLevel(authResult.getUser().getUid());
                         }
                     }
