@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Random;
+
 public class AdminAddTour extends BaseActivity {
     ActivityAdminAddTourBinding binding;
     private static final int PICK_IMAGE = 1;
@@ -83,9 +85,16 @@ public class AdminAddTour extends BaseActivity {
                 long count = dataSnapshot.getChildrenCount();
                 long nextIndex = count; // Tính chỉ số tiếp theo
 
+                // Tạo số ngẫu nhiên đảm bảo nó luôn dương và lớn hơn nextIndex
+                Random random = new Random();
+                int randomNum = Math.abs(random.nextInt()) + 1;  // Đảm bảo số ngẫu nhiên luôn lớn hơn 0
+
+                // Đảm bảo nextIndex + randomNum > nextIndex
+                long newId = nextIndex + randomNum;  // Tổng hợp nextIndex và randomNum để tạo ID mới
+
                 // Tạo đối tượng ItemDomain và thêm vào Firebase Realtime Database với chỉ số tiếp theo
                 ItemDomain tour = new ItemDomain();
-                tour.setId(String.valueOf(nextIndex)); // Sử dụng chỉ số tiếp theo làm ID
+                tour.setId(String.valueOf(newId)); // Sử dụng chỉ số tiếp theo làm ID
 
                 // Kiểm tra các trường dữ liệu trước khi thêm vào database
                 String title = binding.titleTour.getText().toString().trim();
@@ -100,6 +109,7 @@ public class AdminAddTour extends BaseActivity {
                 String bedNumStr = binding.bedNum.getText().toString().trim();
                 String scoreStr = binding.scoreTour.getText().toString().trim();
                 String categoryIdStr = binding.CategoryId.getText().toString().trim();
+                String distance = binding.distanceTour.getText().toString().trim();
 
                 // Kiểm tra các trường không được null hoặc rỗng
                 if (title.isEmpty() || address.isEmpty() || description.isEmpty() || duration.isEmpty() || timeTour.isEmpty() ||
@@ -113,6 +123,7 @@ public class AdminAddTour extends BaseActivity {
                 tour.setTitle(title);
                 tour.setAddress(address);
                 tour.setDescription(description);
+                tour.setDistance(distance);
                 tour.setPic(imageUrl);
                 tour.setDuration(duration);
                 tour.setTimeTour(timeTour);

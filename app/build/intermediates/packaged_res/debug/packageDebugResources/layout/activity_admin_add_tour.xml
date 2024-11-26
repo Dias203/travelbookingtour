@@ -65,7 +65,7 @@
                     android:id="@+id/CategoryId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tour category"
+                    android:hint="Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -83,7 +83,7 @@
                     android:id="@+id/addressTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Adress"
+                    android:hint="Address"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/titleTour" />
@@ -92,7 +92,7 @@
                     android:id="@+id/bedNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Bed"
+                    android:hint="Bed number"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/addressTour" />
