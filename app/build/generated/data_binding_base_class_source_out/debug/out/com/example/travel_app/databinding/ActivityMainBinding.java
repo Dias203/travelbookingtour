@@ -4,6 +4,7 @@ package com.example.travel_app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -29,6 +30,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ChipNavigationBar bottomnav;
 
   @NonNull
+  public final EditText edtSearch;
+
+  @NonNull
   public final ImageView imageView;
 
   @NonNull
@@ -50,6 +54,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ProgressBar progressBarRecommended;
 
   @NonNull
+  public final ProgressBar progressBarSearch;
+
+  @NonNull
   public final RecyclerView recyclerViewCategory;
 
   @NonNull
@@ -59,21 +66,29 @@ public final class ActivityMainBinding implements ViewBinding {
   public final RecyclerView recyclerViewRecommended;
 
   @NonNull
+  public final TextView search;
+
+  @NonNull
+  public final RecyclerView searchResults;
+
+  @NonNull
   public final TextView textView3;
 
   @NonNull
   public final ViewPager2 viewPagerSlider;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ChipNavigationBar bottomnav, @NonNull ImageView imageView,
-      @NonNull Spinner locationSp, @NonNull ConstraintLayout main,
+      @NonNull ChipNavigationBar bottomnav, @NonNull EditText edtSearch,
+      @NonNull ImageView imageView, @NonNull Spinner locationSp, @NonNull ConstraintLayout main,
       @NonNull ProgressBar progressBarBanner, @NonNull ProgressBar progressBarCategory,
       @NonNull ProgressBar progressBarPopular, @NonNull ProgressBar progressBarRecommended,
-      @NonNull RecyclerView recyclerViewCategory, @NonNull RecyclerView recyclerViewPopular,
-      @NonNull RecyclerView recyclerViewRecommended, @NonNull TextView textView3,
+      @NonNull ProgressBar progressBarSearch, @NonNull RecyclerView recyclerViewCategory,
+      @NonNull RecyclerView recyclerViewPopular, @NonNull RecyclerView recyclerViewRecommended,
+      @NonNull TextView search, @NonNull RecyclerView searchResults, @NonNull TextView textView3,
       @NonNull ViewPager2 viewPagerSlider) {
     this.rootView = rootView;
     this.bottomnav = bottomnav;
+    this.edtSearch = edtSearch;
     this.imageView = imageView;
     this.locationSp = locationSp;
     this.main = main;
@@ -81,9 +96,12 @@ public final class ActivityMainBinding implements ViewBinding {
     this.progressBarCategory = progressBarCategory;
     this.progressBarPopular = progressBarPopular;
     this.progressBarRecommended = progressBarRecommended;
+    this.progressBarSearch = progressBarSearch;
     this.recyclerViewCategory = recyclerViewCategory;
     this.recyclerViewPopular = recyclerViewPopular;
     this.recyclerViewRecommended = recyclerViewRecommended;
+    this.search = search;
+    this.searchResults = searchResults;
     this.textView3 = textView3;
     this.viewPagerSlider = viewPagerSlider;
   }
@@ -118,6 +136,12 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.bottomnav;
       ChipNavigationBar bottomnav = ViewBindings.findChildViewById(rootView, id);
       if (bottomnav == null) {
+        break missingId;
+      }
+
+      id = R.id.edtSearch;
+      EditText edtSearch = ViewBindings.findChildViewById(rootView, id);
+      if (edtSearch == null) {
         break missingId;
       }
 
@@ -159,6 +183,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBarSearch;
+      ProgressBar progressBarSearch = ViewBindings.findChildViewById(rootView, id);
+      if (progressBarSearch == null) {
+        break missingId;
+      }
+
       id = R.id.recyclerViewCategory;
       RecyclerView recyclerViewCategory = ViewBindings.findChildViewById(rootView, id);
       if (recyclerViewCategory == null) {
@@ -177,6 +207,18 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.search;
+      TextView search = ViewBindings.findChildViewById(rootView, id);
+      if (search == null) {
+        break missingId;
+      }
+
+      id = R.id.search_results;
+      RecyclerView searchResults = ViewBindings.findChildViewById(rootView, id);
+      if (searchResults == null) {
+        break missingId;
+      }
+
       id = R.id.textView3;
       TextView textView3 = ViewBindings.findChildViewById(rootView, id);
       if (textView3 == null) {
@@ -189,10 +231,10 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, bottomnav, imageView, locationSp,
-          main, progressBarBanner, progressBarCategory, progressBarPopular, progressBarRecommended,
-          recyclerViewCategory, recyclerViewPopular, recyclerViewRecommended, textView3,
-          viewPagerSlider);
+      return new ActivityMainBinding((ConstraintLayout) rootView, bottomnav, edtSearch, imageView,
+          locationSp, main, progressBarBanner, progressBarCategory, progressBarPopular,
+          progressBarRecommended, progressBarSearch, recyclerViewCategory, recyclerViewPopular,
+          recyclerViewRecommended, search, searchResults, textView3, viewPagerSlider);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

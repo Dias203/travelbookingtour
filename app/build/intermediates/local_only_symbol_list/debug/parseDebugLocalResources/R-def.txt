@@ -76,6 +76,7 @@ id distanceTxt
 id downloadTicketBtn
 id durationTour
 id durationTxt
+id edtSearch
 id email
 id explorer
 id facebookBtn
@@ -117,6 +118,7 @@ id progressBarCategory
 id progressBarListItem
 id progressBarPopular
 id progressBarRecommended
+id progressBarSearch
 id ratingBar
 id recommendCheckBox
 id recyclerView
@@ -128,6 +130,8 @@ id scoreTour
 id scoreTxt
 id scrollView2
 id scrollView3
+id search
+id search_results
 id textView
 id textView10
 id textView11

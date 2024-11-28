@@ -74,7 +74,7 @@
                     android:id="@+id/titleTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Title"
+                    android:hint="Tiêu đề"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/CategoryId" />
@@ -83,7 +83,7 @@
                     android:id="@+id/addressTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Address"
+                    android:hint="Địa chỉ"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/titleTour" />
@@ -92,7 +92,7 @@
                     android:id="@+id/bedNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Bed number"
+                    android:hint="Số lượng giường"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/addressTour" />
@@ -101,25 +101,34 @@
                     android:id="@+id/dateTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Date Tour"
+                    android:hint="Ngày khởi hành (dd/MM/yyyy)"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/bedNum" />
 
                 <EditText
-                    android:id="@+id/descriptionTour"
+                    android:id="@+id/timeTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Description"
+                    android:hint="Thời gian khởi hành"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dateTour" />
 
                 <EditText
+                    android:id="@+id/descriptionTour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mô tả"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/timeTour" />
+
+                <EditText
                     android:id="@+id/durationTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Duration"
+                    android:hint="Thời gian tour (D:day / N:night)"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/descriptionTour" />
@@ -128,7 +137,7 @@
                     android:id="@+id/distanceTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Distance"
+                    android:hint="Khoảng cách"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/durationTour" />
@@ -137,7 +146,7 @@
                     android:id="@+id/priceTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Price"
+                    android:hint="Giá"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/distanceTour" />
@@ -146,34 +155,25 @@
                     android:id="@+id/scoreTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Score"
+                    android:hint="Đánh giá"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/priceTour" />
 
                 <EditText
-                    android:id="@+id/timeTour"
+                    android:id="@+id/tourGuideName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Time"
+                    android:hint="Tên hướng dẫn viên"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/scoreTour" />
 
                 <EditText
-                    android:id="@+id/tourGuideName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Tour guide name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/timeTour" />
-
-                <EditText
                     android:id="@+id/tourGuidePhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tour guide phone"
+                    android:hint="SĐT hướng dẫn viên"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tourGuideName" />

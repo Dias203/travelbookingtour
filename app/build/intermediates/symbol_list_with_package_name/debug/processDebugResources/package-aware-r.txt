@@ -3832,6 +3832,7 @@ id edge
 id edit
 id edit_query
 id edit_text_id
+id edtSearch
 id elastic
 id email
 id email_edit_text
@@ -4121,6 +4122,7 @@ id progressBarCategory
 id progressBarListItem
 id progressBarPopular
 id progressBarRecommended
+id progressBarSearch
 id progress_bar
 id progress_circular
 id progress_horizontal
@@ -4162,6 +4164,7 @@ id scrollView2
 id scrollView3
 id scroll_view
 id scrollable
+id search
 id search_badge
 id search_bar
 id search_button
@@ -4170,6 +4173,7 @@ id search_edit_frame
 id search_go_btn
 id search_mag_icon
 id search_plate
+id search_results
 id search_src_text
 id search_voice_btn
 id second_row_layout

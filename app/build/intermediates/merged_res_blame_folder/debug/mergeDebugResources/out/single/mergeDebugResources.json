@@ -332,10 +332,6 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\viewholder_cart.xml"
     },
     {
-        "merged": "com.example.travel_app-debug-71:/layout_activity_admin_add_tour.xml.flat",
-        "source": "com.example.travel_app-main-73:/layout/activity_admin_add_tour.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-ldpi_back.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-ldpi\\back.png"
     },
@@ -422,6 +418,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-mdpi_dash_line.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-mdpi\\dash_line.png"
+    },
+    {
+        "merged": "com.example.travel_app-debug-71:/layout_activity_main.xml.flat",
+        "source": "com.example.travel_app-main-73:/layout/activity_main.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-xhdpi_bell_icon.png.flat",

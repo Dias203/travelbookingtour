@@ -10,8 +10,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomnav"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -21,7 +23,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="24dp">
@@ -53,64 +55,77 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:background="@drawable/grey_bg"-->
-            <!--                android:layout_marginStart="24dp"-->
-            <!--                android:layout_marginEnd="24dp"-->
-            <!--                android:layout_marginTop="16dp"-->
-            <!--                android:layout_height="match_parent">-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/grey_bg">
 
-            <!--                <EditText-->
-            <!--                    android:id="@+id/edtSearch"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="50dp"-->
-            <!--                    android:padding="8dp"-->
-            <!--                    android:drawableStart="@drawable/search_icon"-->
-            <!--                    android:drawablePadding="8dp"-->
-            <!--                    android:ems="10"-->
-            <!--                    android:inputType="text"-->
-            <!--                    android:hint="Street, Address, City, ..."-->
-            <!--                    android:textSize="16sp"-->
-            <!--                    android:textColor="@color/darkBlue"-->
-            <!--                    android:background="#00ffffff"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintEnd_toStartOf="@+id/search"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:background="#00ffffff"
+                    android:drawableStart="@drawable/search_icon"
+                    android:drawablePadding="8dp"
+                    android:ems="10"
+                    android:hint="Street, Address, City, ..."
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:textColor="@color/darkBlue"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/search"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/search"-->
-            <!--                    android:layout_width="85dp"-->
-            <!--                    android:layout_height="42dp"-->
-            <!--                    android:text="Search"-->
-            <!--                    android:gravity="center"-->
-            <!--                    android:textColor="@color/white"-->
-            <!--                    android:background="@drawable/blue_bg"-->
-            <!--                    android:layout_marginTop="2dp"-->
-            <!--                    android:layout_marginEnd="4dp"-->
-            <!--                    android:layout_marginBottom="2dp"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
-            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-            <!--            <SearchView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="16dp"-->
-            <!--                android:layout_marginStart="12dp"-->
-            <!--                android:layout_marginEnd="12dp"-->
-            <!--                android:id="@+id/search"-->
-            <!--                android:iconifiedByDefault="false"-->
-            <!--                android:searchHintIcon="@null"-->
-            <!--                android:queryHint="Search..."-->
-            <!--                android:focusable="false"-->
-            <!--                android:background="@drawable/lavender_border"-->
-            <!--                android:searchIcon="@drawable/search_icon"/>-->
+                <TextView
+                    android:id="@+id/search"
+                    android:layout_width="85dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/blue_bg"
+                    android:gravity="center"
+                    android:text="Search"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progressBarSearch"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/search_results"
+                    app:layout_constraintEnd_toEndOf="@+id/search_results"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/search_results"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp">
 
                 <androidx.viewpager2.widget.ViewPager2
@@ -140,7 +155,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="24dp">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -192,12 +207,12 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewRecommended"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
@@ -221,7 +236,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
@@ -246,12 +261,12 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewPopular"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
@@ -277,14 +292,14 @@
         android:id="@+id/bottomnav"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:cnb_menuResource="@menu/menu_bottom"
         android:background="@color/white"
         android:elevation="3dp"
         android:padding="4dp"
-        app:cnb_iconSize="20sp"
         app:cnb_iconColor="@color/darkBlue"
-        app:cnb_radius="50dp"
+        app:cnb_iconSize="20sp"
+        app:cnb_menuResource="@menu/menu_bottom"
         app:cnb_orientationMode="horizontal"
+        app:cnb_radius="50dp"
         app:cnb_unselectedColor="@color/darkBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

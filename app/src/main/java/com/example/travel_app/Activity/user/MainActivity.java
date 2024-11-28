@@ -3,8 +3,11 @@ package com.example.travel_app.Activity.user;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +16,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 
 import com.example.travel_app.Activity.BaseActivity;
+import com.example.travel_app.Adapter.AllTourAdapter;
 import com.example.travel_app.Adapter.CategoryAdapter;
 import com.example.travel_app.Adapter.PopularApdater;
 import com.example.travel_app.Adapter.RecommendedApdater;
@@ -36,6 +40,8 @@ public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
     private SliderAdapter sliderAdapter;
     private ArrayList<ItemDomain> itemsList;
+    private AllTourAdapter searchAdapter;
+    private ArrayList<ItemDomain> searchList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,8 @@ public class MainActivity extends BaseActivity {
 
         // xử lý hiển thị location
         initLocation();
+        initSearchView();
+        solveSearchBox();
         initBanner();
         initCategory();
         initRecommended();
@@ -53,12 +61,69 @@ public class MainActivity extends BaseActivity {
         initBottomNav();
     }
 
+    private void initSearchView() {
+        // Thiết lập RecyclerView cho kết quả tìm kiếm
+        binding.progressBarSearch.setVisibility(View.GONE);
+        searchAdapter = new AllTourAdapter(searchList);
+        binding.searchResults.setLayoutManager(new LinearLayoutManager(this));
+        binding.searchResults.setAdapter(searchAdapter);
+    }
+
+    private void solveSearchBox() {
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    filter(s.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Lỗi khi tìm kiếm: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
+    private void filter(String text) {
+        binding.progressBarSearch.setVisibility(View.VISIBLE);
+        try {
+            ArrayList<ItemDomain> filteredList = new ArrayList<>();
+            if (itemsList != null) {
+                for (ItemDomain item : itemsList) {
+                    if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            if (filteredList.isEmpty()) {
+                binding.searchResults.setVisibility(View.GONE);
+            } else {
+                searchList.clear();
+                searchList.addAll(filteredList);
+                searchAdapter.notifyDataSetChanged();
+                binding.searchResults.setVisibility(View.VISIBLE);
+            }
+            binding.progressBarSearch.setVisibility(View.GONE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(MainActivity.this, "Lỗi khi lọc kết quả: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void initBottomNav() {
         binding.bottomnav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
-                if(i == R.id.explorer){
+                if (i == R.id.explorer) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
                     intent.setPackage("com.android.chrome"); // Đảm bảo rằng Chrome được sử dụng
                     if (intent.resolveActivity(getPackageManager()) != null) {
@@ -68,12 +133,10 @@ public class MainActivity extends BaseActivity {
                         intent.setPackage(null); // Khôi phục về trình duyệt mặc định
                         startActivity(intent);
                     }
-                }
-                else if (i == R.id.cart){
+                } else if (i == R.id.cart) {
                     Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
                     startActivity(intent);
-                }
-                else if(i == R.id.profile){
+                } else if (i == R.id.profile) {
                     Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                     startActivity(intent);
                 }
@@ -93,13 +156,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) { //snapshot là dữ liệu nhận được từ firebase
                 // kiểm tra xem dữ liệu có tồn tại trong DataSnapshot không
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     // duyệt qua tất cả các phần tử con của snapshot
-                    for (DataSnapshot issue: snapshot.getChildren()){
+                    for (DataSnapshot issue : snapshot.getChildren()) {
                         // chuyển đổi thành các đối tượng của class ItemDomain và add vào list
                         list.add(issue.getValue(ItemDomain.class));
                     }
-                    if(!list.isEmpty()){
+                    if (!list.isEmpty()) {
                         binding.recyclerViewPopular.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
                         RecyclerView.Adapter adapter = new PopularApdater(list);
                         binding.recyclerViewPopular.setAdapter(adapter);
@@ -123,11 +186,11 @@ public class MainActivity extends BaseActivity {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) { //snapshot là dữ liệu nhận được từ firebase
-                if(snapshot.exists()){ // kiểm tra xem dữ liệu có tồn tại trong DataSnapshot không
-                    for (DataSnapshot issue: snapshot.getChildren()){
+                if (snapshot.exists()) { // kiểm tra xem dữ liệu có tồn tại trong DataSnapshot không
+                    for (DataSnapshot issue : snapshot.getChildren()) {
                         list.add(issue.getValue(ItemDomain.class));
                     }
-                    if(!list.isEmpty()){
+                    if (!list.isEmpty()) {
                         binding.recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(MainActivity.this,
                                 LinearLayoutManager.HORIZONTAL, false));
                         RecyclerView.Adapter adapter = new RecommendedApdater(list);
@@ -151,11 +214,11 @@ public class MainActivity extends BaseActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot issue: snapshot.getChildren()){
+                if (snapshot.exists()) {
+                    for (DataSnapshot issue : snapshot.getChildren()) {
                         list.add(issue.getValue(Category.class));
                     }
-                    if(list.size() > 0){
+                    if (list.size() > 0) {
                         binding.recyclerViewCategory.setLayoutManager(new LinearLayoutManager(MainActivity.this,
                                 LinearLayoutManager.HORIZONTAL, false));
                         RecyclerView.Adapter adapter = new CategoryAdapter(list);
@@ -179,8 +242,8 @@ public class MainActivity extends BaseActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot issue:snapshot.getChildren()){
+                if (snapshot.exists()) {
+                    for (DataSnapshot issue : snapshot.getChildren()) {
                         list.add(issue.getValue(Location.class));
                     }
                     ArrayAdapter<Location> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.sp_item, list);
@@ -195,7 +258,8 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-    private void banners(ArrayList<SliderItems> items){
+
+    private void banners(ArrayList<SliderItems> items) {
         binding.viewPagerSlider.setAdapter(new SliderAdapter(items, binding.viewPagerSlider));
         binding.viewPagerSlider.setClipToPadding(false);
         binding.viewPagerSlider.setClipChildren(false);
@@ -207,15 +271,15 @@ public class MainActivity extends BaseActivity {
         binding.viewPagerSlider.setPageTransformer(compositePageTransformer);
     }
 
-    private void initBanner(){
+    private void initBanner() {
         DatabaseReference myRef = database.getReference("Banner");
         binding.progressBarBanner.setVisibility(RecyclerView.VISIBLE);
         ArrayList<SliderItems> items = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot issue:snapshot.getChildren()){
+                if (snapshot.exists()) {
+                    for (DataSnapshot issue : snapshot.getChildren()) {
                         items.add(issue.getValue(SliderItems.class));
                     }
                     banners(items);
@@ -229,6 +293,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
