@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="blue">#3F95EC</color>
+    <color name="blueTurquoise">#00BCD4</color>
+    <color name="darkBlue">#253f66</color>
+    <color name="lightGray">#efefef</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">travel_app</string>
+    <string name="click_to_login">Đã có tài khoản? <font color="#3F95EC">Đăng nhập </font></string>
+    <string name="click_to_register">Chưa có tài khoản? <font color="#3F95EC">Đăng ký </font> </string>
+    <string name="email">Email</string>
+    <string name="forgot_password"> <font color="#A9A8A8"> Quên mật khẩu? </font> </string>
+    <string name="gcm_defaultSenderId" translatable="false">360431585351</string>
+    <string name="google_api_key" translatable="false">AIzaSyADbu1Dae1WVtBgEu-7uaL948VaUJgoseM</string>
+    <string name="google_app_id" translatable="false">1:360431585351:android:a6e157bf4ba40019c30962</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyADbu1Dae1WVtBgEu-7uaL948VaUJgoseM</string>
+    <string name="google_storage_bucket" translatable="false">travel-app-51c86.appspot.com</string>
+    <string name="introTitle">Khám phá<font color="#3f95ec"> thế giới </font>\ncùng chúng tôi</string>
+    <string name="login">Đăng nhập</string>
+    <string name="login_admin">Đăng nhập cho Admin</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="password">Password</string>
+    <string name="project_id" translatable="false">travel-app-51c86</string>
+    <string name="register">Đăng ký</string>
+    <string name="subIntro">Ứng dụng đặt vé du lịch giúp người dùng đặt vé máy bay và khách sạn với mức giá trọn gói thuận tiện.</string>
+    <style name="Base.Theme.Travel_app" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="ShapeAppearanceOverlay.App.circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+    <style name="Theme.Travel_app" parent="Base.Theme.Travel_app"/>
+</resources>

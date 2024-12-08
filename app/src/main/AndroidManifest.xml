@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Travel_app"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".Activity.user.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.admin.AdminEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.admin.AllTourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.admin.AdminAddTour"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.admin.AdminMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.admin.AllOderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.TicketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.BookmarkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.ListItemsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.user.IntroActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.user.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

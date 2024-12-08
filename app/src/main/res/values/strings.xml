@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">travel_app</string>
+    <string name="introTitle">Khám phá<font color='#3f95ec'> thế giới </font>\ncùng chúng tôi</string>
+
+    <string name="subIntro">Ứng dụng đặt vé du lịch giúp người dùng đặt vé máy bay và khách sạn với mức giá trọn gói thuận tiện.</string>
+
+    <string name="login">Đăng nhập</string>
+    <string name="login_admin">Đăng nhập cho Admin</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Đăng ký</string>
+    <string name="click_to_login">Đã có tài khoản? <font color='#3F95EC'>Đăng nhập </font></string>
+    <string name="click_to_register">Chưa có tài khoản? <font color='#3F95EC'>Đăng ký </font> </string>
+    <string name="logout">Đăng xuất</string>
+    <string name="forgot_password"> <font color="#A9A8A8"> Quên mật khẩu? </font> </string>
+</resources>
