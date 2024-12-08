@@ -72,8 +72,8 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\add.xml"
     },
     {
-        "merged": "com.example.travel_app-debug-71:/layout_activity_forgot_password.xml.flat",
-        "source": "com.example.travel_app-main-73:/layout/activity_forgot_password.xml"
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_background_btn_blue.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\background_btn_blue.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_cart.xml.flat",
@@ -190,10 +190,6 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-hdpi_star.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-hdpi\\star.png"
-    },
-    {
-        "merged": "com.example.travel_app-debug-71:/layout_activity_change_password_acitivity.xml.flat",
-        "source": "com.example.travel_app-main-73:/layout/activity_change_password_acitivity.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\mipmap-mdpi_ic_launcher.webp.flat",
@@ -318,6 +314,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-xxhdpi_bell_icon.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-xxhdpi\\bell_icon.png"
+    },
+    {
+        "merged": "com.example.travel_app-debug-71:/drawable_password.xml.flat",
+        "source": "com.example.travel_app-main-73:/drawable/password.xml"
     },
     {
         "merged": "com.example.travel_app-debug-71:/layout_activity_profile.xml.flat",
@@ -638,6 +638,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-mdpi_bottom_btn1.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-mdpi\\bottom_btn1.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\layout_activity_change_password_acitivity.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_change_password_acitivity.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-ldpi_message.png.flat",

@@ -3276,6 +3276,7 @@ int drawable avd_hide_password 0x7f07007b
 int drawable avd_show_password 0x7f07007c
 int drawable back 0x7f07007d
 int drawable back_white 0x7f07007e
+int drawable background_btn_blue 0x7f07018a
 int drawable barcode 0x7f07007f
 int drawable baseline_access_time_24 0x7f070080
 int drawable baseline_arrow_back_24 0x7f070081
@@ -3437,6 +3438,7 @@ int drawable notification_template_icon_bg 0x7f070119
 int drawable notification_template_icon_low_bg 0x7f07011a
 int drawable notification_tile_bg 0x7f07011b
 int drawable notify_panel_notification_icon_bg 0x7f07011c
+int drawable password 0x7f07018b
 int drawable search_icon 0x7f07011d
 int drawable showpasswordicon 0x7f07011e
 int drawable star 0x7f07011f

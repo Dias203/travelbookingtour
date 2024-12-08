@@ -12,6 +12,7 @@ drawable all
 drawable arrow_detail
 drawable back
 drawable back_white
+drawable background_btn_blue
 drawable barcode
 drawable baseline_access_time_24
 drawable baseline_arrow_back_24
@@ -43,6 +44,7 @@ drawable lavender_border
 drawable light_blue_bg
 drawable location
 drawable message
+drawable password
 drawable search_icon
 drawable showpasswordicon
 drawable star

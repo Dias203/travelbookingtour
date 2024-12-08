@@ -66,13 +66,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_ChangePassword"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:drawableEnd="@drawable/exit"
-        android:background="@color/design_default_color_on_primary"
+        android:drawableEnd="@drawable/password"
+        android:background="@drawable/background_btn_blue"
         android:text="Thay đổi mật khẩu"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,13 +80,13 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_Logout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:drawableEnd="@drawable/exit"
-        android:background="@color/design_default_color_on_primary"
+        android:background="@drawable/background_btn_blue"
         android:text="@string/logout"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

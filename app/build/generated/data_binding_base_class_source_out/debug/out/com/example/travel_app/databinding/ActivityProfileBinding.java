@@ -4,11 +4,11 @@ package com.example.travel_app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -26,10 +26,10 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final ChipNavigationBar bottomnav;
 
   @NonNull
-  public final Button buttonChangePassword;
+  public final AppCompatButton buttonChangePassword;
 
   @NonNull
-  public final Button buttonLogout;
+  public final AppCompatButton buttonLogout;
 
   @NonNull
   public final ImageView imageView7;
@@ -47,9 +47,10 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final View view;
 
   private ActivityProfileBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ChipNavigationBar bottomnav, @NonNull Button buttonChangePassword,
-      @NonNull Button buttonLogout, @NonNull ImageView imageView7, @NonNull ConstraintLayout main,
-      @NonNull TextView textView12, @NonNull TextView textView5, @NonNull View view) {
+      @NonNull ChipNavigationBar bottomnav, @NonNull AppCompatButton buttonChangePassword,
+      @NonNull AppCompatButton buttonLogout, @NonNull ImageView imageView7,
+      @NonNull ConstraintLayout main, @NonNull TextView textView12, @NonNull TextView textView5,
+      @NonNull View view) {
     this.rootView = rootView;
     this.bottomnav = bottomnav;
     this.buttonChangePassword = buttonChangePassword;
@@ -95,13 +96,13 @@ public final class ActivityProfileBinding implements ViewBinding {
       }
 
       id = R.id.button_ChangePassword;
-      Button buttonChangePassword = ViewBindings.findChildViewById(rootView, id);
+      AppCompatButton buttonChangePassword = ViewBindings.findChildViewById(rootView, id);
       if (buttonChangePassword == null) {
         break missingId;
       }
 
       id = R.id.button_Logout;
-      Button buttonLogout = ViewBindings.findChildViewById(rootView, id);
+      AppCompatButton buttonLogout = ViewBindings.findChildViewById(rootView, id);
       if (buttonLogout == null) {
         break missingId;
       }

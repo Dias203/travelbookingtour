@@ -71,7 +71,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:drawableEnd="@drawable/exit"
+        android:drawableEnd="@drawable/password"
         android:background="@drawable/background_btn_blue"
         android:text="Thay đổi mật khẩu"
         android:textSize="18sp"

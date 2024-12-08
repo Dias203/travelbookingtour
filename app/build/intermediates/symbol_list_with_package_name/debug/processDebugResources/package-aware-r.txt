@@ -3277,6 +3277,7 @@ drawable avd_hide_password
 drawable avd_show_password
 drawable back
 drawable back_white
+drawable background_btn_blue
 drawable barcode
 drawable baseline_access_time_24
 drawable baseline_arrow_back_24
@@ -3438,6 +3439,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable password
 drawable search_icon
 drawable showpasswordicon
 drawable star
