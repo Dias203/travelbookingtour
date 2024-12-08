@@ -39,9 +39,9 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
     private SliderAdapter sliderAdapter;
-    private ArrayList<ItemDomain> itemsList;
+    private ArrayList<ItemDomain> itemsList = new ArrayList<>();
     private AllTourAdapter searchAdapter;
-    private ArrayList<ItemDomain> searchList = new ArrayList();
+    private ArrayList<ItemDomain> searchList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +49,10 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        // xử lý hiển thị location
+        // Xử lý hiển thị location
         initLocation();
         initSearchView();
+        fetchDataForSearch(); // Lấy dữ liệu từ Firebase cho itemsList
         solveSearchBox();
         initBanner();
         initCategory();
@@ -62,8 +62,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initSearchView() {
-        // Thiết lập RecyclerView cho kết quả tìm kiếm
         binding.progressBarSearch.setVisibility(View.GONE);
+        binding.searchResults.setVisibility(View.GONE);
         searchAdapter = new AllTourAdapter(searchList);
         binding.searchResults.setLayoutManager(new LinearLayoutManager(this));
         binding.searchResults.setAdapter(searchAdapter);
@@ -87,6 +87,9 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(s.toString().isEmpty()) {
+                    binding.searchResults.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -95,21 +98,19 @@ public class MainActivity extends BaseActivity {
         binding.progressBarSearch.setVisibility(View.VISIBLE);
         try {
             ArrayList<ItemDomain> filteredList = new ArrayList<>();
-            if (itemsList != null) {
-                for (ItemDomain item : itemsList) {
-                    if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
-                        filteredList.add(item);
-                    }
+            for (ItemDomain item : itemsList) {
+                if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(item);
                 }
             }
 
-            if (filteredList.isEmpty()) {
-                binding.searchResults.setVisibility(View.GONE);
-            } else {
-                searchList.clear();
+            searchList.clear();
+            if (!filteredList.isEmpty()) {
                 searchList.addAll(filteredList);
                 searchAdapter.notifyDataSetChanged();
                 binding.searchResults.setVisibility(View.VISIBLE);
+            } else {
+                binding.searchResults.setVisibility(View.GONE);
             }
             binding.progressBarSearch.setVisibility(View.GONE);
         } catch (Exception e) {
@@ -118,48 +119,58 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private void fetchDataForSearch() {
+        DatabaseReference myRef = database.getReference("Item");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    itemsList.clear();
+                    for (DataSnapshot issue : snapshot.getChildren()) {
+                        ItemDomain item = issue.getValue(ItemDomain.class);
+                        if (item != null) {
+                            itemsList.add(item);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Lỗi khi lấy dữ liệu: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void initBottomNav() {
-        binding.bottomnav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(int i) {
-                if (i == R.id.explorer) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-                    intent.setPackage("com.android.chrome"); // Đảm bảo rằng Chrome được sử dụng
-                    if (intent.resolveActivity(getPackageManager()) != null) {
-                        startActivity(intent);
-                    } else {
-                        // Xử lý trường hợp Chrome không được cài đặt
-                        intent.setPackage(null); // Khôi phục về trình duyệt mặc định
-                        startActivity(intent);
-                    }
-                } else if (i == R.id.cart) {
-                    Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
+        binding.bottomnav.setOnItemSelectedListener(i -> {
+            if (i == R.id.explorer) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                intent.setPackage("com.android.chrome");
+                if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                } else if (i == R.id.profile) {
-                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                } else {
+                    intent.setPackage(null);
                     startActivity(intent);
                 }
+            } else if (i == R.id.cart) {
+                startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
+            } else if (i == R.id.profile) {
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             }
         });
     }
 
     private void initPopular() {
-        // Tham chiếu đến Node trên database
         DatabaseReference myRef = database.getReference("Item");
         binding.progressBarPopular.setVisibility(View.VISIBLE);
         ArrayList<ItemDomain> list = new ArrayList<>();
-
-        // Truy vấn trên realtime database
         Query query = myRef.orderByChild("popular").equalTo(true);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { //snapshot là dữ liệu nhận được từ firebase
-                // kiểm tra xem dữ liệu có tồn tại trong DataSnapshot không
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    // duyệt qua tất cả các phần tử con của snapshot
                     for (DataSnapshot issue : snapshot.getChildren()) {
-                        // chuyển đổi thành các đối tượng của class ItemDomain và add vào list
                         list.add(issue.getValue(ItemDomain.class));
                     }
                     if (!list.isEmpty()) {
@@ -173,7 +184,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -185,14 +195,13 @@ public class MainActivity extends BaseActivity {
         Query query = myRef.orderByChild("recommended").equalTo(true);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { //snapshot là dữ liệu nhận được từ firebase
-                if (snapshot.exists()) { // kiểm tra xem dữ liệu có tồn tại trong DataSnapshot không
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
                     for (DataSnapshot issue : snapshot.getChildren()) {
                         list.add(issue.getValue(ItemDomain.class));
                     }
                     if (!list.isEmpty()) {
-                        binding.recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(MainActivity.this,
-                                LinearLayoutManager.HORIZONTAL, false));
+                        binding.recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
                         RecyclerView.Adapter adapter = new RecommendedApdater(list);
                         binding.recyclerViewRecommended.setAdapter(adapter);
                     }
@@ -202,7 +211,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -219,8 +227,7 @@ public class MainActivity extends BaseActivity {
                         list.add(issue.getValue(Category.class));
                     }
                     if (list.size() > 0) {
-                        binding.recyclerViewCategory.setLayoutManager(new LinearLayoutManager(MainActivity.this,
-                                LinearLayoutManager.HORIZONTAL, false));
+                        binding.recyclerViewCategory.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
                         RecyclerView.Adapter adapter = new CategoryAdapter(list);
                         binding.recyclerViewCategory.setAdapter(adapter);
                     }
@@ -230,12 +237,10 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
 
-    // lấy dữ liệu từ Firebase Realtime Database và cập nhật Spinner với các đối tượng "Location"
     private void initLocation() {
         DatabaseReference myRef = database.getReference("Location");
         ArrayList<Location> list = new ArrayList<>();
@@ -254,7 +259,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -273,7 +277,7 @@ public class MainActivity extends BaseActivity {
 
     private void initBanner() {
         DatabaseReference myRef = database.getReference("Banner");
-        binding.progressBarBanner.setVisibility(RecyclerView.VISIBLE);
+        binding.progressBarBanner.setVisibility(View.VISIBLE);
         ArrayList<SliderItems> items = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -289,7 +293,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -298,7 +301,7 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (sliderAdapter != null) {
-            sliderAdapter.stopSlider();  // Dừng slider khi Activity bị hủy
+            sliderAdapter.stopSlider();
         }
     }
 }

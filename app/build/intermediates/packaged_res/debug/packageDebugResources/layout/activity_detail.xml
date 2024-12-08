@@ -297,7 +297,7 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="12dp"
-                            android:text="Description"
+                            android:text="Mô tả"
                             android:textColor="@color/darkBlue"
                             android:textSize="20sp"
                             android:textStyle="bold" />

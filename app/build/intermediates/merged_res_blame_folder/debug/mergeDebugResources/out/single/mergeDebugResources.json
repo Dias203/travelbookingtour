@@ -316,14 +316,6 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-xxhdpi\\bell_icon.png"
     },
     {
-        "merged": "com.example.travel_app-debug-71:/drawable_password.xml.flat",
-        "source": "com.example.travel_app-main-73:/drawable/password.xml"
-    },
-    {
-        "merged": "com.example.travel_app-debug-71:/layout_activity_profile.xml.flat",
-        "source": "com.example.travel_app-main-73:/layout/activity_profile.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\layout_activity_signup.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_signup.xml"
     },
@@ -438,6 +430,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-mdpi_dash_line.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-mdpi\\dash_line.png"
+    },
+    {
+        "merged": "com.example.travel_app-debug-71:/layout_activity_main.xml.flat",
+        "source": "com.example.travel_app-main-73:/layout/activity_main.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-xhdpi_bell_icon.png.flat",
@@ -688,12 +684,12 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-xhdpi\\bottom_btn2.png"
     },
     {
-        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_card_view_bg.xml.flat",
-        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\card_view_bg.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\layout_activity_detail.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_card_view_bg.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\card_view_bg.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-xxxhdpi_bottom_btn4.png.flat",
@@ -702,6 +698,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-hdpi_dash_line.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-hdpi\\dash_line.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_password.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\password.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\mipmap-mdpi_ic_launcher_round.webp.flat",

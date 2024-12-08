@@ -68,10 +68,6 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_detail.xml"
     },
     {
-        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/activity_profile.xml",
-        "source": "com.example.travel_app-main-73:/layout/activity_profile.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_profile.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_profile.xml"
     },
@@ -82,6 +78,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\viewholder_list_item.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\viewholder_list_item.xml"
+    },
+    {
+        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/activity_main.xml",
+        "source": "com.example.travel_app-main-73:/layout/activity_main.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_signup.xml",
