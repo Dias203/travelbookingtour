@@ -1,6 +1,5 @@
 package com.example.travel_app.Activity.admin;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Activity.user.LoginActivity;
-import com.example.travel_app.Adapter.AllTourAdapter;
-import com.example.travel_app.Adapter.BookmarkAdapter;
+import com.example.travel_app.Adapter.AdminAllTourAdapter;
 import com.example.travel_app.Domain.ItemDomain;
-import com.example.travel_app.R;
 import com.example.travel_app.databinding.ActivityAllTourBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +31,7 @@ import java.util.List;
 public class AllTourActivity extends BaseActivity {
     ActivityAllTourBinding binding;
     private ArrayList<ItemDomain> itemList = new ArrayList<>();
-    private AllTourAdapter adapter;
+    private AdminAllTourAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +95,7 @@ public class AllTourActivity extends BaseActivity {
                     // Cập nhật dữ liệu cho RecyclerView
                     if (adapter == null) {
                         itemList = newList;
-                        adapter = new AllTourAdapter(itemList);
+                        adapter = new AdminAllTourAdapter(itemList);
                         binding.recyclerView.setLayoutManager(new LinearLayoutManager(AllTourActivity.this,
                                 LinearLayoutManager.VERTICAL, false));
                         binding.recyclerView.setAdapter(adapter);
@@ -121,7 +118,7 @@ public class AllTourActivity extends BaseActivity {
     }
 
     // Thiết lập tính năng xoá mục trong RecyclerView
-    private void setupSwipeToDelete(RecyclerView recyclerView, AllTourAdapter adapter, List<ItemDomain> list) {
+    private void setupSwipeToDelete(RecyclerView recyclerView, AdminAllTourAdapter adapter, List<ItemDomain> list) {
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,

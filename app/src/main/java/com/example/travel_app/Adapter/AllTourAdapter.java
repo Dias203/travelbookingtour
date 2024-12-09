@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.travel_app.Activity.admin.AdminEditActivity;
+import com.example.travel_app.Activity.user.BookmarkActivity;
+import com.example.travel_app.Activity.user.DetailActivity;
 import com.example.travel_app.Activity.user.TicketActivity;
 import com.example.travel_app.Domain.ItemDomain;
 import com.example.travel_app.R;
@@ -53,13 +55,13 @@ public class AllTourAdapter extends RecyclerView.Adapter<AllTourAdapter.ViewHold
                 .into(holder.binding.pic);
 
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, TicketActivity.class);
+            Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra("object", itemList.get(position));
             context.startActivity(intent);
         });
 
 
-        // Chuyển sang màn hình sửa thông tin sản phẩm
+        /*// Chuyển sang màn hình sửa thông tin sản phẩm
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, AdminEditActivity.class);
             intent.putExtra("id", item.getId());
@@ -68,7 +70,7 @@ public class AllTourAdapter extends RecyclerView.Adapter<AllTourAdapter.ViewHold
             intent.putExtra("address", item.getAddress());
             intent.putExtra("score", item.getScore());
             context.startActivity(intent);
-        });
+        });*/
     }
 
     @Override

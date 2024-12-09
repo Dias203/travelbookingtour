@@ -6,12 +6,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Domain.ItemDomain;
 import com.example.travel_app.databinding.ActivityAdminEditBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AdminEditActivity extends AppCompatActivity {
+public class AdminEditActivity extends BaseActivity {
     ActivityAdminEditBinding binding;
     private String productId;
     ItemDomain item;
