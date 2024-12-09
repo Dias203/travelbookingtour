@@ -16,7 +16,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 
 import com.example.travel_app.Activity.BaseActivity;
-import com.example.travel_app.Adapter.AllTourAdapter;
+import com.example.travel_app.Adapter.UserAllTourAdapter;
 import com.example.travel_app.Adapter.CategoryAdapter;
 import com.example.travel_app.Adapter.PopularApdater;
 import com.example.travel_app.Adapter.RecommendedApdater;
@@ -32,7 +32,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.ArrayList;
 
@@ -40,7 +39,7 @@ public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
     private SliderAdapter sliderAdapter;
     private ArrayList<ItemDomain> itemsList = new ArrayList<>();
-    private AllTourAdapter searchAdapter;
+    private UserAllTourAdapter searchAdapter;
     private ArrayList<ItemDomain> searchList = new ArrayList<>();
 
     @Override
@@ -64,7 +63,7 @@ public class MainActivity extends BaseActivity {
     private void initSearchView() {
         binding.progressBarSearch.setVisibility(View.GONE);
         binding.searchResults.setVisibility(View.GONE);
-        searchAdapter = new AllTourAdapter(searchList);
+        searchAdapter = new UserAllTourAdapter(searchList);
         binding.searchResults.setLayoutManager(new LinearLayoutManager(this));
         binding.searchResults.setAdapter(searchAdapter);
     }

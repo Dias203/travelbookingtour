@@ -4,32 +4,23 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.travel_app.Activity.admin.AdminEditActivity;
-import com.example.travel_app.Activity.user.BookmarkActivity;
 import com.example.travel_app.Activity.user.DetailActivity;
-import com.example.travel_app.Activity.user.TicketActivity;
 import com.example.travel_app.Domain.ItemDomain;
-import com.example.travel_app.R;
 import com.example.travel_app.databinding.ViewholderCartBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AllTourAdapter extends RecyclerView.Adapter<AllTourAdapter.ViewHolder> {
+public class UserAllTourAdapter extends RecyclerView.Adapter<UserAllTourAdapter.ViewHolder> {
     Context context;
     private ArrayList<ItemDomain> itemList;
 
-    public AllTourAdapter(ArrayList<ItemDomain> itemList) {
+    public UserAllTourAdapter(ArrayList<ItemDomain> itemList) {
         this.itemList = itemList;
     }
 
