@@ -13,53 +13,61 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="Trang chủ Admin"
-        android:textStyle="bold"
         android:textColor="@color/darkBlue"
         android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adminAllTour"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Tất cả Tour"
-        android:drawableEnd="@drawable/all"
         android:layout_marginTop="24dp"
+        android:background="@drawable/background_btn_blue"
+        android:drawableEnd="@drawable/all"
+        android:text="Tất cả Tour"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adminAddTour"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Thêm Tour"
-        android:drawableEnd="@drawable/add"
         android:layout_marginTop="50dp"
+        android:background="@drawable/background_btn_blue"
+        android:drawableEnd="@drawable/add"
+        android:text="Thêm Tour"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAllTour" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adminAllOrder"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Tất cả đơn hàng"
-        android:drawableEnd="@drawable/cart"
         android:layout_marginTop="50dp"
+        android:background="@drawable/background_btn_blue"
+        android:drawableEnd="@drawable/cart"
+        android:text="Tất cả đơn hàng"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/adminAddTour"
         app:layout_constraintStart_toStartOf="@+id/adminAddTour"
         app:layout_constraintTop_toBottomOf="@+id/adminAddTour" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adminLogoutBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:drawableEnd="@drawable/exit"
         android:layout_marginTop="50dp"
+        android:background="@drawable/background_btn_blue"
+        android:drawableEnd="@drawable/exit"
+        android:text="@string/logout"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/adminAllOrder"
         app:layout_constraintStart_toStartOf="@+id/adminAllOrder"
         app:layout_constraintTop_toBottomOf="@+id/adminAllOrder" />
