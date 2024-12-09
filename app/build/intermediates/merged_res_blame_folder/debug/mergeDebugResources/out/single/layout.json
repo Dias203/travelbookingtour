@@ -72,16 +72,16 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_profile.xml"
     },
     {
+        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/activity_change_password_acitivity.xml",
+        "source": "com.example.travel_app-main-73:/layout/activity_change_password_acitivity.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_forgot_password.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_forgot_password.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\viewholder_list_item.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\viewholder_list_item.xml"
-    },
-    {
-        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/activity_main.xml",
-        "source": "com.example.travel_app-main-73:/layout/activity_main.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_signup.xml",

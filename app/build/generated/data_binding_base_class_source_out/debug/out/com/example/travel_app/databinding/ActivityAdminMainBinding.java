@@ -4,10 +4,10 @@ package com.example.travel_app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -21,16 +21,16 @@ public final class ActivityAdminMainBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final Button adminAddTour;
+  public final AppCompatButton adminAddTour;
 
   @NonNull
-  public final Button adminAllOrder;
+  public final AppCompatButton adminAllOrder;
 
   @NonNull
-  public final Button adminAllTour;
+  public final AppCompatButton adminAllTour;
 
   @NonNull
-  public final Button adminLogoutBtn;
+  public final AppCompatButton adminLogoutBtn;
 
   @NonNull
   public final ConstraintLayout main;
@@ -38,8 +38,9 @@ public final class ActivityAdminMainBinding implements ViewBinding {
   @NonNull
   public final TextView textView5;
 
-  private ActivityAdminMainBinding(@NonNull ConstraintLayout rootView, @NonNull Button adminAddTour,
-      @NonNull Button adminAllOrder, @NonNull Button adminAllTour, @NonNull Button adminLogoutBtn,
+  private ActivityAdminMainBinding(@NonNull ConstraintLayout rootView,
+      @NonNull AppCompatButton adminAddTour, @NonNull AppCompatButton adminAllOrder,
+      @NonNull AppCompatButton adminAllTour, @NonNull AppCompatButton adminLogoutBtn,
       @NonNull ConstraintLayout main, @NonNull TextView textView5) {
     this.rootView = rootView;
     this.adminAddTour = adminAddTour;
@@ -78,25 +79,25 @@ public final class ActivityAdminMainBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.adminAddTour;
-      Button adminAddTour = ViewBindings.findChildViewById(rootView, id);
+      AppCompatButton adminAddTour = ViewBindings.findChildViewById(rootView, id);
       if (adminAddTour == null) {
         break missingId;
       }
 
       id = R.id.adminAllOrder;
-      Button adminAllOrder = ViewBindings.findChildViewById(rootView, id);
+      AppCompatButton adminAllOrder = ViewBindings.findChildViewById(rootView, id);
       if (adminAllOrder == null) {
         break missingId;
       }
 
       id = R.id.adminAllTour;
-      Button adminAllTour = ViewBindings.findChildViewById(rootView, id);
+      AppCompatButton adminAllTour = ViewBindings.findChildViewById(rootView, id);
       if (adminAllTour == null) {
         break missingId;
       }
 
       id = R.id.adminLogoutBtn;
-      Button adminLogoutBtn = ViewBindings.findChildViewById(rootView, id);
+      AppCompatButton adminLogoutBtn = ViewBindings.findChildViewById(rootView, id);
       if (adminLogoutBtn == null) {
         break missingId;
       }
