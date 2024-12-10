@@ -48,6 +48,10 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\slider_item_container.xml"
     },
     {
+        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/viewholder_header.xml",
+        "source": "com.example.travel_app-main-73:/layout/viewholder_header.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_bookmark.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_bookmark.xml"
     },
@@ -70,10 +74,6 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_profile.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_profile.xml"
-    },
-    {
-        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/activity_change_password_acitivity.xml",
-        "source": "com.example.travel_app-main-73:/layout/activity_change_password_acitivity.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_forgot_password.xml",

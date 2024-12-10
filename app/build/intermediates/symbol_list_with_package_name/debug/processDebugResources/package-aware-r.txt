@@ -3301,6 +3301,7 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable call
 drawable cart
+drawable check
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -3929,6 +3930,7 @@ id grouping
 id groups
 id guestTxt
 id header
+id headerTxt
 id header_title
 id hide_ime_id
 id hide_in_inspector_tag
@@ -4679,6 +4681,7 @@ layout stripe_vertical_divider
 layout support_simple_spinner_dropdown_item
 layout viewholder_cart
 layout viewholder_category
+layout viewholder_header
 layout viewholder_list_item
 layout viewholder_popular
 layout viewholder_recommended

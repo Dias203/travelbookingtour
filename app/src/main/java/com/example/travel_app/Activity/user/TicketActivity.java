@@ -1,6 +1,8 @@
 package com.example.travel_app.Activity.user;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -60,8 +62,8 @@ public class TicketActivity extends BaseActivity {
 //    private static final String PublishableKey = dotenv.get("PUBLISHABLE_KEY");
 //    private static final String SecretKey = dotenv.get("SECRET_KEY");
 
-    private static final String PublishableKey = "pk_test_51PkTKL06Mp5xYcJjQCJdbfDH8Q8wzRfiHrUi8EFHM5D2lMHA26VuNyaivOxWVvbAFcCJ8o3B1xZ2HPKz45vXggQL002jSShbZa";
-    private static final String SecretKey = "sk_test_51PkTKL06Mp5xYcJjFCO0lPeKo5VyjxVh5nX8V0CDmA9DeLhx6xJYzWp4qYbVE37MKbbAG0RnZJEyaNtRmb80NWXS0017Kj7JlU";
+    private static final String PublishableKey = "pk_test_51QUTviEDU5x4BEa1f5hyip7KOhkb4DQbCF6P42lm42tWdaSnoFIRYKk3xaHqa66dmQhIpQRftLMM1Ny9oKx3Llih00KsRjS6JH";
+    private static final String SecretKey = "sk_test_51QUTviEDU5x4BEa1RnYHZfgxmvg3CBn66K02w3OfWBaBCWYEaPw5tujRAobBlk6B4AFeMBBiUWLZg0zZCDVUoTHc00523u5yqo";
 
     private String CustomerId;
     private String EphemeralKey;
@@ -161,13 +163,15 @@ public class TicketActivity extends BaseActivity {
                     try {
                         JSONObject object = new JSONObject(response);
                         ClientSecret = object.getString("client_secret");
-                        Toast.makeText(TicketActivity.this, "Client Secret: " + ClientSecret, Toast.LENGTH_SHORT).show();
-
+                        Log.d("Stripe", "Client Secret: " + ClientSecret);
                         paymentFlow(); // Gọi paymentFlow() sau khi nhận được ClientSecret mới
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.e("StripeError", "JSON Parsing Error: " + e.getMessage());
                     }
-                }, error -> Toast.makeText(TicketActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show()) {
+                }, error -> {
+            Log.e("StripeError", "Volley Error: " + error.getLocalizedMessage());
+            Toast.makeText(TicketActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> header = new HashMap<>();
@@ -180,12 +184,13 @@ public class TicketActivity extends BaseActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("customer", CustomerId);
-                params.put("amount", String.valueOf(object.getPrice() * 100)); // Giá trị amount cần phải là một chuỗi, ví dụ "10000" để chỉ 100 USD
+                params.put("amount", String.valueOf(object.getPrice() * 100)); // Giá trị amount cần là cent
                 params.put("currency", "USD");
                 params.put("automatic_payment_methods[enabled]", "true");
                 return params;
             }
         };
+
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
@@ -373,7 +378,6 @@ public class TicketActivity extends BaseActivity {
 
         binding.paymentBtn.setOnClickListener(view -> {
             if (mAuth.getCurrentUser() == null) {
-                // Người dùng chưa đăng nhập, yêu cầu đăng nhập
                 Toast.makeText(this,
                         "Bạn phải đăng nhập ứng dụng!",
                         Toast.LENGTH_SHORT).show();
@@ -381,9 +385,22 @@ public class TicketActivity extends BaseActivity {
                 startActivity(intent);
             } else {
                 // Người dùng đã đăng nhập, thực hiện thanh toán
-                createCustomer();
+                //createCustomer
+
+                savePurchaseToFirebase();
+                savePurchaseToRealtime();
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Thông báo")
+                        .setMessage("Thanh toán thành công!")
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            // Chuyển về MainActivity
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        })
+                        .show();
             }
         });
+
 
 
         binding.downloadTicketBtn.setOnClickListener(view -> {

@@ -192,10 +192,6 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-hdpi\\star.png"
     },
     {
-        "merged": "com.example.travel_app-debug-71:/layout_activity_change_password_acitivity.xml.flat",
-        "source": "com.example.travel_app-main-73:/layout/activity_change_password_acitivity.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\mipmap-mdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\mipmap-mdpi\\ic_launcher.webp"
     },
@@ -320,6 +316,10 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable-xxhdpi\\bell_icon.png"
     },
     {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_check.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\check.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\layout_activity_signup.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_signup.xml"
     },
@@ -414,6 +414,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_ic_launcher_background.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.travel_app-debug-71:/layout_viewholder_header.xml.flat",
+        "source": "com.example.travel_app-main-73:/layout/viewholder_header.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable-ldpi_arrow_detail.png.flat",
@@ -654,10 +658,6 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_admin.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\drawable\\admin.xml"
-    },
-    {
-        "merged": "com.example.travel_app-debug-71:/drawable_check.xml.flat",
-        "source": "com.example.travel_app-main-73:/drawable/check.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-debug-71:\\drawable_light_blue_bg.xml.flat",

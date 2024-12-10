@@ -3300,6 +3300,7 @@ int drawable btn_radio_on_mtrl 0x7f070091
 int drawable btn_radio_on_to_off_mtrl_animation 0x7f070092
 int drawable call 0x7f070093
 int drawable cart 0x7f070189
+int drawable check 0x7f07018c
 int drawable common_full_open_on_phone 0x7f070094
 int drawable common_google_signin_btn_icon_dark 0x7f070095
 int drawable common_google_signin_btn_icon_dark_focused 0x7f070096
@@ -3928,6 +3929,7 @@ int id grouping 0x7f080161
 int id groups 0x7f080162
 int id guestTxt 0x7f080163
 int id header 0x7f080164
+int id headerTxt 0x7f080363
 int id header_title 0x7f080165
 int id hide_ime_id 0x7f080166
 int id hide_in_inspector_tag 0x7f080167
@@ -4678,6 +4680,7 @@ int layout stripe_vertical_divider 0x7f0b00af
 int layout support_simple_spinner_dropdown_item 0x7f0b00b0
 int layout viewholder_cart 0x7f0b00b1
 int layout viewholder_category 0x7f0b00b2
+int layout viewholder_header 0x7f0b00c0
 int layout viewholder_list_item 0x7f0b00b3
 int layout viewholder_popular 0x7f0b00b4
 int layout viewholder_recommended 0x7f0b00b5
