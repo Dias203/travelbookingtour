@@ -1,9 +1,10 @@
 -- Merging decision tree log ---
 manifest
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-87:12
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-87:12
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-87:12
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-87:12
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
+MERGED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:2:1-15:12
 MERGED from [com.stripe:stripe-android:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\4d5b111c08990674876d7c97f0569e2a\transformed\stripe-android-17.2.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\838c5838e1f7a7c15af55602dc978b15\transformed\paymentsheet-17.2.0\AndroidManifest.xml:2:1-20:12
 MERGED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:2:1-83:12
@@ -170,8 +171,8 @@ ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\And
 	android:name
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:9:22-79
 application
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:11:5-85:19
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:11:5-85:19
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:11:5-98:19
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:11:5-98:19
 MERGED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\838c5838e1f7a7c15af55602dc978b15\transformed\paymentsheet-17.2.0\AndroidManifest.xml:9:5-18:19
 MERGED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\838c5838e1f7a7c15af55602dc978b15\transformed\paymentsheet-17.2.0\AndroidManifest.xml:9:5-18:19
 MERGED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:16:5-81:19
@@ -309,67 +310,93 @@ ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\And
 	android:name
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:47:13-56
 activity#com.example.travel_app.Activity.user.TicketActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:49:9-51:40
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:49:9-64:20
+	android:label
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:52:13-42
+	android:launchMode
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:53:13-44
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:51:13-37
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:51:13-36
 	android:name
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:50:13-57
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:app+data:scheme:demozpdk
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:54:13-63:29
+action#android.intent.action.VIEW
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:55:17-69
+	android:name
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:55:25-66
+category#android.intent.category.DEFAULT
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:57:17-76
+	android:name
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:57:27-73
+category#android.intent.category.BROWSABLE
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:58:17-78
+	android:name
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:58:27-75
+data
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:60:17-62:49
+	android:host
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:61:21-39
+	android:scheme
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:62:21-46
 activity#com.example.travel_app.Activity.user.ProfileActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:52:9-54:40
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:65:9-67:40
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:54:13-37
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:67:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:53:13-58
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:66:13-58
 activity#com.example.travel_app.Activity.user.BookmarkActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:55:9-57:40
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:68:9-70:40
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:57:13-37
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:70:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:56:13-59
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:69:13-59
 activity#com.example.travel_app.Activity.user.DetailActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:58:9-60:40
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:71:9-73:40
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:60:13-37
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:73:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:59:13-57
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:72:13-57
 activity#com.example.travel_app.Activity.user.ListItemsActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:61:9-63:40
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:74:9-76:40
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:63:13-37
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:76:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:62:13-60
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:75:13-60
 activity#com.example.travel_app.Activity.BaseActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:64:9-66:40
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:77:9-79:40
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:66:13-37
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:79:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:65:13-50
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:78:13-50
 activity#com.example.travel_app.Activity.user.IntroActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:67:9-75:20
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:80:9-88:20
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:69:13-36
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:82:13-36
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:68:13-56
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:81:13-56
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:70:13-74:29
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:83:13-87:29
 action#android.intent.action.MAIN
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:71:17-69
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:84:17-69
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:71:25-66
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:84:25-66
 category#android.intent.category.LAUNCHER
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:73:17-77
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:86:17-77
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:73:27-74
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:86:27-74
 activity#com.example.travel_app.Activity.user.MainActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:76:9-84:20
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:89:9-97:20
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:78:13-36
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:91:13-36
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:77:13-55
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:90:13-55
 uses-sdk
 INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml
 INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml
+MERGED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:5:5-7:41
+MERGED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.stripe:stripe-android:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\4d5b111c08990674876d7c97f0569e2a\transformed\stripe-android-17.2.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.stripe:stripe-android:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\4d5b111c08990674876d7c97f0569e2a\transformed\stripe-android-17.2.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\838c5838e1f7a7c15af55602dc978b15\transformed\paymentsheet-17.2.0\AndroidManifest.xml:5:5-7:41
@@ -594,6 +621,22 @@ MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\Adm
 		INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml
+queries
+ADDED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:9:5-13:15
+MERGED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:10:5-14:15
+MERGED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:10:5-14:15
+package#vn.com.vng.zalopay.sb1
+ADDED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:10:9-58
+	android:name
+		ADDED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:10:18-55
+package#vn.com.vng.zalopay
+ADDED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:11:9-54
+	android:name
+		ADDED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:11:18-51
+package#com.zing.zalo
+ADDED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:12:9-49
+	android:name
+		ADDED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:12:18-46
 activity#com.stripe.android.paymentsheet.PaymentSheetActivity
 ADDED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\838c5838e1f7a7c15af55602dc978b15\transformed\paymentsheet-17.2.0\AndroidManifest.xml:10:9-13:69
 	android:exported
@@ -610,8 +653,6 @@ ADDED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transf
 		ADDED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\838c5838e1f7a7c15af55602dc978b15\transformed\paymentsheet-17.2.0\AndroidManifest.xml:17:13-66
 	android:name
 		ADDED from [com.stripe:paymentsheet:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\838c5838e1f7a7c15af55602dc978b15\transformed\paymentsheet-17.2.0\AndroidManifest.xml:15:13-82
-queries
-ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:10:5-14:15
 package#com.android.chrome
 ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:13:9-54
 	android:name
@@ -672,26 +713,6 @@ intent-filter#action:name:android.intent.action.VIEW+category:name:android.inten
 ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:48:13-59:29
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:payment_return_url+data:path:/com.example.travel_app+data:scheme:stripesdk
 ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:48:13-59:29
-action#android.intent.action.VIEW
-ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:49:17-69
-	android:name
-		ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:49:25-66
-category#android.intent.category.DEFAULT
-ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:51:17-76
-	android:name
-		ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:51:27-73
-category#android.intent.category.BROWSABLE
-ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:52:17-78
-	android:name
-		ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:52:27-75
-data
-ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:55:17-58:50
-	android:path
-		ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:57:21-53
-	android:host
-		ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:56:21-54
-	android:scheme
-		ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:58:21-47
 activity#com.stripe.android.payments.core.authentication.threeds2.Stripe3ds2TransactionActivity
 ADDED from [com.stripe:payments-core:17.2.0] C:\Users\Admin\.gradle\caches\transforms-4\06181569f3c2350da2b07868a3189c3e\transformed\payments-core-17.2.0\AndroidManifest.xml:61:9-64:57
 	android:exported

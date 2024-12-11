@@ -27,7 +27,7 @@ public class DetailActivity extends BaseActivity {
 
     private void setVariable() {
         binding.titleTxt.setText(object.getTitle());
-        binding.priceTxt.setText("$"+object.getPrice());
+        binding.priceTxt.setText(object.getPrice()+"VND");
         binding.backBtn.setOnClickListener(view -> finish());
         binding.bedTxt.setText(""+object.getBed());
         binding.addressTxt.setText(object.getAddress());

@@ -1,7 +1,9 @@
-#Wed Dec 11 15:14:15 ICT 2024
+#Wed Dec 11 16:11:51 ICT 2024
 base.0=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.11=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.12=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
 base.2=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
 base.3=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
 base.4=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
@@ -13,6 +15,8 @@ base.9=G\:\\Study\\Android Projects\\Application\\TravelApp-main\\app\\build\\in
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=14/classes.dex
+path.11=10/classes.dex
+path.12=9/classes.dex
 path.2=1/classes.dex
 path.3=6/classes.dex
 path.4=7/classes.dex
@@ -24,6 +28,8 @@ path.9=classes5.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.10=classes11.dex
+renamed.11=classes12.dex
+renamed.12=classes13.dex
 renamed.2=classes3.dex
 renamed.3=classes4.dex
 renamed.4=classes5.dex

@@ -14,9 +14,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
-    <!-- See https://developer.android.com/training/package-visibility/declaring for more details. -->
     <queries>
-
+        <package android:name="vn.com.vng.zalopay.sb1" />
+        <package android:name="vn.com.vng.zalopay" />
+        <package android:name="com.zing.zalo" />
         <!-- Added to check if Chrome is installed for browser-based payment authentication (e.g. 3DS1). -->
         <package android:name="com.android.chrome" />
     </queries>
@@ -76,7 +77,20 @@
             android:exported="false" />
         <activity
             android:name="com.example.travel_app.Activity.user.TicketActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:label="Merchant Demo"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.example.travel_app.Activity.user.ProfileActivity"
             android:exported="false" />

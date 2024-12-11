@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Domain.ItemDomain;
+import com.example.travel_app.ZaloPaySdk.Api.CreateOrder;
 import com.example.travel_app.databinding.ActivityTicketBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,6 +54,9 @@ import java.util.Map;
 import java.util.Random;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import vn.zalopay.sdk.ZaloPayError;
+import vn.zalopay.sdk.ZaloPaySDK;
+import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class TicketActivity extends BaseActivity {
     private ActivityTicketBinding binding;
@@ -87,123 +92,11 @@ public class TicketActivity extends BaseActivity {
 
 
         getIntentExtra();
+        initZaloPaySDK();
         setVariable();
-
-        // Payment
-        PaymentConfiguration.init(this, PublishableKey);
-        paymentSheet = new PaymentSheet(this, paymentSheetResult -> {
-            onPaymentResult(paymentSheetResult);
-        });
     }
 
-    private void createCustomer() {
-        StringRequest request = new StringRequest(Request.Method.POST, "https://api.stripe.com/v1/customers",
-                response -> {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        CustomerId = object.getString("id");
-                        Toast.makeText(TicketActivity.this,
-                                "Customer ID: " + CustomerId,
-                                Toast.LENGTH_SHORT).show();
-                        getEphemeralKey(); // Sau khi tạo khách hàng, lấy khóa tạm thời
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, error -> Toast.makeText(TicketActivity.this,
-                error.getLocalizedMessage(),
-                Toast.LENGTH_SHORT).show()) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<>();
-                header.put("Authorization", "Bearer " + SecretKey);
-                return header;
-            }
-        };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);
-    }
-
-    private void getEphemeralKey() {
-        StringRequest request = new StringRequest(Request.Method.POST, "https://api.stripe.com/v1/ephemeral_keys",
-                response -> {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        EphemeralKey = object.getString("id");
-                        Toast.makeText(TicketActivity.this, "Ephemeral Key: " + EphemeralKey, Toast.LENGTH_SHORT).show();
-                        getClientSecret(); // Sau khi lấy khóa tạm thời, lấy Client Secret
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, error -> Toast.makeText(TicketActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show()) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<>();
-                header.put("Authorization", "Bearer " + SecretKey);
-                header.put("Stripe-Version", "2024-06-20");
-                return header;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("customer", CustomerId);
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);
-    }
-
-    private void getClientSecret() {
-        StringRequest request = new StringRequest(Request.Method.POST, "https://api.stripe.com/v1/payment_intents",
-                response -> {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        ClientSecret = object.getString("client_secret");
-                        Log.d("Stripe", "Client Secret: " + ClientSecret);
-                        paymentFlow(); // Gọi paymentFlow() sau khi nhận được ClientSecret mới
-                    } catch (JSONException e) {
-                        Log.e("StripeError", "JSON Parsing Error: " + e.getMessage());
-                    }
-                }, error -> {
-            Log.e("StripeError", "Volley Error: " + error.getLocalizedMessage());
-            Toast.makeText(TicketActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<>();
-                header.put("Authorization", "Bearer " + SecretKey);
-                return header;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("customer", CustomerId);
-                params.put("amount", String.valueOf(object.getPrice() * 100)); // Giá trị amount cần là cent
-                params.put("currency", "USD");
-                params.put("automatic_payment_methods[enabled]", "true");
-                return params;
-            }
-        };
-
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);
-    }
-
-    // Khởi động quy trình thanh toán
-    private void paymentFlow() {
-        paymentSheet.presentWithPaymentIntent(ClientSecret, new PaymentSheet.Configuration(
-                "", new PaymentSheet.CustomerConfiguration(
-                CustomerId,
-                EphemeralKey
-        )));
-    }
 
     private void onPaymentResult(PaymentSheetResult paymentSheetResult) {
         if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
@@ -219,6 +112,15 @@ public class TicketActivity extends BaseActivity {
         }
     }
 
+    private void initZaloPaySDK() {
+        StrictMode.ThreadPolicy policy = new
+                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // ZaloPay SDK Init
+        ZaloPaySDK.init(2553, vn.zalopay.sdk.Environment.SANDBOX);
+
+    }
 
     private void savePurchaseToRealtime() {
         // Khởi tạo Firebase Database
@@ -376,28 +278,42 @@ public class TicketActivity extends BaseActivity {
             timePickerDialog.show();
         });
 
-        binding.paymentBtn.setOnClickListener(view -> {
-            if (mAuth.getCurrentUser() == null) {
-                Toast.makeText(this,
-                        "Bạn phải đăng nhập ứng dụng!",
-                        Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            } else {
-                // Người dùng đã đăng nhập, thực hiện thanh toán
-                //createCustomer
+        binding.paymentBtn.setOnClickListener(new View.OnClickListener() {
+            String totalString = String.format("%.0f", object.getPrice() * 1000);
+            @Override
+            public void onClick(View v) {
+                CreateOrder orderApi = new CreateOrder();
+                try {
+                    JSONObject data = orderApi.createOrder(totalString);
+                    String code = data.getString("return_code");
+                    if (code.equals("1")) {
+                        String token = data.getString("zp_trans_token");
+                        ZaloPaySDK.getInstance().payOrder(TicketActivity.this, token, "demozpdk://app", new PayOrderListener() {
+                            @Override
+                            public void onPaymentSucceeded(String s, String s1, String s2) {
+                                savePurchaseToFirebase();
+                                savePurchaseToRealtime();
 
-                savePurchaseToFirebase();
-                savePurchaseToRealtime();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
 
-                new AlertDialog.Builder(this)
-                        .setTitle("Thông báo")
-                        .setMessage("Thanh toán thành công!")
-                        .setPositiveButton("OK", (dialog, which) -> {
-                            // Chuyển về MainActivity
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        })
-                        .show();
+                            @Override
+                            public void onPaymentCanceled(String s, String s1) {
+
+                                startActivity(new Intent(getApplicationContext(), TicketActivity.class));
+                            }
+
+                            @Override
+                            public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+
+                                startActivity(new Intent(getApplicationContext(), TicketActivity.class));
+                            }
+                        });
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -476,5 +392,11 @@ public class TicketActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ZaloPaySDK.getInstance().onResult(intent);
+    }
 
 }

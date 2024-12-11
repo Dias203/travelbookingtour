@@ -68,24 +68,6 @@ public class SignupActivity extends BaseActivity {
                 Toast.makeText(this, "Nhập password!", Toast.LENGTH_SHORT).show();
             }
 
-//            mAuth.createUserWithEmailAndPassword(email, password)
-//                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            binding.progressBar.setVisibility(View.GONE);
-//                            if (task.isSuccessful()) {
-//                                binding.email.setText("");
-//                                binding.password.setText("");
-//                                Toast.makeText(SignupActivity.this, "Account created.",
-//                                        Toast.LENGTH_SHORT).show();
-//                            } else {
-//                                // If sign in fails, display a message to the user.
-//                                Toast.makeText(SignupActivity.this, "Authentication failed.",
-//                                        Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-
             mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(
                     new OnSuccessListener<AuthResult>() {
                         @Override
