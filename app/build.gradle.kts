@@ -44,6 +44,11 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
+    implementation(fileTree(mapOf(
+        "dir" to "C:\\Users\\Admin\\Downloads\\zalopaysdklib",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -64,5 +69,7 @@ dependencies {
     implementation ("io.github.cdimascio:dotenv-java:2.2.0")
     implementation ("com.google.code.gson:gson:2.10.1")
 
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
 
 }

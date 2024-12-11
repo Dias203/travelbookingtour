@@ -35,7 +35,7 @@ public class RecommendedApdater extends RecyclerView.Adapter<RecommendedApdater.
     @Override
     public void onBindViewHolder(@NonNull RecommendedApdater.Viewholder holder, int position) {
         binding.title.setText(items.get(position).getTitle());
-        binding.priceTxt.setText("$"+items.get(position).getPrice());
+        binding.priceTxt.setText(items.get(position).getPrice()+"VND");
         binding.addressTxt.setText(items.get(position).getAddress());
         binding.scoreTxt.setText(""+items.get(position).getScore());
 

@@ -36,8 +36,16 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\activity_admin_add_tour.xml"
     },
     {
+        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/sp_item.xml",
+        "source": "com.example.travel_app-main-73:/layout/sp_item.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\viewholder_popular.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\viewholder_popular.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\viewholder_header.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\viewholder_header.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\viewholder_category.xml",
@@ -46,10 +54,6 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\slider_item_container.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-73:\\layout\\slider_item_container.xml"
-    },
-    {
-        "merged": "com.example.travel_app-mergeDebugResources-70:/layout/viewholder_header.xml",
-        "source": "com.example.travel_app-main-73:/layout/viewholder_header.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-70:\\layout\\activity_bookmark.xml",

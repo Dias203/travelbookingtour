@@ -3930,7 +3930,6 @@ id grouping
 id groups
 id guestTxt
 id header
-id headerTxt
 id header_title
 id hide_ime_id
 id hide_in_inspector_tag
@@ -4681,7 +4680,6 @@ layout stripe_vertical_divider
 layout support_simple_spinner_dropdown_item
 layout viewholder_cart
 layout viewholder_category
-layout viewholder_header
 layout viewholder_list_item
 layout viewholder_popular
 layout viewholder_recommended

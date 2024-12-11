@@ -38,7 +38,7 @@ public class AdminAllTourAdapter extends RecyclerView.Adapter<AdminAllTourAdapte
         ItemDomain item = itemList.get(position);
 
         holder.binding.titleTxt.setText(item.getTitle());
-        holder.binding.priceTxt.setText("$" + item.getPrice());
+        holder.binding.priceTxt.setText(item.getPrice() + "VND");
         holder.binding.addressTxt.setText(item.getAddress());
         holder.binding.scoreTxt.setText("" + item.getScore());
 

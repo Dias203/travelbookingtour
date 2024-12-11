@@ -37,7 +37,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         ItemDomain item = items.get(position);
 
         holder.binding.titleTxt.setText(item.getTitle());
-        holder.binding.priceTxt.setText("$" + item.getPrice());
+        holder.binding.priceTxt.setText(item.getPrice() + "VND");
         holder.binding.addressTxt.setText(item.getAddress());
         holder.binding.scoreTxt.setText("" + item.getScore());
 

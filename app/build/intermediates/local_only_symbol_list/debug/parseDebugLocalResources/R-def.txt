@@ -105,7 +105,6 @@ id facebookBtn
 id favBtn
 id forgot_passwordBtn
 id guestTxt
-id headerTxt
 id home
 id imageSlide
 id imageView
@@ -218,7 +217,6 @@ layout slider_item_container
 layout sp_item
 layout viewholder_cart
 layout viewholder_category
-layout viewholder_header
 layout viewholder_list_item
 layout viewholder_popular
 layout viewholder_recommended
