@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="/Person"
+        android:text="/Người"
         android:textColor="@color/darkBlue"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/priceTxt"

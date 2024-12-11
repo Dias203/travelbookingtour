@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.travel_app-mergeDebugResources-69:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.example.travel_app-mergeDebugResources-54:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\9a70be8bf2293aa24d2f98d580c945b5\\transformed\\appcompat-1.7.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
@@ -12,24 +12,6 @@
                         "endLines": "6",
                         "endColumns": "13",
                         "endOffsets": "327"
-                    },
-                    "to": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "112",
-                        "endLines": "7",
-                        "endColumns": "13",
-                        "endOffsets": "384"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\06181569f3c2350da2b07868a3189c3e\\transformed\\payments-core-17.2.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "56",
-                        "endOffsets": "107"
                     }
                 }
             ]

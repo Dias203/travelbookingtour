@@ -57,7 +57,6 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.stripe:stripe-java:22.2.0")
-    implementation("com.stripe:stripe-android:17.2.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
 

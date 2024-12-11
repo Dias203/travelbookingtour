@@ -1,25 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.travel_app-mergeDebugResources-69:/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "com.example.travel_app-mergeDebugResources-54:/values-en-rIN/values-en-rIN.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\9e361ed8f86e0590b70c4a337d75f37f\\transformed\\play-services-wallet-18.1.3\\res\\values-en-rIN\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "206",
-                        "endColumns": "70",
-                        "endOffsets": "276"
-                    },
-                    "to": {
-                        "startLines": "61",
-                        "startColumns": "4",
-                        "startOffsets": "5718",
-                        "endColumns": "74",
-                        "endOffsets": "5788"
-                    }
-                },
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\2ba589d2755bcd502776e51531243192\\transformed\\browser-1.4.0\\res\\values-en-rIN\\values-en-rIN.xml",
                     "from": {

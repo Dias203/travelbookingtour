@@ -20,13 +20,6 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Domain.ItemDomain;
@@ -38,9 +31,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
-import com.stripe.android.PaymentConfiguration;
-import com.stripe.android.paymentsheet.PaymentSheet;
-import com.stripe.android.paymentsheet.PaymentSheetResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,18 +52,7 @@ public class TicketActivity extends BaseActivity {
     private ActivityTicketBinding binding;
     private ItemDomain object;
 
-    // Hiding Key
-//    private static final Dotenv dotenv = Dotenv.load();
-//    private static final String PublishableKey = dotenv.get("PUBLISHABLE_KEY");
-//    private static final String SecretKey = dotenv.get("SECRET_KEY");
 
-    private static final String PublishableKey = "pk_test_51QUTviEDU5x4BEa1f5hyip7KOhkb4DQbCF6P42lm42tWdaSnoFIRYKk3xaHqa66dmQhIpQRftLMM1Ny9oKx3Llih00KsRjS6JH";
-    private static final String SecretKey = "sk_test_51QUTviEDU5x4BEa1RnYHZfgxmvg3CBn66K02w3OfWBaBCWYEaPw5tujRAobBlk6B4AFeMBBiUWLZg0zZCDVUoTHc00523u5yqo";
-
-    private String CustomerId;
-    private String EphemeralKey;
-    private String ClientSecret;
-    private PaymentSheet paymentSheet;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     Calendar today = Calendar.getInstance();
@@ -98,19 +77,6 @@ public class TicketActivity extends BaseActivity {
 
 
 
-    private void onPaymentResult(PaymentSheetResult paymentSheetResult) {
-        if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
-            Toast.makeText(this, "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
-
-            // lưu thông tin vào firebase
-            savePurchaseToFirebase();
-            savePurchaseToRealtime();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        } else {
-            Toast.makeText(this, "Thanh toán thất bại!", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void initZaloPaySDK() {
         StrictMode.ThreadPolicy policy = new
@@ -282,37 +248,49 @@ public class TicketActivity extends BaseActivity {
             String totalString = String.format("%.0f", object.getPrice() * 1000);
             @Override
             public void onClick(View v) {
-                CreateOrder orderApi = new CreateOrder();
-                try {
-                    JSONObject data = orderApi.createOrder(totalString);
-                    String code = data.getString("return_code");
-                    if (code.equals("1")) {
-                        String token = data.getString("zp_trans_token");
-                        ZaloPaySDK.getInstance().payOrder(TicketActivity.this, token, "demozpdk://app", new PayOrderListener() {
-                            @Override
-                            public void onPaymentSucceeded(String s, String s1, String s2) {
-                                savePurchaseToFirebase();
-                                savePurchaseToRealtime();
 
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            }
+                // Kiểm tra trạng thái đăng nhập
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user == null) {
+                    // Nếu chưa đăng nhập, hiển thị thông báo và chuyển đến màn hình đăng nhập
+                    Toast.makeText(TicketActivity.this, "Vui lòng đăng nhập để thực hiện thanh toán!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(TicketActivity.this, LoginActivity.class); // Thay LoginActivity bằng tên Activity đăng nhập của bạn
+                    startActivity(intent);
+                    return; // Không tiếp tục thực hiện thanh toán
+                }
+                else{
+                    CreateOrder orderApi = new CreateOrder();
+                    try {
+                        JSONObject data = orderApi.createOrder(totalString);
+                        String code = data.getString("return_code");
+                        if (code.equals("1")) {
+                            String token = data.getString("zp_trans_token");
+                            ZaloPaySDK.getInstance().payOrder(TicketActivity.this, token, "demozpdk://app", new PayOrderListener() {
+                                @Override
+                                public void onPaymentSucceeded(String s, String s1, String s2) {
+                                    savePurchaseToFirebase();
+                                    savePurchaseToRealtime();
 
-                            @Override
-                            public void onPaymentCanceled(String s, String s1) {
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                }
 
-                                startActivity(new Intent(getApplicationContext(), TicketActivity.class));
-                            }
+                                @Override
+                                public void onPaymentCanceled(String s, String s1) {
 
-                            @Override
-                            public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+                                    startActivity(new Intent(getApplicationContext(), TicketActivity.class));
+                                }
 
-                                startActivity(new Intent(getApplicationContext(), TicketActivity.class));
-                            }
-                        });
+                                @Override
+                                public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+
+                                    startActivity(new Intent(getApplicationContext(), TicketActivity.class));
+                                }
+                            });
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         });

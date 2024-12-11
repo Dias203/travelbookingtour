@@ -4,7 +4,7 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/bottom_btn1"
-        android:title="Trang chủ"
+        android:title=""
         app:cnb_iconColor="@android:color/white"
         app:cnb_textColor="@android:color/white"
         app:cnb_backgroundColor="@color/blue" />
@@ -12,21 +12,21 @@
     <item
         android:id="@+id/explorer"
         android:icon="@drawable/bottom_btn2"
-        android:title="Explorer"
+        android:title=""
         app:cnb_textColor="@android:color/white"
         app:cnb_iconColor="@android:color/white"
         app:cnb_backgroundColor="@color/blue" />
 
     <item android:id="@+id/cart"
-        android:icon="@drawable/bottom_btn3"
-        android:title="Đã mua"
+        android:icon="@drawable/cart"
+        android:title=""
         app:cnb_textColor="@android:color/white"
-        app:cnb_iconColor="@android:color/white"
+        app:cnb_iconColor="#253f66"
         app:cnb_backgroundColor="@color/blue"/>
 
     <item android:id="@+id/profile"
         android:icon="@drawable/bottom_btn4"
-        android:title="Thông tin"
+        android:title=""
         app:cnb_textColor="@android:color/white"
         app:cnb_iconColor="@android:color/white"
         app:cnb_backgroundColor="@color/blue"/>

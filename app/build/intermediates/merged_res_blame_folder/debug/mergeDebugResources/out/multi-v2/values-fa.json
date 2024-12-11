@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.travel_app-mergeDebugResources-69:/values-fa/values-fa.xml",
+            "outputFile": "com.example.travel_app-mergeDebugResources-54:/values-fa/values-fa.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\41d1909defa2656542eb33248c13e203\\transformed\\credentials-1.2.0-rc01\\res\\values-fa\\values-fa.xml",
@@ -139,23 +139,6 @@
                         "startOffsets": "309,419,520,631,715,816,931,1011,1088,1181,1276,1368,1462,1564,1659,1756,1850,1943,2033,2115,2223,2327,2425,2531,2636,2741,2898,13340",
                         "endColumns": "109,100,110,83,100,114,79,76,92,94,91,93,101,94,96,93,92,89,81,107,103,97,105,104,104,156,100,81",
                         "endOffsets": "414,515,626,710,811,926,1006,1083,1176,1271,1363,1457,1559,1654,1751,1845,1938,2028,2110,2218,2322,2420,2526,2631,2736,2893,2994,13417"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\9e361ed8f86e0590b70c4a337d75f37f\\transformed\\play-services-wallet-18.1.3\\res\\values-fa\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "202",
-                        "endColumns": "69",
-                        "endOffsets": "271"
-                    },
-                    "to": {
-                        "startLines": "158",
-                        "startColumns": "4",
-                        "startOffsets": "14093",
-                        "endColumns": "73",
-                        "endOffsets": "14162"
                     }
                 }
             ]

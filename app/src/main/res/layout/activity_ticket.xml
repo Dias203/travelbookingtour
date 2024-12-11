@@ -318,7 +318,7 @@
                     android:layout_margin="24dp"
                     android:layout_weight="1"
                     android:background="@drawable/blue_bg"
-                    android:text="Payment"
+                    android:text="Thanh toán"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -330,7 +330,7 @@
                     android:layout_margin="24dp"
                     android:layout_weight="1"
                     android:background="@drawable/blue_bg"
-                    android:text="Download Ticket"
+                    android:text="Tải ảnh xuống"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>

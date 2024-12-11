@@ -41,7 +41,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location"
+                    android:text="Vị trí"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -90,7 +90,7 @@
                     android:layout_marginBottom="2dp"
                     android:background="@drawable/blue_bg"
                     android:gravity="center"
-                    android:text="Search"
+                    android:text="Tìm kiếm"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Recommended"
+                    android:text="Điểm đến gợi ý"
                     android:textColor="@color/darkBlue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -200,7 +200,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="see all"
+                    android:text="Tất cả"
                     android:textColor="@color/blue"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -246,7 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Popular Destination"
+                    android:text="Điểm đến phổ biến"
                     android:textColor="@color/darkBlue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -254,7 +254,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="see all"
+                    android:text="Tất cả"
                     android:textColor="@color/blue"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -296,7 +296,7 @@
         android:elevation="3dp"
         android:padding="4dp"
         app:cnb_iconColor="@color/darkBlue"
-        app:cnb_iconSize="20sp"
+        app:cnb_iconSize="30sp"
         app:cnb_menuResource="@menu/menu_bottom"
         app:cnb_orientationMode="horizontal"
         app:cnb_radius="50dp"

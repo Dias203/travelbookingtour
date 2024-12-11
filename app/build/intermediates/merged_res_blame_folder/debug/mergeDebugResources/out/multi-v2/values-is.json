@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.travel_app-mergeDebugResources-69:/values-is/values-is.xml",
+            "outputFile": "com.example.travel_app-mergeDebugResources-54:/values-is/values-is.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\d97898c92c6a4035c94e4634aa1df957\\transformed\\material-1.12.0\\res\\values-is\\values-is.xml",
@@ -37,23 +37,6 @@
                         "startOffsets": "3615,3710,3817,3914,4014,4117,4221,13664",
                         "endColumns": "94,106,96,99,102,103,110,100",
                         "endOffsets": "3705,3812,3909,4009,4112,4216,4327,13760"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-4\\9e361ed8f86e0590b70c4a337d75f37f\\transformed\\play-services-wallet-18.1.3\\res\\values-is\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "202",
-                        "endColumns": "71",
-                        "endOffsets": "273"
-                    },
-                    "to": {
-                        "startLines": "158",
-                        "startColumns": "4",
-                        "startOffsets": "14030",
-                        "endColumns": "75",
-                        "endOffsets": "14101"
                     }
                 },
                 {
