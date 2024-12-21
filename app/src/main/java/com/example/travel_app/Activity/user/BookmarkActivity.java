@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,10 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travel_app.Activity.BaseActivity;
+import com.example.travel_app.Activity.admin.AllTourActivity;
 import com.example.travel_app.Adapter.BookmarkAdapter;
 import com.example.travel_app.Domain.ItemDomain;
 import com.example.travel_app.R;
 import com.example.travel_app.databinding.ActivityBookmarkBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.ArrayList;
@@ -137,15 +144,82 @@ public class BookmarkActivity extends BaseActivity {
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String itemId = item.getId(); // Lấy ID của item từ ItemDomain
 
                                 // Xóa item khỏi danh sách và cập nhật RecyclerView
                                 list.remove(position);
                                 adapter.notifyItemRemoved(position);
 
-                                // Cập nhật dữ liệu trong Firebase
-                                DatabaseReference myRef = database.getReference("Purchased");
-                                myRef.child(String.valueOf(itemId)).removeValue(); // Xóa item khỏi Firebase bằng ID
+                                // Xóa item khỏi Firestore collection "Purchased"
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+
+                                fStore.collection("Purchased").whereEqualTo("userId", user.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                                            String documentID = documentSnapshot.getId();
+
+                                            fStore.collection("Purchased").document(documentID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Toast.makeText(BookmarkActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
+                                                    Log.d("DeleteItem", "DocumentSnapshot successfully deleted!");
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(BookmarkActivity.this, "Lỗi khi xóa: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Log.w("DeleteItem", "Error deleting document", e);
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(BookmarkActivity.this, "Không tìm thấy tài liệu cần xóa", Toast.LENGTH_SHORT).show();
+                                            Log.d("DeleteItem", "No document found with userId: " + user.getUid());
+                                        }
+                                    }
+                                });
+
+                                /*
+                                * FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+
+fStore.collection("Purchased")
+        .whereEqualTo("userId", user.getUid())
+        .get()
+        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                    // Lấy DocumentSnapshot đầu tiên từ kết quả
+                    DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                    String documentID = documentSnapshot.getId();
+
+                    // Xóa tài liệu khỏi Firestore
+                    fStore.collection("Purchased")
+                            .document(documentID)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(BookmarkActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
+                                    Log.d("DeleteItem", "DocumentSnapshot successfully deleted!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(BookmarkActivity.this, "Lỗi khi xóa: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Log.w("DeleteItem", "Error deleting document", e);
+                                }
+                            });
+                } else {
+                    Log.d("DeleteItem", "Không tìm thấy tài liệu phù hợp");
+                }
+            }
+        });
+
+                                * */
                             }
                         })
                         .setNegativeButton("Không", new DialogInterface.OnClickListener() {

@@ -50,9 +50,9 @@ public class MainActivity extends BaseActivity {
 
         // Xử lý hiển thị location
         initLocation();
-        initSearchView();
+        initSearchView();     // Thiết lập các thuộc tính ban đầu cho giao diện tìm kiếm
         fetchDataForSearch(); // Lấy dữ liệu từ Firebase cho itemsList
-        solveSearchBox();
+        solveSearchBox();     // Lắng nghe và xử lý sự thay đổi trong ô nhập liệu tìm kiếm
         initBanner();
         initCategory();
         initRecommended();
@@ -93,6 +93,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    // Lọc danh sách itemsList theo chuỗi text được nhập vào
     private void filter(String text) {
         binding.progressBarSearch.setVisibility(View.VISIBLE);
         try {
