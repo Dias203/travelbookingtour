@@ -64,7 +64,8 @@ public class ChangePasswordActivity extends BaseActivity {
                             null, null, AppCompatResources.getDrawable(ChangePasswordActivity.this, R.drawable.check), null);
                 } else {
                     // Ẩn icon nếu không khớp
-                    binding.confirmNewPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                    binding.confirmNewPassword.setCompoundDrawablesWithIntrinsicBounds(
+                            null, null, AppCompatResources.getDrawable(ChangePasswordActivity.this, R.drawable.cancel), null);
                 }
             }
         });
@@ -91,7 +92,8 @@ public class ChangePasswordActivity extends BaseActivity {
             Toast.makeText(this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            binding.confirmNewPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(this, R.drawable.check), null); // Hiện icon
+            binding.confirmNewPassword.setCompoundDrawablesWithIntrinsicBounds(
+                    null, null, AppCompatResources.getDrawable(this, R.drawable.check), null); // Hiện icon
             //Firebase sử dụng AuthCredential để thực hiện các thao tác xác thực,
             // chẳng hạn như đăng nhập, liên kết tài khoản, hoặc xác thực lại người dùng.
             // Tạo credential từ email và mật khẩu cũ

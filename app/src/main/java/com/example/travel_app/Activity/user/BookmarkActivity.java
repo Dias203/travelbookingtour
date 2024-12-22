@@ -53,43 +53,11 @@ public class BookmarkActivity extends BaseActivity {
         initPurchased();
     }
 
-    /*private void initPurchased() {
-        DatabaseReference myRef = database.getReference("Purchased");
-        binding.progressBarListItem.setVisibility(View.VISIBLE);
-
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    itemList.clear(); // Xóa dữ liệu cũ trước khi thêm dữ liệu mới
-                    for (DataSnapshot issue : snapshot.getChildren()) {
-                        ItemDomain item = issue.getValue(ItemDomain.class);
-                        if (item != null) {
-                            itemList.add(item);
-                        }
-                    }
-                    if (!itemList.isEmpty()) {
-                        binding.recyclerView.setLayoutManager(new LinearLayoutManager(BookmarkActivity.this,
-                                LinearLayoutManager.VERTICAL, false));
-                        adapter = new BookmarkAdapter(itemList);
-                        binding.recyclerView.setAdapter(adapter);
-                        setupSwipeToDelete(binding.recyclerView, adapter, itemList);
-                    }
-                }
-                binding.progressBarListItem.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                binding.progressBarListItem.setVisibility(View.GONE);
-            }
-        });
-    }*/
     private void initPurchased() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user == null) {
+        if (user == null) {
             Toast.makeText(this, "Vui lòng đăng nhập để xem lịch sử mua", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
@@ -157,6 +125,7 @@ public class BookmarkActivity extends BaseActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                            // Lấy DocumentSnapshot đầu tiên từ kết quả
                                             DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                                             String documentID = documentSnapshot.getId();
 
@@ -180,46 +149,6 @@ public class BookmarkActivity extends BaseActivity {
                                     }
                                 });
 
-                                /*
-                                * FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-
-fStore.collection("Purchased")
-        .whereEqualTo("userId", user.getUid())
-        .get()
-        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                    // Lấy DocumentSnapshot đầu tiên từ kết quả
-                    DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                    String documentID = documentSnapshot.getId();
-
-                    // Xóa tài liệu khỏi Firestore
-                    fStore.collection("Purchased")
-                            .document(documentID)
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(BookmarkActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
-                                    Log.d("DeleteItem", "DocumentSnapshot successfully deleted!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(BookmarkActivity.this, "Lỗi khi xóa: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    Log.w("DeleteItem", "Error deleting document", e);
-                                }
-                            });
-                } else {
-                    Log.d("DeleteItem", "Không tìm thấy tài liệu phù hợp");
-                }
-            }
-        });
-
-                                * */
                             }
                         })
                         .setNegativeButton("Không", new DialogInterface.OnClickListener() {

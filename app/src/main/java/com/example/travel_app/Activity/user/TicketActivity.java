@@ -254,7 +254,7 @@ public class TicketActivity extends BaseActivity {
                 if (user == null) {
                     // Nếu chưa đăng nhập, hiển thị thông báo và chuyển đến màn hình đăng nhập
                     Toast.makeText(TicketActivity.this, "Vui lòng đăng nhập để thực hiện thanh toán!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(TicketActivity.this, LoginActivity.class); // Thay LoginActivity bằng tên Activity đăng nhập của bạn
+                    Intent intent = new Intent(TicketActivity.this, LoginActivity.class);
                     startActivity(intent);
                     return; // Không tiếp tục thực hiện thanh toán
                 }
