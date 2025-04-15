@@ -4,8 +4,8 @@ package com.example.travel_app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,13 +14,14 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.travel_app.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivitySignupBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final RelativeLayout rootView;
 
   @NonNull
   public final AppCompatButton btnRegister;
@@ -29,33 +30,47 @@ public final class ActivitySignupBinding implements ViewBinding {
   public final TextInputEditText email;
 
   @NonNull
+  public final TextInputLayout emailLayout;
+
+  @NonNull
   public final TextView loginNow;
 
   @NonNull
-  public final LinearLayout main;
+  public final RelativeLayout main;
 
   @NonNull
   public final TextInputEditText password;
 
   @NonNull
+  public final TextInputLayout passwordLayout;
+
+  @NonNull
   public final ProgressBar progressBar;
 
-  private ActivitySignupBinding(@NonNull LinearLayout rootView,
+  @NonNull
+  public final TextView titleText;
+
+  private ActivitySignupBinding(@NonNull RelativeLayout rootView,
       @NonNull AppCompatButton btnRegister, @NonNull TextInputEditText email,
-      @NonNull TextView loginNow, @NonNull LinearLayout main, @NonNull TextInputEditText password,
-      @NonNull ProgressBar progressBar) {
+      @NonNull TextInputLayout emailLayout, @NonNull TextView loginNow,
+      @NonNull RelativeLayout main, @NonNull TextInputEditText password,
+      @NonNull TextInputLayout passwordLayout, @NonNull ProgressBar progressBar,
+      @NonNull TextView titleText) {
     this.rootView = rootView;
     this.btnRegister = btnRegister;
     this.email = email;
+    this.emailLayout = emailLayout;
     this.loginNow = loginNow;
     this.main = main;
     this.password = password;
+    this.passwordLayout = passwordLayout;
     this.progressBar = progressBar;
+    this.titleText = titleText;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public RelativeLayout getRoot() {
     return rootView;
   }
 
@@ -92,17 +107,29 @@ public final class ActivitySignupBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.emailLayout;
+      TextInputLayout emailLayout = ViewBindings.findChildViewById(rootView, id);
+      if (emailLayout == null) {
+        break missingId;
+      }
+
       id = R.id.loginNow;
       TextView loginNow = ViewBindings.findChildViewById(rootView, id);
       if (loginNow == null) {
         break missingId;
       }
 
-      LinearLayout main = (LinearLayout) rootView;
+      RelativeLayout main = (RelativeLayout) rootView;
 
       id = R.id.password;
       TextInputEditText password = ViewBindings.findChildViewById(rootView, id);
       if (password == null) {
+        break missingId;
+      }
+
+      id = R.id.passwordLayout;
+      TextInputLayout passwordLayout = ViewBindings.findChildViewById(rootView, id);
+      if (passwordLayout == null) {
         break missingId;
       }
 
@@ -112,8 +139,14 @@ public final class ActivitySignupBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivitySignupBinding((LinearLayout) rootView, btnRegister, email, loginNow, main,
-          password, progressBar);
+      id = R.id.titleText;
+      TextView titleText = ViewBindings.findChildViewById(rootView, id);
+      if (titleText == null) {
+        break missingId;
+      }
+
+      return new ActivitySignupBinding((RelativeLayout) rootView, btnRegister, email, emailLayout,
+          loginNow, main, password, passwordLayout, progressBar, titleText);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

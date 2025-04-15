@@ -26,6 +26,9 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final ChipNavigationBar bottomnav;
 
   @NonNull
+  public final AppCompatButton buttonChangeLanguage;
+
+  @NonNull
   public final AppCompatButton buttonChangePassword;
 
   @NonNull
@@ -47,12 +50,13 @@ public final class ActivityProfileBinding implements ViewBinding {
   public final View view;
 
   private ActivityProfileBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ChipNavigationBar bottomnav, @NonNull AppCompatButton buttonChangePassword,
-      @NonNull AppCompatButton buttonLogout, @NonNull ImageView imageView7,
-      @NonNull ConstraintLayout main, @NonNull TextView textView12, @NonNull TextView textView5,
-      @NonNull View view) {
+      @NonNull ChipNavigationBar bottomnav, @NonNull AppCompatButton buttonChangeLanguage,
+      @NonNull AppCompatButton buttonChangePassword, @NonNull AppCompatButton buttonLogout,
+      @NonNull ImageView imageView7, @NonNull ConstraintLayout main, @NonNull TextView textView12,
+      @NonNull TextView textView5, @NonNull View view) {
     this.rootView = rootView;
     this.bottomnav = bottomnav;
+    this.buttonChangeLanguage = buttonChangeLanguage;
     this.buttonChangePassword = buttonChangePassword;
     this.buttonLogout = buttonLogout;
     this.imageView7 = imageView7;
@@ -95,6 +99,12 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.button_ChangeLanguage;
+      AppCompatButton buttonChangeLanguage = ViewBindings.findChildViewById(rootView, id);
+      if (buttonChangeLanguage == null) {
+        break missingId;
+      }
+
       id = R.id.button_ChangePassword;
       AppCompatButton buttonChangePassword = ViewBindings.findChildViewById(rootView, id);
       if (buttonChangePassword == null) {
@@ -134,7 +144,8 @@ public final class ActivityProfileBinding implements ViewBinding {
       }
 
       return new ActivityProfileBinding((ConstraintLayout) rootView, bottomnav,
-          buttonChangePassword, buttonLogout, imageView7, main, textView12, textView5, view);
+          buttonChangeLanguage, buttonChangePassword, buttonLogout, imageView7, main, textView12,
+          textView5, view);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

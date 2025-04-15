@@ -3073,6 +3073,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable call
+drawable cancel
 drawable cart
 drawable check
 drawable common_full_open_on_phone
@@ -3135,6 +3136,7 @@ drawable ic_password
 drawable ic_search_black_24
 drawable indeterminate_static
 drawable intro_pic
+drawable language
 drawable lavender_border
 drawable light_blue_bg
 drawable location
@@ -3160,6 +3162,7 @@ drawable material_ic_keyboard_arrow_right_black_24dp
 drawable material_ic_menu_arrow_down_black_24dp
 drawable material_ic_menu_arrow_up_black_24dp
 drawable message
+drawable message_bubble
 drawable mtrl_bottomsheet_drag_handle
 drawable mtrl_checkbox_button
 drawable mtrl_checkbox_button_checked_unchecked
@@ -3345,6 +3348,7 @@ id btn_confirm
 id btn_login
 id btn_register
 id buttonPanel
+id button_ChangeLanguage
 id button_ChangePassword
 id button_Logout
 id cache_measures
@@ -3458,6 +3462,7 @@ id edit_text_id
 id edtSearch
 id elastic
 id email
+id emailLayout
 id embed
 id end
 id endToStart
@@ -3497,7 +3502,6 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
-id guestTxt
 id header_title
 id hide_ime_id
 id hide_in_inspector_tag
@@ -3515,7 +3519,6 @@ id ignore
 id ignoreRequest
 id image
 id imageSlide
-id imageView
 id imageView10
 id imageView12
 id imageView13
@@ -3636,6 +3639,7 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id numOfPeople
 id off
 id oldPassword
 id on
@@ -3654,6 +3658,7 @@ id open_search_view_search_prefix
 id open_search_view_status_bar_spacer
 id open_search_view_toolbar
 id open_search_view_toolbar_container
+id orderIdBarcode
 id orderIdTxt
 id outline
 id outward
@@ -3665,6 +3670,7 @@ id parentPanel
 id parentRelative
 id parent_matrix
 id password
+id passwordLayout
 id password_toggle
 id path
 id pathRelative
@@ -3836,6 +3842,7 @@ id timeTour
 id timeTxt
 id title
 id titleDividerNoCustom
+id titleText
 id titleTour
 id titleTxt
 id title_template
@@ -4010,7 +4017,6 @@ layout activity_admin_edit
 layout activity_admin_main
 layout activity_all_oder
 layout activity_all_tour
-layout activity_bookmark
 layout activity_change_password_acitivity
 layout activity_detail
 layout activity_forgot_password
@@ -4019,6 +4025,7 @@ layout activity_list_items
 layout activity_login
 layout activity_main
 layout activity_profile
+layout activity_purchased
 layout activity_signup
 layout activity_ticket
 layout browser_actions_context_menu_page
@@ -4334,6 +4341,7 @@ string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
 string selected
+string show_ticket
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow

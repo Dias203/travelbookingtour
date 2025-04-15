@@ -18,43 +18,56 @@ import com.example.travel_app.R;
 import java.util.ArrayList;
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewholder> {
-    private ArrayList<SliderItems> sliderItems;
-    private ViewPager2 viewPager2;
+    private final ArrayList<SliderItems> sliderItems;
+    private final ViewPager2 viewPager2;
     private Context context;
-    private Handler sliderHandler = new Handler();
+    private final Handler sliderHandler = new Handler();
 
     public SliderAdapter(ArrayList<SliderItems> sliderItems, ViewPager2 viewPager2) {
         this.sliderItems = sliderItems;
         this.viewPager2 = viewPager2;
     }
 
-    private Runnable sliderRunnable = new Runnable() {
-        @Override
-        public void run() {
-            int currentItem = viewPager2.getCurrentItem();
-            int nextItem = currentItem + 1;
-            if (nextItem >= sliderItems.size()) {
-                nextItem = 0;
-            }
-            viewPager2.setCurrentItem(nextItem, true);
-            sliderHandler.postDelayed(this, 3000); // Chuyển đổi sau 3 giây
+    /** Runnable để tự động chuyển slide sau mỗi 3 giây */
+    private final Runnable sliderRunnable = this::moveToNextSlide;
+
+    /** Chuyển đến slide tiếp theo, quay về đầu nếu là slide cuối */
+    private void moveToNextSlide() {
+        int currentItem = viewPager2.getCurrentItem();
+        int nextItem = currentItem + 1;
+        if (nextItem >= sliderItems.size()) {
+            nextItem = 0;
         }
-    };
+        viewPager2.setCurrentItem(nextItem, true);
+        sliderHandler.postDelayed(sliderRunnable, 3000);
+    }
 
     @NonNull
     @Override
     public SliderViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Khởi tạo SliderViewholder bằng cách inflate layout của từng item trong slider
+        initContext(parent);
+        return createSliderViewHolder(parent);
+    }
+
+    /** Khởi tạo context từ parent */
+    private void initContext(ViewGroup parent) {
         context = parent.getContext();
-        return new SliderViewholder(LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false));
+    }
+
+    /** Tạo mới ViewHolder cho slider item */
+    private SliderViewholder createSliderViewHolder(ViewGroup parent) {
+        View view = LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false);
+        return new SliderViewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewholder holder, int position) {
-        // Gán hình ảnh tương ứng với mỗi vị trí từ sliderItems vào ImageView.
-        holder.setImage(sliderItems.get(position));
+        holder.bindImage(sliderItems.get(position));
+        startAutoSliderIfFirstPosition(position);
+    }
 
-        // Bắt đầu chạy slider tự động từ vị trí đầu tiên
+    /** Bắt đầu auto slider nếu là vị trí đầu tiên */
+    private void startAutoSliderIfFirstPosition(int position) {
         if (position == 0) {
             sliderHandler.postDelayed(sliderRunnable, 3000);
         }
@@ -65,23 +78,25 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         return sliderItems.size();
     }
 
-    public class SliderViewholder extends RecyclerView.ViewHolder{
-        private ImageView imageView;
+    /** Dừng auto slider khi không cần thiết */
+    public void stopSlider() {
+        sliderHandler.removeCallbacks(sliderRunnable);
+    }
+
+    /** ViewHolder cho mỗi item trong slider */
+    public class SliderViewholder extends RecyclerView.ViewHolder {
+        private final ImageView imageView;
 
         public SliderViewholder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
         }
 
-        void setImage(SliderItems sliderItems) {
+        /** Hiển thị hình ảnh lên ImageView sử dụng Glide */
+        public void bindImage(SliderItems sliderItems) {
             Glide.with(context)
                     .load(sliderItems.getUrl())
                     .into(imageView);
         }
-    }
-
-    // Gọi hàm này trong Activity hoặc Fragment để ngừng slider khi không cần thiết
-    public void stopSlider() {
-        sliderHandler.removeCallbacks(sliderRunnable);
     }
 }

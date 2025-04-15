@@ -27,6 +27,7 @@ drawable bottom_btn2
 drawable bottom_btn3
 drawable bottom_btn4
 drawable call
+drawable cancel
 drawable cart
 drawable check
 drawable darkblue_bg
@@ -41,10 +42,12 @@ drawable hourglass
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable intro_pic
+drawable language
 drawable lavender_border
 drawable light_blue_bg
 drawable location
 drawable message
+drawable message_bubble
 drawable password
 drawable search_icon
 drawable showpasswordicon
@@ -69,6 +72,7 @@ id bottomnav
 id btn_confirm
 id btn_login
 id btn_register
+id button_ChangeLanguage
 id button_ChangePassword
 id button_Logout
 id calendarBtn
@@ -100,14 +104,13 @@ id editTourGuideName
 id editTourGuidePhone
 id edtSearch
 id email
+id emailLayout
 id explorer
 id facebookBtn
 id favBtn
 id forgot_passwordBtn
-id guestTxt
 id home
 id imageSlide
-id imageView
 id imageView10
 id imageView12
 id imageView13
@@ -127,9 +130,12 @@ id main
 id mainLayout
 id messageBtn
 id newPassword
+id numOfPeople
 id oldPassword
+id orderIdBarcode
 id orderIdTxt
 id password
+id passwordLayout
 id paymentBtn
 id pic
 id picTour
@@ -185,6 +191,7 @@ id timeBtn
 id timeTour
 id timeTxt
 id title
+id titleText
 id titleTour
 id titleTxt
 id tourGuideName
@@ -202,7 +209,6 @@ layout activity_admin_edit
 layout activity_admin_main
 layout activity_all_oder
 layout activity_all_tour
-layout activity_bookmark
 layout activity_change_password_acitivity
 layout activity_detail
 layout activity_forgot_password
@@ -211,6 +217,7 @@ layout activity_list_items
 layout activity_login
 layout activity_main
 layout activity_profile
+layout activity_purchased
 layout activity_signup
 layout activity_ticket
 layout slider_item_container
@@ -240,6 +247,7 @@ string logout
 string password
 string project_id
 string register
+string show_ticket
 string subIntro
 style Base.Theme.Travel_app
 style ShapeAppearanceOverlay.App.circleImageView

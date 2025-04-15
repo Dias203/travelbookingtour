@@ -1,10 +1,7 @@
 package com.example.travel_app.Activity.admin;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,15 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travel_app.Activity.BaseActivity;
-import com.example.travel_app.Activity.user.BookmarkActivity;
 import com.example.travel_app.Activity.user.LoginActivity;
-import com.example.travel_app.Activity.user.MainActivity;
-import com.example.travel_app.Activity.user.ProfileActivity;
-import com.example.travel_app.Adapter.BookmarkAdapter;
+import com.example.travel_app.Adapter.PurchasedAdapter;
 import com.example.travel_app.Domain.ItemDomain;
-import com.example.travel_app.R;
 import com.example.travel_app.databinding.ActivityAllOderBinding;
-import com.example.travel_app.databinding.ActivityBookmarkBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,63 +23,72 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AllOderActivity extends BaseActivity {
-    ActivityAllOderBinding binding;
+    private static final String TAG = "AllOderActivity";
+
+    private ActivityAllOderBinding binding;
     private ArrayList<ItemDomain> itemList = new ArrayList<>();
-    private BookmarkAdapter adapter;
+    private PurchasedAdapter adapter;
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private final DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Purchased");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAllOderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        binding.backBtn.setOnClickListener(v -> finish());
+        setupEventListeners();
         checkAdminAndLoadData();
     }
 
-    // Kiểm tra phân quyền admin
-    private void checkAdminAndLoadData() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    /**
+     * Thiết lập các sự kiện click cho các nút
+     */
+    private void setupEventListeners() {
+        binding.backBtn.setOnClickListener(v -> finish());
+    }
 
+    /**
+     * Kiểm tra quyền admin và tải dữ liệu nếu hợp lệ
+     */
+    private void checkAdminAndLoadData() {
+        FirebaseUser user = auth.getCurrentUser();
         if (user == null) {
-            Toast.makeText(this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, LoginActivity.class));
+            showToast("Vui lòng đăng nhập");
+            navigateTo(LoginActivity.class);
             finish();
             return;
         }
 
-        // Kiểm tra quyền admin trong collection "Users"
-        db.collection("Users").document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
-            Boolean isAdmin = documentSnapshot.getBoolean("isAdmin");
-            if (Boolean.TRUE.equals(isAdmin)) {
-                initPurchased();
-            } else {
-                Toast.makeText(this, "Bạn không có quyền truy cập vào chức năng này", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }).addOnFailureListener(e -> {
-            Toast.makeText(this, "Lỗi kiểm tra quyền admin: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        });
+        firestore.collection("Users").document(user.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    Boolean isAdmin = documentSnapshot.getBoolean("isAdmin");
+                    if (Boolean.TRUE.equals(isAdmin)) {
+                        loadPurchasedData();
+                    } else {
+                        showToast("Bạn không có quyền truy cập vào chức năng này");
+                        finish();
+                    }
+                })
+                .addOnFailureListener(e -> showToast("Lỗi kiểm tra quyền admin: " + e.getMessage()));
     }
 
-    // Lấy từ realtime database
-    private void initPurchased() {
-        DatabaseReference myRef = database.getReference("Purchased");
+    /**
+     * Tải dữ liệu đơn hàng từ Realtime Database
+     */
+    private void loadPurchasedData() {
         binding.progressBarListItem.setVisibility(View.VISIBLE);
-
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    itemList.clear(); // Xóa dữ liệu cũ trước khi thêm dữ liệu mới
+                    itemList.clear();
                     for (DataSnapshot issue : snapshot.getChildren()) {
                         ItemDomain item = issue.getValue(ItemDomain.class);
                         if (item != null) {
@@ -95,11 +96,7 @@ public class AllOderActivity extends BaseActivity {
                         }
                     }
                     if (!itemList.isEmpty()) {
-                        binding.recyclerView.setLayoutManager(new LinearLayoutManager(AllOderActivity.this,
-                                LinearLayoutManager.VERTICAL, false));
-                        adapter = new BookmarkAdapter(itemList);
-                        binding.recyclerView.setAdapter(adapter);
-                        setupSwipeToDelete(binding.recyclerView, adapter, itemList);
+                        setupRecyclerView();
                     }
                 }
                 binding.progressBarListItem.setVisibility(View.GONE);
@@ -108,11 +105,25 @@ public class AllOderActivity extends BaseActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBarListItem.setVisibility(View.GONE);
+                showToast("Lỗi tải dữ liệu: " + error.getMessage());
             }
         });
     }
 
-    private void setupSwipeToDelete(RecyclerView recyclerView, BookmarkAdapter adapter, List<ItemDomain> list) {
+    /**
+     * Thiết lập RecyclerView để hiển thị danh sách đơn hàng
+     */
+    private void setupRecyclerView() {
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        adapter = new PurchasedAdapter(itemList);
+        binding.recyclerView.setAdapter(adapter);
+        setupSwipeToDelete();
+    }
+
+    /**
+     * Thiết lập chức năng vuốt để xóa đơn hàng
+     */
+    private void setupSwipeToDelete() {
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
@@ -125,44 +136,58 @@ public class AllOderActivity extends BaseActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 ItemDomain item = adapter.getItem(position);
-
-                // Hiển thị AlertDialog xác nhận
-                new AlertDialog.Builder(AllOderActivity.this)
-                        .setTitle("Xóa mục")
-                        .setMessage("Bạn có chắc chắn muốn xóa mục này không?")
-                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                list.remove(position);
-                                adapter.notifyItemRemoved(position);
-
-                                // Xóa dữ liệu trong Realtime Database
-                                DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference("Purchased").child(item.getId());
-                                itemRef.removeValue()
-                                        .addOnSuccessListener(aVoid -> {
-                                            // Sau khi xóa Realtime Database, xóa trong Firestore
-                                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                            db.collection("Purchased").document(item.getId()).delete()
-                                                    .addOnSuccessListener(aVoid2 -> {
-                                                        Toast.makeText(AllOderActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
-                                                    })
-                                                    .addOnFailureListener(e -> {
-                                                        Toast.makeText(AllOderActivity.this, "Lỗi khi xóa từ Firestore: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    });
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            Toast.makeText(AllOderActivity.this, "Lỗi khi xóa từ Realtime Database: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        });
-                            }
-                        })
-                        .setNegativeButton("Không", (dialog, which) -> adapter.notifyItemChanged(position))
-                        .create()
-                        .show();
+                showDeleteConfirmationDialog(position, item);
             }
         };
-
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.recyclerView);
     }
 
+    /**
+     * Hiển thị dialog xác nhận xóa đơn hàng
+     */
+    private void showDeleteConfirmationDialog(int position, ItemDomain item) {
+        new AlertDialog.Builder(this)
+                .setTitle("Xóa mục")
+                .setMessage("Bạn có chắc chắn muốn xóa mục này không?")
+                .setPositiveButton("Có", (dialog, which) -> deleteItem(position, item))
+                .setNegativeButton("Không", (dialog, which) -> adapter.notifyItemChanged(position))
+                .create()
+                .show();
+    }
+
+    /**
+     * Xóa đơn hàng từ cả Realtime Database và Firestore
+     */
+    private void deleteItem(int position, ItemDomain item) {
+        itemList.remove(position);
+        adapter.notifyItemRemoved(position);
+
+        databaseRef.child(item.getId()).removeValue()
+                .addOnSuccessListener(aVoid -> deleteFromFirestore(item))
+                .addOnFailureListener(e -> showToast("Lỗi khi xóa từ Realtime Database: " + e.getMessage()));
+    }
+
+    /**
+     * Xóa đơn hàng từ Firestore sau khi xóa thành công từ Realtime Database
+     */
+    private void deleteFromFirestore(ItemDomain item) {
+        firestore.collection("Purchased").document(item.getId())
+                .delete()
+                .addOnSuccessListener(aVoid -> showToast("Đã xóa thành công"))
+                .addOnFailureListener(e -> showToast("Lỗi khi xóa từ Firestore: " + e.getMessage()));
+    }
+
+    /**
+     * Điều hướng đến một activity khác
+     */
+    private void navigateTo(Class<?> activityClass) {
+        startActivity(new Intent(this, activityClass));
+    }
+
+    /**
+     * Hiển thị thông báo Toast
+     */
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }

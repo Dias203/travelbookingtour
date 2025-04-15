@@ -1,0 +1,5 @@
+com.example.travel_app.test.app-core-1.6.1-0 C:\Users\Admin\.gradle\caches\transforms-4\4c2cc199813a843ffa637855f97babdf\transformed\core-1.6.1\res
+com.example.travel_app.test.app-androidTest-1 G:\Study\Android Projects\Application\TravelApp-main\app\build\generated\res\resValues\androidTest\debug
+com.example.travel_app.test.app-mergeDebugAndroidTestResources-2 G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.travel_app.test.app-mergeDebugAndroidTestResources-3 G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.travel_app.test.app-debugAndroidTest-4 G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

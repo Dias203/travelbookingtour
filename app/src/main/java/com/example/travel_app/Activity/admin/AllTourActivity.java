@@ -1,6 +1,9 @@
 package com.example.travel_app.Activity.admin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -29,9 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllTourActivity extends BaseActivity {
-    ActivityAllTourBinding binding;
+    private ActivityAllTourBinding binding;
     private ArrayList<ItemDomain> itemList = new ArrayList<>();
     private AdminAllTourAdapter adapter;
+    private FirebaseFirestore firestore;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,87 +44,183 @@ public class AllTourActivity extends BaseActivity {
         binding = ActivityAllTourBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.backBtn.setOnClickListener(v -> finish());
+        initFirebaseInstances();
+        setupUI();
         checkAdminAndLoadData();
+    }
 
+    /**
+     * Khởi tạo các instance Firebase
+     */
+    private void initFirebaseInstances() {
+        firestore = FirebaseFirestore.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Item");
+    }
+
+    /**
+     * Cài đặt giao diện người dùng
+     */
+    private void setupUI() {
+        binding.backBtn.setOnClickListener(v -> finish());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        loadTourData();
+        if (isUserAuthenticated() && adapter != null) {
+            loadTourData();
+        }
     }
 
-    // Kiểm tra quyền admin và tải dữ liệu
-    private void checkAdminAndLoadData() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    /**
+     * Kiểm tra xem người dùng đã đăng nhập chưa
+     * @return true nếu đã đăng nhập, false nếu chưa
+     */
+    private boolean isUserAuthenticated() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         if (user == null) {
-            Toast.makeText(this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
+            redirectToLogin("Vui lòng đăng nhập");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Chuyển hướng người dùng đến màn hình đăng nhập
+     * @param message Thông báo để hiển thị
+     */
+    private void redirectToLogin(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
+    /**
+     * Kiểm tra quyền admin và tải dữ liệu
+     */
+    private void checkAdminAndLoadData() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            redirectToLogin("Vui lòng đăng nhập");
             return;
         }
 
-        db.collection("Users").document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
-            Boolean isAdmin = documentSnapshot.getBoolean("isAdmin");
-            if (Boolean.TRUE.equals(isAdmin)) {
-                loadTourData();
-            } else {
-                Toast.makeText(this, "Bạn không có quyền truy cập vào chức năng này", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }).addOnFailureListener(e -> {
-            Toast.makeText(this, "Lỗi kiểm tra quyền admin: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        });
+        firestore.collection("Users").document(user.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    Boolean isAdmin = documentSnapshot.getBoolean("isAdmin");
+                    if (Boolean.TRUE.equals(isAdmin)) {
+                        loadTourData();
+                    } else {
+                        showToast("Bạn không có quyền truy cập vào chức năng này");
+                        finish();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    showToast("Lỗi kiểm tra quyền admin: " + e.getMessage());
+                    finish();
+                });
     }
 
-    // Lấy và cập nhật dữ liệu từ Firebase
-    private void loadTourData() {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Item");
-        binding.progressBarListItem.setVisibility(View.VISIBLE);
+    /**
+     * Hiển thị thông báo toast
+     * @param message Thông báo cần hiển thị
+     */
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
-        myRef.addValueEventListener(new ValueEventListener() {
+    /**
+     * Lấy và cập nhật dữ liệu từ Firebase
+     */
+    private void loadTourData() {
+        if (!isNetworkAvailable()) {
+            showToast("Không có kết nối Internet. Vui lòng kiểm tra lại!");
+            return;
+        }
+
+        showProgressBar(true);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    ArrayList<ItemDomain> newList = new ArrayList<>();
-                    for (DataSnapshot issue : snapshot.getChildren()) {
-                        ItemDomain item = issue.getValue(ItemDomain.class);
-                        if (item != null) {
-                            newList.add(item);
-                        }
-                    }
-
-                    // Cập nhật dữ liệu cho RecyclerView
-                    if (adapter == null) {
-                        itemList = newList;
-                        adapter = new AdminAllTourAdapter(itemList);
-                        binding.recyclerView.setLayoutManager(new LinearLayoutManager(AllTourActivity.this,
-                                LinearLayoutManager.VERTICAL, false));
-                        binding.recyclerView.setAdapter(adapter);
-                        setupSwipeToDelete(binding.recyclerView, adapter, itemList);
-                    } else {
-                        adapter.updateItems(newList);  // Cập nhật adapter với danh sách mới
-                    }
+                    ArrayList<ItemDomain> newList = extractItemsFromSnapshot(snapshot);
+                    updateRecyclerView(newList);
                 } else {
-                    Toast.makeText(AllTourActivity.this, "Dữ liệu không tồn tại", Toast.LENGTH_SHORT).show();
+                    showToast("Dữ liệu không tồn tại");
                 }
-                binding.progressBarListItem.setVisibility(View.GONE);
+                showProgressBar(false);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                binding.progressBarListItem.setVisibility(View.GONE);
-                Toast.makeText(AllTourActivity.this, "Lỗi khi tải dữ liệu: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                showProgressBar(false);
+                showToast("Lỗi khi tải dữ liệu: " + error.getMessage());
             }
         });
     }
 
-    // Thiết lập tính năng xoá mục trong RecyclerView
-    private void setupSwipeToDelete(RecyclerView recyclerView, AdminAllTourAdapter adapter, List<ItemDomain> list) {
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+    /**
+     * Trích xuất danh sách các mục từ DataSnapshot
+     * @param snapshot DataSnapshot từ Firebase
+     * @return ArrayList chứa các ItemDomain
+     */
+    private ArrayList<ItemDomain> extractItemsFromSnapshot(DataSnapshot snapshot) {
+        ArrayList<ItemDomain> newList = new ArrayList<>();
+        for (DataSnapshot issue : snapshot.getChildren()) {
+            ItemDomain item = issue.getValue(ItemDomain.class);
+            if (item != null) {
+                newList.add(item);
+            }
+        }
+        return newList;
+    }
+
+    /**
+     * Hiển thị hoặc ẩn thanh tiến trình
+     * @param show true để hiển thị, false để ẩn
+     */
+    private void showProgressBar(boolean show) {
+        binding.progressBarListItem.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * Cập nhật RecyclerView với danh sách mới
+     * @param newList Danh sách mới các ItemDomain
+     */
+    private void updateRecyclerView(ArrayList<ItemDomain> newList) {
+        if (adapter == null) {
+            itemList = newList;
+            adapter = new AdminAllTourAdapter(itemList);
+            binding.recyclerView.setLayoutManager(new LinearLayoutManager(
+                    AllTourActivity.this, LinearLayoutManager.VERTICAL, false));
+            binding.recyclerView.setAdapter(adapter);
+            setupSwipeToDelete();
+        } else {
+            adapter.updateItems(newList);
+        }
+    }
+
+    /**
+     * Thiết lập tính năng xoá mục trong RecyclerView
+     */
+    private void setupSwipeToDelete() {
+        if (!isNetworkAvailable()) {
+            showToast("Không có kết nối Internet. Vui lòng kiểm tra lại!");
+            return;
+        }
+
+        ItemTouchHelper.SimpleCallback swipeCallback = createSwipeCallback();
+        new ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.recyclerView);
+    }
+
+    /**
+     * Tạo callback để xử lý sự kiện vuốt để xóa
+     * @return ItemTouchHelper.SimpleCallback
+     */
+    private ItemTouchHelper.SimpleCallback createSwipeCallback() {
+        return new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
@@ -131,35 +232,53 @@ public class AllTourActivity extends BaseActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 ItemDomain item = adapter.getItem(position);
-
-                // Hiển thị AlertDialog xác nhận
-                new AlertDialog.Builder(AllTourActivity.this)
-                        .setTitle("Xóa mục")
-                        .setMessage("Bạn có chắc chắn muốn xóa mục này không?")
-                        .setPositiveButton("Có", (dialog, which) -> {
-                            String itemId = item.getId(); // Lấy ID của item từ ItemDomain
-
-                            // Xóa item khỏi danh sách và cập nhật RecyclerView
-                            list.remove(position);
-                            adapter.notifyItemRemoved(position);
-
-                            // Cập nhật dữ liệu trong Firebase
-                            DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference("Item").child(itemId);
-                            itemRef.removeValue()
-                                    .addOnSuccessListener(aVoid -> {
-                                        Toast.makeText(AllTourActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(AllTourActivity.this, "Lỗi khi xóa: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    });
-                        })
-                        .setNegativeButton("Không", (dialog, which) -> adapter.notifyItemChanged(position))
-                        .create()
-                        .show();
+                showDeleteConfirmationDialog(position, item);
             }
         };
+    }
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+    /**
+     * Hiển thị hộp thoại xác nhận xóa mục
+     * @param position Vị trí của mục trong danh sách
+     * @param item Mục cần xóa
+     */
+    private void showDeleteConfirmationDialog(int position, ItemDomain item) {
+        new AlertDialog.Builder(AllTourActivity.this)
+                .setTitle("Xóa mục")
+                .setMessage("Bạn có chắc chắn muốn xóa mục này không?")
+                .setPositiveButton("Có", (dialog, which) -> {
+                    deleteItem(position, item);
+                })
+                .setNegativeButton("Không", (dialog, which) -> adapter.notifyItemChanged(position))
+                .create()
+                .show();
+    }
+
+    /**
+     * Xóa mục khỏi danh sách và Firebase
+     * @param position Vị trí của mục trong danh sách
+     * @param item Mục cần xóa
+     */
+    private void deleteItem(int position, ItemDomain item) {
+        String itemId = item.getId();
+
+        // Xóa khỏi danh sách cục bộ và cập nhật RecyclerView
+        itemList.remove(position);
+        adapter.notifyItemRemoved(position);
+
+        // Xóa từ Firebase
+        databaseReference.child(itemId).removeValue()
+                .addOnSuccessListener(aVoid -> showToast("Đã xóa thành công"))
+                .addOnFailureListener(e -> showToast("Lỗi khi xóa: " + e.getMessage()));
+    }
+
+    /**
+     * Kiểm tra kết nối mạng
+     * @return true nếu có kết nối mạng, false nếu không
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnected();
     }
 }

@@ -36,47 +36,77 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryAdapter.Viewholder holder, int position) {
-        Category item = items.get(holder.getPosition());
-        holder.binding.title.setText(item.getName());
+    public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+        Category item = items.get(position);
+        bindDataToViewHolder(holder, item);
+        setupItemClickListener(holder, position);
+        updateItemAppearance(holder, position);
+    }
 
-        Glide.with(holder.itemView.getContext())
+    /**
+     * Gán dữ liệu của category vào các view trong ViewHolder
+     */
+    private void bindDataToViewHolder(Viewholder holder, Category item) {
+        holder.binding.title.setText(item.getName());
+        Glide.with(context)
                 .load(item.getImagePath())
                 .into(holder.binding.pic);
+        holder.binding.title.setTextColor(context.getResources().getColor(R.color.white));
+    }
 
+    /**
+     * Thiết lập sự kiện click để chuyển sang danh sách item theo category
+     */
+    private void setupItemClickListener(Viewholder holder, int position) {
         holder.binding.getRoot().setOnClickListener(view -> {
             lastSelectedPosition = selectedPosition;
-            selectedPosition = holder.getPosition();
+            selectedPosition = position;
             notifyItemChanged(lastSelectedPosition);
             notifyItemChanged(selectedPosition);
-
-            // hiển thị danh sách các Item tương ứng
-            Intent intent = new Intent(context, ListItemsActivity.class);
-            intent.putExtra("categoryId", items.get(position).getId());
-            intent.putExtra("CategoryName", items.get(position).getName());
-            context.startActivity(intent);
+            navigateToListItemsActivity(position);
         });
-        holder.binding.title.setTextColor(context.getResources().getColor(R.color.white));
+    }
 
-        if(selectedPosition == position){
+    /**
+     * Chuyển đến ListItemsActivity với thông tin category được chọn
+     */
+    private void navigateToListItemsActivity(int position) {
+        Intent intent = new Intent(context, ListItemsActivity.class);
+        intent.putExtra("categoryId", items.get(position).getId());
+        intent.putExtra("CategoryName", items.get(position).getName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        context.startActivity(intent);
+    }
+
+    /**
+     * Cập nhật giao diện của item dựa trên trạng thái được chọn
+     */
+    private void updateItemAppearance(Viewholder holder, int position) {
+        if (selectedPosition == position) {
             holder.binding.pic.setBackgroundResource(0);
             holder.binding.mainLayout.setBackgroundResource(R.drawable.blue_bg);
             holder.binding.title.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             holder.binding.pic.setBackgroundResource(R.drawable.grey_bg);
             holder.binding.mainLayout.setBackgroundResource(0);
             holder.binding.title.setVisibility(View.GONE);
         }
     }
 
+    /**
+     * Trả về số lượng item trong danh sách
+     */
     @Override
     public int getItemCount() {
         return items.size();
     }
 
-    public class Viewholder extends RecyclerView.ViewHolder {
-        private final ViewholderCategoryBinding binding;
+    /**
+     * ViewHolder để ánh xạ các view trong layout của mỗi category
+     */
+    public static class Viewholder extends RecyclerView.ViewHolder {
+        final ViewholderCategoryBinding binding;
+
         public Viewholder(ViewholderCategoryBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

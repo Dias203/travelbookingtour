@@ -2,22 +2,26 @@ package com.example.travel_app.Activity.user;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -32,36 +36,33 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import vn.zalopay.sdk.ZaloPayError;
 import vn.zalopay.sdk.ZaloPaySDK;
 import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class TicketActivity extends BaseActivity {
+    private static final String TAG = "TicketActivity";
+    private static final String[] ZALOPAY_PACKAGES = {
+            "com.vng.zalo",        // Bản chính thức
+            "com.vng.zalopay.sdk",
+            "vn.com.vng.zalopay.sb1" // Bản sandbox
+    };
+
     private ActivityTicketBinding binding;
     private ItemDomain object;
-
-
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-    Calendar today = Calendar.getInstance();
-    int startDay = today.get(Calendar.DATE);
-    int startMonth = today.get(Calendar.MONTH);
-    int startYear = today.get(Calendar.YEAR);
-
-    int startHour = today.get(Calendar.HOUR_OF_DAY);
-    int startMinute = today.get(Calendar.MINUTE);
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,75 +70,298 @@ public class TicketActivity extends BaseActivity {
         binding = ActivityTicketBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         getIntentExtra();
         initZaloPaySDK();
         setVariable();
     }
 
-
-
-
+    /**
+     * Khởi tạo SDK ZaloPay với cấu hình sandbox
+     */
     private void initZaloPaySDK() {
-        StrictMode.ThreadPolicy policy = new
-                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-        // ZaloPay SDK Init
         ZaloPaySDK.init(2553, vn.zalopay.sdk.Environment.SANDBOX);
-
     }
 
-    private void savePurchaseToRealtime() {
-        // Khởi tạo Firebase Database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Purchased");
-
-        // Lấy số lượng các đối tượng hiện tại trong node "Popular"
-        myRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                long index = task.getResult().getChildrenCount(); // Lấy số lượng đối tượng hiện có
-
-                ItemDomain item = new ItemDomain();
-                item.setTitle(object.getTitle());
-                item.setPrice(object.getPrice());
-                item.setBed(object.getBed());
-                item.setId(object.getId());
-                item.setAddress(object.getAddress());
-                item.setDuration(object.getDuration());
-                item.setDistance(object.getDistance());
-                item.setDescription(object.getDescription());
-                item.setScore(object.getScore());
-                item.setTimeTour(object.getTimeTour());
-                item.setDateTour(object.getDateTour());
-                item.setPic(object.getPic());
-                item.setTourGuideName(object.getTourGuideName());
-                item.setTourGuidePhone(object.getTourGuidePhone());
-                item.setTourGuidePic(object.getTourGuidePic());
-
-                // Lưu đối tượng mới với key là "index" (0, 1, 2,...)
-                myRef.child(String.valueOf(index)).setValue(item)
-                        .addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()) {
-                                Toast.makeText(TicketActivity.this, "Dữ liệu đã được thêm vào Firebase", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(TicketActivity.this, "Thêm dữ liệu thất bại", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            } else {
-                Toast.makeText(TicketActivity.this, "Không thể lấy dữ liệu Firebase", Toast.LENGTH_SHORT).show();
-            }
-        });
+    /**
+     * Lấy dữ liệu từ Intent và kiểm tra tính hợp lệ
+     */
+    private void getIntentExtra() {
+        object = (ItemDomain) getIntent().getSerializableExtra("object");
+        if (object == null) {
+            showToast("Error: Object data is missing.");
+            finish();
+        }
     }
-    private void savePurchaseToFirebase() {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user == null) {
-            Toast.makeText(TicketActivity.this, "Vui lòng đăng nhập để mua vé", Toast.LENGTH_SHORT).show();
+    /**
+     * Thiết lập các sự kiện và hiển thị dữ liệu lên giao diện
+     */
+    private void setVariable() {
+        String orderId = generateOrderId();
+        setupUI(orderId);
+        setupEventListeners();
+    }
+
+    /**
+     * Tạo mã đơn hàng ngẫu nhiên 8 chữ số
+     */
+    private String generateOrderId() {
+        Random random = new Random();
+        StringBuilder orderId = new StringBuilder();
+        for (int i = 0; i < 8; i++) {
+            orderId.append(random.nextInt(10));
+        }
+        return orderId.toString();
+    }
+
+    /**
+     * Cài đặt giao diện với dữ liệu từ object
+     */
+    private void setupUI(String orderId) {
+        Glide.with(this).load(object.getPic()).into(binding.pic);
+        Glide.with(this).load(object.getTourGuidePic()).into(binding.tourGuidePic);
+        binding.titleTxt.setText(object.getTitle());
+        binding.durationTxt.setText(object.getDuration());
+        binding.tourGuideTxt.setText(object.getDateTour());
+        binding.timeTxt.setText(object.getTimeTour());
+        binding.tourGuideNameTxt.setText(object.getTourGuideName());
+        binding.orderIdTxt.setText("Order Id: " + orderId);
+        binding.orderIdBarcode.setText(orderId);
+    }
+
+    /**
+     * Thiết lập các sự kiện click cho các nút
+     */
+    private void setupEventListeners() {
+        if(!isNetworkConnected()) {
+            showToast("Mất kết nối internet! Kiểm tra lại kết nối");
+        }
+        binding.backBtn.setOnClickListener(v -> finish());
+        binding.messageBtn.setOnClickListener(v -> sendSMS());
+        binding.callBtn.setOnClickListener(v -> makeCall());
+        binding.calendarBtn.setOnClickListener(v -> showDatePicker());
+        binding.timeBtn.setOnClickListener(v -> showTimePicker());
+        binding.paymentBtn.setOnClickListener(v -> processPayment());
+        binding.downloadTicketBtn.setOnClickListener(v -> downloadTicket());
+    }
+
+    /**
+     * Gửi tin nhắn SMS đến hướng dẫn viên
+     */
+    private void sendSMS() {
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+        sendIntent.setData(Uri.parse("sms:" + object.getTourGuidePhone()));
+        sendIntent.putExtra("sms_body", "type your message");
+        startActivity(sendIntent);
+    }
+
+    /**
+     * Thực hiện cuộc gọi đến hướng dẫn viên
+     */
+    private void makeCall() {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", object.getTourGuidePhone(), null));
+        startActivity(intent);
+    }
+
+    /**
+     * Hiển thị dialog chọn ngày
+     */
+    private void showDatePicker() {
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, selectedYear, selectedMonth, selectedDay) ->
+                        binding.tourGuideTxt.setText(selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear),
+                year, month, day);
+        datePickerDialog.show();
+    }
+
+    /**
+     * Hiển thị dialog chọn giờ
+     */
+    private void showTimePicker() {
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                (view, selectedHour, selectedMinute) ->
+                        binding.timeTxt.setText(String.format("%02d:%02d", selectedHour, selectedMinute)),
+                hour, minute, false);
+        timePickerDialog.show();
+    }
+
+    /**
+     * Xử lý thanh toán qua ZaloPay
+     */
+    private void processPayment() {
+        if (!isZaloPayInstalled()) {
+            showZaloPayInstallDialog();
             return;
         }
 
+        String numOfPeople = binding.numOfPeople.getText().toString();
+        if (numOfPeople.isEmpty()) {
+            showToast("Vui lòng nhập số lượng người");
+            return;
+        }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            showToast("Vui lòng đăng nhập để thực hiện thanh toán!");
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+
+        String totalString = calculateTotal(numOfPeople);
+        executePayment(totalString);
+    }
+
+    /**
+     * Tính tổng tiền dựa trên số lượng người
+     */
+    private String calculateTotal(String numOfPeople) {
+        return String.format("%.0f", object.getPrice() * Integer.parseInt(numOfPeople) * 1000);
+    }
+
+    /**
+     * Thực thi thanh toán trên luồng background
+     */
+    private void executePayment(String totalString) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                JSONObject data = new CreateOrder().createOrder(totalString);
+                String code = data.getString("return_code");
+
+                if ("1".equals(code)) {
+                    String token = data.getString("zp_trans_token");
+                    handler.post(() -> ZaloPaySDK.getInstance().payOrder(
+                            this, token, "demozpdk://app", createPayOrderListener()));
+                }
+            } catch (Exception e) {
+                handler.post(() -> showToast("Lỗi thanh toán: " + e.getMessage()));
+            } finally {
+                executor.shutdown();
+            }
+        });
+    }
+
+    /**
+     * Lưu vé dưới dạng hình ảnh
+     */
+    private void downloadTicket() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            Bitmap bitmap = getBitmapFromView(binding.inforTicket);
+            if (bitmap != null) {
+                try {
+                    saveImage(bitmap, "ticket_image");
+                    handler.post(() -> showToast("Lưu hình ảnh thành công!"));
+                } catch (Exception e) {
+                    handler.post(() -> showToast("Lưu hình ảnh thất bại!"));
+                }
+            } else {
+                handler.post(() -> showToast("Không có layout ticket để lưu!"));
+            }
+            executor.shutdown();
+        });
+    }
+
+    /**
+     * Chuyển view thành bitmap
+     */
+    private Bitmap getBitmapFromView(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    /**
+     * Lưu bitmap thành file hình ảnh
+     */
+    private void saveImage(Bitmap bitmap, String fileName) throws Exception {
+        OutputStream fos;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName + ".jpg");
+            values.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
+            values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/TravelApp");
+            Uri imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            fos = getContentResolver().openOutputStream(imageUri);
+        } else {
+            File imageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "TravelApp");
+            if (!imageDir.exists()) imageDir.mkdirs();
+            File image = new File(imageDir, fileName + ".jpg");
+            fos = new FileOutputStream(image);
+        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        fos.flush();
+        fos.close();
+    }
+
+    /**
+     * Lưu thông tin mua vé vào Realtime Database
+     */
+    private void savePurchaseToRealtime() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Purchased");
+            ref.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    long index = task.getResult().getChildrenCount();
+                    ItemDomain item = createItemDomain();
+                    ref.child(String.valueOf(index)).setValue(item)
+                            .addOnCompleteListener(t -> handler.post(() ->
+                                    showToast(t.isSuccessful() ?
+                                            "Dữ liệu đã được thêm vào Firebase" :
+                                            "Thêm dữ liệu thất bại")));
+                } else {
+                    handler.post(() -> showToast("Không thể lấy dữ liệu Firebase"));
+                }
+            });
+            executor.shutdown();
+        });
+    }
+
+    /**
+     * Lưu thông tin mua vé vào Firestore
+     */
+    private void savePurchaseToFirebase() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (user == null) {
+                handler.post(() -> showToast("Vui lòng đăng nhập để mua vé"));
+                return;
+            }
+
+            ItemDomain item = createItemDomain();
+            item.setUserId(user.getUid());
+            Log.d(TAG, "Item: " + new Gson().toJson(item));
+
+            FirebaseFirestore.getInstance().collection("Purchased")
+                    .add(item)
+                    .addOnCompleteListener(task -> handler.post(() ->
+                            showToast(task.isSuccessful() ?
+                                    "Dữ liệu đã được thêm vào Firestore" :
+                                    "Thêm dữ liệu thất bại")))
+                    .addOnFailureListener(e -> handler.post(() -> {
+                        Log.e(TAG, "Lỗi: " + e.getMessage());
+                        showToast("Lỗi: " + e.getMessage());
+                    }));
+            executor.shutdown();
+        });
+    }
+
+    /**
+     * Tạo đối tượng ItemDomain từ dữ liệu hiện tại
+     */
+    private ItemDomain createItemDomain() {
         ItemDomain item = new ItemDomain();
         item.setTitle(object.getTitle());
         item.setPrice(object.getPrice());
@@ -154,227 +378,124 @@ public class TicketActivity extends BaseActivity {
         item.setTourGuideName(object.getTourGuideName());
         item.setTourGuidePhone(object.getTourGuidePhone());
         item.setTourGuidePic(object.getTourGuidePic());
-        item.setUserId(user.getUid());
-
-        // Kiểm tra dữ liệu trước khi gửi
-        Log.d("Firestore", "Item: " + new Gson().toJson(item));
-
-        fStore.collection("Purchased")
-                .add(item)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(TicketActivity.this, "Dữ liệu đã được thêm vào Firestore", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(TicketActivity.this, "Thêm dữ liệu thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("FirestoreError", "Lỗi: " + e.getMessage());
-                    Toast.makeText(TicketActivity.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+        return item;
     }
 
-
-
-    private void setVariable() {
-        Random random = new Random();
-        StringBuilder orderId = new StringBuilder();
-        for (int i = 0; i < 8; i++) {
-            int digit = random.nextInt(10); // Random digit from 0 to 9
-            orderId.append(digit);
+    /**
+     * Kiểm tra xem ZaloPay đã được cài đặt chưa
+     */
+    private boolean isZaloPayInstalled() {
+        PackageManager pm = getPackageManager();
+        for (String packageName : ZALOPAY_PACKAGES) {
+            try {
+                pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+                return true;
+            } catch (PackageManager.NameNotFoundException ignored) {}
         }
-
-        Glide.with(TicketActivity.this)
-                .load(object.getPic())
-                .into(binding.pic);
-
-        Glide.with(TicketActivity.this)
-                .load(object.getTourGuidePic())
-                .into(binding.tourGuidePic);
-        binding.backBtn.setOnClickListener(view -> finish());
-        binding.titleTxt.setText(object.getTitle());
-        binding.durationTxt.setText(object.getDuration());
-        binding.tourGuideTxt.setText(object.getDateTour());
-        binding.timeTxt.setText(object.getTimeTour());
-        binding.tourGuideNameTxt.setText(object.getTourGuideName());
-        binding.orderIdTxt.setText("Order Id: " + orderId.toString());
-
-        binding.messageBtn.setOnClickListener(view -> {
-            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-            sendIntent.setData(Uri.parse("sms:" + object.getTourGuidePhone()));
-            sendIntent.putExtra("sms_body", "type your message");
-            startActivity(sendIntent);
-        });
-
-        binding.callBtn.setOnClickListener(view -> {
-            String phone = object.getTourGuidePhone();
-            Intent intent = new Intent(Intent.ACTION_DIAL,
-                    Uri.fromParts("tel", phone, null));
-            startActivity(intent);
-        });
-
-
-        binding.calendarBtn.setOnClickListener(view -> {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    binding.tourGuideTxt.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                }
-            }, startYear, startMonth, startDay);
-            datePickerDialog.show();
-
-        });
-        binding.timeBtn.setOnClickListener(view -> {
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    if (hourOfDay < 10) {
-                        if (minute < 10) {
-                            binding.timeTxt.setText("0" + hourOfDay + ":" + "0" + minute);
-                        }
-                        binding.timeTxt.setText("0" + hourOfDay + ":" + minute);
-                    } else {
-                        if (minute < 10) {
-                            binding.timeTxt.setText(hourOfDay + ":" + "0" + minute);
-                        }
-                        binding.timeTxt.setText(hourOfDay + ":" + minute);
-                    }
-                }
-            }, startHour, startMinute, false);
-            timePickerDialog.show();
-        });
-
-        binding.paymentBtn.setOnClickListener(new View.OnClickListener() {
-            String totalString = String.format("%.0f", object.getPrice() * 1000);
-            @Override
-            public void onClick(View v) {
-
-                // Kiểm tra trạng thái đăng nhập
-                FirebaseUser user = mAuth.getCurrentUser();
-                if (user == null) {
-                    // Nếu chưa đăng nhập, hiển thị thông báo và chuyển đến màn hình đăng nhập
-                    Toast.makeText(TicketActivity.this, "Vui lòng đăng nhập để thực hiện thanh toán!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(TicketActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    return; // Không tiếp tục thực hiện thanh toán
-                }
-                else{
-                    CreateOrder orderApi = new CreateOrder();
-                    try {
-                        JSONObject data = orderApi.createOrder(totalString);
-                        String code = data.getString("return_code");
-                        if (code.equals("1")) {
-                            String token = data.getString("zp_trans_token");
-                            ZaloPaySDK.getInstance().payOrder(TicketActivity.this, token, "demozpdk://app", new PayOrderListener() {
-                                @Override
-                                public void onPaymentSucceeded(String s, String s1, String s2) {
-                                    savePurchaseToFirebase();
-                                    savePurchaseToRealtime();
-
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                }
-
-                                @Override
-                                public void onPaymentCanceled(String s, String s1) {
-
-                                    startActivity(new Intent(getApplicationContext(), TicketActivity.class));
-                                }
-
-                                @Override
-                                public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
-
-                                    startActivity(new Intent(getApplicationContext(), TicketActivity.class));
-                                }
-                            });
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-
-
-        binding.downloadTicketBtn.setOnClickListener(view -> {
-            // Chụp lại hình ảnh của LinearLayout và lưu nó
-            Bitmap bitmap = getBitmapFromView(binding.inforTicket); // Chuyển đổi LinearLayout thành Bitmap
-            if (bitmap != null) {
-                try {
-                    saveImage(bitmap, "ticket_image"); // Lưu hình ảnh
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(TicketActivity.this, "Lưu hình ảnh thất bại!", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(TicketActivity.this, "Không có layout ticket để lưu!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        return false;
     }
 
-    private Bitmap getBitmapFromView(View view) {
-        // Chụp lại view (LinearLayout) thành Bitmap
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
-                view.getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-        return bitmap;
+    /**
+     * Hiển thị dialog yêu cầu cài đặt ZaloPay
+     */
+    private void showZaloPayInstallDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("ZaloPay chưa được cài đặt")
+                .setMessage("Bạn cần cài đặt ZaloPay để tiếp tục thanh toán")
+                .setPositiveButton("Cài đặt", (dialog, which) -> openZaloPayInstallPage())
+                .setNegativeButton("Hủy", null)
+                .show();
     }
 
-    private void saveImage(Bitmap bitmap, String fileName) {
-        OutputStream fos;
+    /**
+     * Mở trang cài đặt ZaloPay trên Play Store hoặc trình duyệt
+     */
+    private void openZaloPayInstallPage() {
         try {
-            // Kiểm tra phiên bản Android để chọn phương thức lưu ảnh phù hợp
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                // Lưu ảnh vào MediaStore cho Android 10 trở lên
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName + ".jpg");
-                contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
-                contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/TravelApp");
-                Uri imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-                fos = getContentResolver().openOutputStream(imageUri);
-            } else {
-                // Lưu ảnh vào bộ nhớ cho các phiên bản Android thấp hơn
-                File imageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "TravelApp");
-                if (!imageDir.exists()) {
-                    imageDir.mkdirs();
-                }
-                File image = new File(imageDir, fileName + ".jpg");
-                fos = new FileOutputStream(image);
+            for (String packageName : ZALOPAY_PACKAGES) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=" + packageName)));
+                    return;
+                } catch (ActivityNotFoundException ignored) {}
+            }
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=com.vng.zalo")));
+        } catch (Exception e) {
+            showToast("Không thể mở cửa hàng ứng dụng");
+        }
+    }
+
+    /**
+     * Tạo listener cho kết quả thanh toán ZaloPay
+     */
+    private PayOrderListener createPayOrderListener() {
+        return new PayOrderListener() {
+            @Override
+            public void onPaymentSucceeded(String transactionId, String transToken, String appTransId) {
+                savePurchaseToFirebase();
+                savePurchaseToRealtime();
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
 
-            // Nén và lưu bitmap thành tệp hình ảnh
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
 
-            Toast.makeText(this, "Lưu hình ảnh thành công!", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Lưu hình ảnh thất bại!", Toast.LENGTH_SHORT).show();
-        }
+            @Override
+            public void onPaymentError(ZaloPayError error, String transactionId, String transToken) {
+                Intent intent = new Intent(getApplicationContext(), TicketActivity.class);
+                intent.putExtra("payment_error", error.toString());
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onPaymentCanceled(String transactionId, String transToken) {
+                Intent intent = new Intent(getApplicationContext(), TicketActivity.class);
+                intent.putExtra("payment_canceled", "true");
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+
+        };
     }
 
-
-    private void getIntentExtra() {
-        object = (ItemDomain) getIntent().getSerializableExtra("object");
-        if (object == null) {
-            Toast.makeText(this,
-                    "Error: Object data is missing.",
-                    Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
-
-
+    /**
+     * Xử lý kết quả từ ZaloPay khi quay lại activity
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         ZaloPaySDK.getInstance().onResult(intent);
+
+        // Kiểm tra nếu có thông báo lỗi từ thanh toán
+        String error = intent.getStringExtra("payment_error");
+        String canceled = intent.getStringExtra("payment_canceled");
+
+        if (error != null) {
+            showToast("Lỗi thanh toán: " + error);
+        } else if (canceled != null) {
+            showToast("Bạn đã hủy thanh toán");
+        }
     }
+
+    /**
+     * Hiển thị thông báo Toast
+     */
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * Kiểm tra kết nối mạng
+     */
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnected();
+    }
+
 
 }

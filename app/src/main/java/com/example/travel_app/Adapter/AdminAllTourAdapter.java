@@ -11,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.travel_app.Activity.admin.AdminEditActivity;
-import com.example.travel_app.Activity.user.DetailActivity;
 import com.example.travel_app.Domain.ItemDomain;
 import com.example.travel_app.databinding.ViewholderCartBinding;
 
 import java.util.ArrayList;
 
 public class AdminAllTourAdapter extends RecyclerView.Adapter<AdminAllTourAdapter.ViewHolder> {
-    Context context;
-    private ArrayList<ItemDomain> itemList;
+    private final ArrayList<ItemDomain> itemList;
+    private Context context;
 
     public AdminAllTourAdapter(ArrayList<ItemDomain> itemList) {
         this.itemList = itemList;
@@ -36,18 +35,27 @@ public class AdminAllTourAdapter extends RecyclerView.Adapter<AdminAllTourAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ItemDomain item = itemList.get(position);
+        bindDataToViewHolder(holder, item);
+        setupItemClickListener(holder, item);
+    }
 
+    /**
+     * Gán dữ liệu của item vào các view trong ViewHolder
+     */
+    private void bindDataToViewHolder(ViewHolder holder, ItemDomain item) {
         holder.binding.titleTxt.setText(item.getTitle());
         holder.binding.priceTxt.setText(item.getPrice() + "VND");
         holder.binding.addressTxt.setText(item.getAddress());
-        holder.binding.scoreTxt.setText("" + item.getScore());
-
+        holder.binding.scoreTxt.setText(String.valueOf(item.getScore()));
         Glide.with(context)
                 .load(item.getPic())
                 .into(holder.binding.pic);
+    }
 
-
-        // Chuyển sang màn hình sửa thông tin sản phẩm
+    /**
+     * Thiết lập sự kiện click để chuyển sang màn hình chỉnh sửa
+     */
+    private void setupItemClickListener(ViewHolder holder, ItemDomain item) {
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, AdminEditActivity.class);
             intent.putExtra("id", item.getId());
@@ -59,25 +67,36 @@ public class AdminAllTourAdapter extends RecyclerView.Adapter<AdminAllTourAdapte
         });
     }
 
+    /**
+     * Trả về số lượng item trong danh sách
+     */
     @Override
     public int getItemCount() {
         return itemList.size();
     }
 
-    // Phương thức để cập nhật dữ liệu trong adapter khi có thay đổi
+    /**
+     * Cập nhật danh sách item và thông báo thay đổi
+     */
     @SuppressLint("NotifyDataSetChanged")
     public void updateItems(ArrayList<ItemDomain> newItems) {
-        this.itemList = newItems;
+        this.itemList.clear();
+        this.itemList.addAll(newItems);
         notifyDataSetChanged();
     }
 
+    /**
+     * Lấy item tại vị trí cụ thể
+     */
     public ItemDomain getItem(int position) {
         return itemList.get(position);
     }
 
-    // ViewHolder để ánh xạ các view trong item layout
+    /**
+     * ViewHolder để ánh xạ các view trong layout của mỗi item
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ViewholderCartBinding binding;
+        final ViewholderCartBinding binding;
 
         public ViewHolder(@NonNull ViewholderCartBinding binding) {
             super(binding.getRoot());
@@ -85,4 +104,3 @@ public class AdminAllTourAdapter extends RecyclerView.Adapter<AdminAllTourAdapte
         }
     }
 }
-

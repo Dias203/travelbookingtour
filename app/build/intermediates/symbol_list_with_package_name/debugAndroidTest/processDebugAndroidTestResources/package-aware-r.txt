@@ -1,0 +1,3 @@
+com.example.travel_app.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

@@ -13,4 +13,5 @@
     <string name="click_to_register">Chưa có tài khoản? <font color='#3F95EC'>Đăng ký </font> </string>
     <string name="logout">Đăng xuất</string>
     <string name="forgot_password"> <font color="#A9A8A8"> Quên mật khẩu? </font> </string>
+    <string name="show_ticket">Xuất trình vé này cho hướng dẫn viên trước khi khởi hành.</string>
 </resources>

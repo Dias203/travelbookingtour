@@ -12,45 +12,68 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class ProfileActivity extends BaseActivity {
-    ActivityProfileBinding binding;
-    FirebaseAuth auth;
-    FirebaseUser user;
+    private ActivityProfileBinding binding;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityProfileBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-
-        displayInfo();
+        initializeView();
+        initializeFirebase();
+        checkAndDisplayUserInfo();
+        setupButtonActions();
         initBottomNav();
-
     }
 
-    private void displayInfo() {
+    /**
+     * Khởi tạo view binding
+     */
+    private void initializeView() {
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+    }
 
-        if(user == null){
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
+    /**
+     * Khởi tạo Firebase auth và lấy user hiện tại
+     */
+    private void initializeFirebase() {
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+    }
+
+    /**
+     * Kiểm tra trạng thái người dùng và hiển thị thông tin
+     */
+    private void checkAndDisplayUserInfo() {
+        if (user == null) {
+            redirectToLogin();
+        } else {
             binding.textView12.setText(user.getEmail());
         }
+    }
 
+    /**
+     * Gán sự kiện cho các nút bấm
+     */
+    private void setupButtonActions() {
         binding.buttonChangePassword.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
+            startActivity(new Intent(this, ChangePasswordActivity.class));
         });
 
-        binding.buttonLogout.setOnClickListener(view -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
+        binding.buttonLogout.setOnClickListener(v -> {
+            auth.signOut();
+            redirectToLogin();
         });
+    }
+
+    /**
+     * Điều hướng về màn hình đăng nhập
+     */
+    private void redirectToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void initBottomNav() {
@@ -63,7 +86,7 @@ public class ProfileActivity extends BaseActivity {
 
                 }
                 else if (i == R.id.cart){
-                    Intent intent = new Intent(ProfileActivity.this, BookmarkActivity.class);
+                    Intent intent = new Intent(ProfileActivity.this, PurchasedActivity.class);
                     startActivity(intent);
                 }
                 else if(i == R.id.explorer){
@@ -79,5 +102,19 @@ public class ProfileActivity extends BaseActivity {
                 }
             }
         });
+    }
+    /**
+     * Mở trình duyệt với URL được chỉ định
+     */
+    private void openBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        intent.setPackage("com.android.chrome");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            intent.setPackage(null);
+            startActivity(intent);
+        }
     }
 }

@@ -9,57 +9,114 @@ import android.util.Log;
 import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Activity.admin.AdminMainActivity;
 import com.example.travel_app.databinding.ActivityIntroBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class IntroActivity extends BaseActivity {
-    ActivityIntroBinding binding;
-    FirebaseFirestore fStore;
-    FirebaseAuth fAuth;
+    private static final String TAG = "IntroActivity";
+    private static final int SPLASH_DELAY = 2000; // 2 giây
+
+    private ActivityIntroBinding binding;
+    private FirebaseFirestore fStore;
+    private FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeViews();
+        initializeFirebase();
+        handleUserSession();
+    }
+
+    /**
+     * Khởi tạo View Binding
+     */
+    private void initializeViews() {
         binding = ActivityIntroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
 
+    /**
+     * Khởi tạo Firebase Auth & Firestore
+     */
+    private void initializeFirebase() {
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
+    }
 
-        // Kiểm tra nếu người dùng đã đăng nhập
-        if (fAuth.getCurrentUser() != null) {
-            // Nếu người dùng đã đăng nhập, lấy UID và kiểm tra quyền truy cập
-            String uid = fAuth.getCurrentUser().getUid();
-            checkUserAccessLevel(uid);
+    /**
+     * Kiểm tra trạng thái đăng nhập của người dùng
+     */
+    private void handleUserSession() {
+        FirebaseUser currentUser = fAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            checkUserAccessLevel(currentUser.getUid());
         } else {
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                startActivity(new Intent(IntroActivity.this, MainActivity.class));
-                finish();
-            }, 2000);
+            delayAndNavigateToMain();
         }
     }
 
-    private void checkUserAccessLevel(String uid) {
-        DocumentReference df = fStore.collection("Users").document(uid);
-        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
+    /**
+     * Đợi splash 2s rồi chuyển sang MainActivity
+     */
+    private void delayAndNavigateToMain() {
+        new Handler(Looper.getMainLooper()).postDelayed(
+                this::navigateToMainActivity,
+                SPLASH_DELAY
+        );
+    }
 
-                // Kiểm tra xem người dùng có phải là admin không
-                if (documentSnapshot.getBoolean("isAdmin") == Boolean.TRUE) {
-                    // Nếu là admin, vào AdminMainActivity
-                    startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
-                    finish();
-                } else {
-                    // Nếu không phải admin, vào MainActivity
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                }
-            }
-        });
+    /**
+     * Chuyển đến MainActivity
+     */
+    private void navigateToMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    /**
+     * Chuyển đến AdminMainActivity
+     */
+    private void navigateToAdminActivity() {
+        startActivity(new Intent(this, AdminMainActivity.class));
+        finish();
+    }
+
+    /**
+     * Lấy thông tin người dùng từ Firestore và kiểm tra quyền admin
+     */
+    private void checkUserAccessLevel(String uid) {
+        DocumentReference userRef = fStore.collection("Users").document(uid);
+
+        userRef.get()
+                .addOnSuccessListener(this::handleUserAccessCheck)
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Lỗi truy vấn Firestore", e);
+                    navigateToMainActivity();
+                });
+    }
+
+    /**
+     * Xử lý sau khi truy vấn Firestore thành công
+     */
+    private void handleUserAccessCheck(DocumentSnapshot documentSnapshot) {
+        Log.d(TAG, "User data: " + documentSnapshot.getData());
+
+        if (isAdminUser(documentSnapshot)) {
+            navigateToAdminActivity();
+        } else {
+            navigateToMainActivity();
+        }
+    }
+
+    /**
+     * Kiểm tra quyền admin từ documentSnapshot
+     */
+    private boolean isAdminUser(DocumentSnapshot documentSnapshot) {
+        return Boolean.TRUE.equals(documentSnapshot.getBoolean("isAdmin"));
     }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.user.BookmarkActivity">
+    tools:context=".Activity.admin.AdminMainActivity">
 
     <TextView
         android:id="@+id/textView5"
@@ -27,7 +27,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/background_btn_blue"
         android:drawableEnd="@drawable/all"
-        android:text="Tất cả Tour"
+        android:text="Quản lý Tour"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
@@ -53,7 +53,7 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/background_btn_blue"
         android:drawableEnd="@drawable/cart"
-        android:text="Tất cả đơn hàng"
+        android:text="Tour được đặt"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/adminAddTour"
         app:layout_constraintStart_toStartOf="@+id/adminAddTour"

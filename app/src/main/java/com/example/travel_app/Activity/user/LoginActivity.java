@@ -21,116 +21,164 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class LoginActivity extends BaseActivity {
-    ActivityLoginBinding binding;
-    FirebaseAuth mAuth;
-    FirebaseFirestore fStore;
+    private static final String TAG = "LoginActivity";
+    private ActivityLoginBinding binding;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
 
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        checkIfUserIsLoggedIn();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeViews();
+        initializeFirebase();
+        setupClickListeners();
+    }
+
+    private void initializeViews() {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
 
+    private void initializeFirebase() {
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+    }
 
-        binding.registerNow.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        binding.btnLogin.setOnClickListener(view -> {
-            binding.progressBar.setVisibility(View.VISIBLE);
-            String email, password;
-            email = String.valueOf(binding.email.getText());
-            password = String.valueOf(binding.password.getText());
-
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(this, "Nhập địa chỉ email!", Toast.LENGTH_SHORT).show();
-            }
-            if (TextUtils.isEmpty(password)) {
-                Toast.makeText(this, "Nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-            }
-
-            /*mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            binding.progressBar.setVisibility(View.GONE);
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công!",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-
-                                Toast.makeText(LoginActivity.this, "Xác thực thất bại!",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });*/
-            mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(
-                    new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                            checkUserAccessLevel(authResult.getUser().getUid());
-                        }
-                    }
-            ).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        });
-
+    private void setupClickListeners() {
+        binding.registerNow.setOnClickListener(view -> navigateToSignup());
+        binding.btnLogin.setOnClickListener(view -> attemptLogin());
         binding.backBtn.setOnClickListener(view -> finish());
+        binding.facebookBtn.setOnClickListener(view -> handleFacebookLogin());
+        binding.twitterBtn.setOnClickListener(view -> handleTwitterLogin());
+        binding.forgotPasswordBtn.setOnClickListener(v -> navigateToForgotPassword());
+    }
 
-        binding.facebookBtn.setOnClickListener(view -> {
+    private void checkIfUserIsLoggedIn() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            navigateToProfile();
+        }
+    }
 
-        });
+    private void navigateToProfile() {
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-        binding.twitterBtn.setOnClickListener(view -> {
+    private void navigateToSignup() {
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-        });
+    private void navigateToForgotPassword() {
+        startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
+    }
 
-        binding.forgotPasswordBtn.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
-        });
+    private void attemptLogin() {
+        showProgressBar();
+        String email = getEmailInput();
+        String password = getPasswordInput();
 
+        if (!validateInputs(email, password)) {
+            hideProgressBar();
+            return;
+        }
+
+        performLogin(email, password);
+    }
+
+    private void showProgressBar() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        binding.progressBar.setVisibility(View.GONE);
+    }
+
+    private String getEmailInput() {
+        return String.valueOf(binding.email.getText());
+    }
+
+    private String getPasswordInput() {
+        return String.valueOf(binding.password.getText());
+    }
+
+    private boolean validateInputs(String email, String password) {
+        if (TextUtils.isEmpty(email)) {
+            showToast("Nhập địa chỉ email!");
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            showToast("Nhập mật khẩu!");
+            return false;
+        }
+        return true;
+    }
+
+    private void performLogin(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    showToast("Đăng nhập thành công!");
+                    checkUserAccessLevel(Objects.requireNonNull(authResult.getUser()).getUid());
+                })
+                .addOnFailureListener(e -> {
+                    hideProgressBar();
+                    showToast(e.getMessage());
+                });
     }
 
     private void checkUserAccessLevel(String uid) {
         DocumentReference df = fStore.collection("Users").document(uid);
-        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
-
-                if(documentSnapshot.getBoolean("isAdmin") == Boolean.TRUE) {
-                    startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
-                    finish();
-                }
-                else{
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                }
+        df.get().addOnSuccessListener(documentSnapshot -> {
+            Log.d(TAG, "onSuccess: " + documentSnapshot.getData());
+            if (isAdminUser(documentSnapshot)) {
+                navigateToAdminDashboard();
+            } else {
+                navigateToUserDashboard();
             }
         });
+    }
+
+    private boolean isAdminUser(DocumentSnapshot documentSnapshot) {
+        return documentSnapshot.getBoolean("isAdmin") == Boolean.TRUE;
+    }
+
+    private void navigateToAdminDashboard() {
+        Intent intent = new Intent(getApplicationContext(), AdminMainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+    private void navigateToUserDashboard() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    // Phương thức stub - sẽ được triển khai sau
+    private void handleFacebookLogin() {
+        // Triển khai đăng nhập bằng Facebook trong tương lai
+    }
+
+    // Phương thức stub - sẽ được triển khai sau
+    private void handleTwitterLogin() {
+        // Triển khai đăng nhập bằng Twitter trong tương lai
     }
 }

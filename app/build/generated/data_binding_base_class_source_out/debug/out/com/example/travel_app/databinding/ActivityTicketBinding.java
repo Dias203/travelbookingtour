@@ -4,6 +4,7 @@ package com.example.travel_app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,9 +40,6 @@ public final class ActivityTicketBinding implements ViewBinding {
   public final TextView durationTxt;
 
   @NonNull
-  public final TextView guestTxt;
-
-  @NonNull
   public final ImageView imageView12;
 
   @NonNull
@@ -55,6 +53,12 @@ public final class ActivityTicketBinding implements ViewBinding {
 
   @NonNull
   public final ImageView messageBtn;
+
+  @NonNull
+  public final EditText numOfPeople;
+
+  @NonNull
+  public final TextView orderIdBarcode;
 
   @NonNull
   public final TextView orderIdTxt;
@@ -113,9 +117,10 @@ public final class ActivityTicketBinding implements ViewBinding {
   private ActivityTicketBinding(@NonNull ConstraintLayout rootView, @NonNull ImageView backBtn,
       @NonNull ImageView calendarBtn, @NonNull ImageView callBtn,
       @NonNull AppCompatButton downloadTicketBtn, @NonNull TextView durationTxt,
-      @NonNull TextView guestTxt, @NonNull ImageView imageView12, @NonNull ImageView imageView13,
+      @NonNull ImageView imageView12, @NonNull ImageView imageView13,
       @NonNull LinearLayout inforTicket, @NonNull ConstraintLayout main,
-      @NonNull ImageView messageBtn, @NonNull TextView orderIdTxt,
+      @NonNull ImageView messageBtn, @NonNull EditText numOfPeople,
+      @NonNull TextView orderIdBarcode, @NonNull TextView orderIdTxt,
       @NonNull AppCompatButton paymentBtn, @NonNull ShapeableImageView pic,
       @NonNull TextView textView10, @NonNull TextView textView14, @NonNull TextView textView15,
       @NonNull TextView textView17, @NonNull TextView textView18, @NonNull TextView textView20,
@@ -129,12 +134,13 @@ public final class ActivityTicketBinding implements ViewBinding {
     this.callBtn = callBtn;
     this.downloadTicketBtn = downloadTicketBtn;
     this.durationTxt = durationTxt;
-    this.guestTxt = guestTxt;
     this.imageView12 = imageView12;
     this.imageView13 = imageView13;
     this.inforTicket = inforTicket;
     this.main = main;
     this.messageBtn = messageBtn;
+    this.numOfPeople = numOfPeople;
+    this.orderIdBarcode = orderIdBarcode;
     this.orderIdTxt = orderIdTxt;
     this.paymentBtn = paymentBtn;
     this.pic = pic;
@@ -212,12 +218,6 @@ public final class ActivityTicketBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.guestTxt;
-      TextView guestTxt = ViewBindings.findChildViewById(rootView, id);
-      if (guestTxt == null) {
-        break missingId;
-      }
-
       id = R.id.imageView12;
       ImageView imageView12 = ViewBindings.findChildViewById(rootView, id);
       if (imageView12 == null) {
@@ -241,6 +241,18 @@ public final class ActivityTicketBinding implements ViewBinding {
       id = R.id.messageBtn;
       ImageView messageBtn = ViewBindings.findChildViewById(rootView, id);
       if (messageBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.numOfPeople;
+      EditText numOfPeople = ViewBindings.findChildViewById(rootView, id);
+      if (numOfPeople == null) {
+        break missingId;
+      }
+
+      id = R.id.orderIdBarcode;
+      TextView orderIdBarcode = ViewBindings.findChildViewById(rootView, id);
+      if (orderIdBarcode == null) {
         break missingId;
       }
 
@@ -353,10 +365,10 @@ public final class ActivityTicketBinding implements ViewBinding {
       }
 
       return new ActivityTicketBinding((ConstraintLayout) rootView, backBtn, calendarBtn, callBtn,
-          downloadTicketBtn, durationTxt, guestTxt, imageView12, imageView13, inforTicket, main,
-          messageBtn, orderIdTxt, paymentBtn, pic, textView10, textView14, textView15, textView17,
-          textView18, textView20, textView22, textView7, timeBtn, timeTxt, titleTxt,
-          tourGuideNameTxt, tourGuidePic, tourGuideTxt, view);
+          downloadTicketBtn, durationTxt, imageView12, imageView13, inforTicket, main, messageBtn,
+          numOfPeople, orderIdBarcode, orderIdTxt, paymentBtn, pic, textView10, textView14,
+          textView15, textView17, textView18, textView20, textView22, textView7, timeBtn, timeTxt,
+          titleTxt, tourGuideNameTxt, tourGuidePic, tourGuideTxt, view);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

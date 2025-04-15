@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-100:12
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-103:12
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-103:12
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-103:12
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:2:1-103:12
 MERGED from [zpdk-release-v3.1.aar] C:\Users\Admin\.gradle\caches\transforms-4\58b075c8091c0863f3f1124943c57085\transformed\zpdk-release-v3.1\AndroidManifest.xml:2:1-15:12
 MERGED from [androidx.databinding:viewbinding:8.6.1] C:\Users\Admin\.gradle\caches\transforms-4\45ed2d0d9d734ee9b066980e658daa75\transformed\viewbinding-8.6.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Admin\.gradle\caches\transforms-4\d97898c92c6a4035c94e4634aa1df957\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
@@ -148,8 +148,8 @@ ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\And
 	android:name
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:9:22-79
 application
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:11:5-98:19
-INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:11:5-98:19
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:14:5-101:19
+INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:14:5-101:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Admin\.gradle\caches\transforms-4\d97898c92c6a4035c94e4634aa1df957\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Admin\.gradle\caches\transforms-4\d97898c92c6a4035c94e4634aa1df957\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Admin\.gradle\caches\transforms-4\e90668b8f4b7f27432ea8763da3ceddb\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -203,161 +203,161 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ad
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.0] C:\Users\Admin\.gradle\caches\transforms-4\184df7efed539af8c8c2a0677102a4ae\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:18:9-35
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:21:9-35
 	android:label
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:16:9-41
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:19:9-41
 	android:fullBackupContent
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:14:9-54
-	android:roundIcon
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:17:9-54
+	android:roundIcon
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:20:9-54
 	tools:targetApi
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:21:9-29
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:24:9-29
 	android:icon
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:15:9-43
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:18:9-43
 	android:allowBackup
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:15:9-35
 	android:theme
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:19:9-48
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:22:9-48
 	android:dataExtractionRules
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:13:9-65
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:16:9-65
 	android:usesCleartextTraffic
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:20:9-44
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:23:9-44
 activity#com.example.travel_app.Activity.user.ChangePasswordActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:22:9-24:40
-	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:24:13-37
-	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:23:13-65
-activity#com.example.travel_app.Activity.user.ForgotPasswordActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:25:9-27:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:27:13-37
 	android:name
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:26:13-65
-activity#com.example.travel_app.Activity.admin.AdminEditActivity
+activity#com.example.travel_app.Activity.user.ForgotPasswordActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:28:9-30:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:30:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:29:13-61
-activity#com.example.travel_app.Activity.admin.AllTourActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:29:13-65
+activity#com.example.travel_app.Activity.admin.AdminEditActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:31:9-33:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:33:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:32:13-59
-activity#com.example.travel_app.Activity.admin.AdminAddTour
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:32:13-61
+activity#com.example.travel_app.Activity.admin.AllTourActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:34:9-36:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:36:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:35:13-56
-activity#com.example.travel_app.Activity.admin.AdminMainActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:35:13-59
+activity#com.example.travel_app.Activity.admin.AdminAddTour
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:37:9-39:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:39:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:38:13-61
-activity#com.example.travel_app.Activity.admin.AllOderActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:38:13-56
+activity#com.example.travel_app.Activity.admin.AdminMainActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:40:9-42:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:42:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:41:13-59
-activity#com.example.travel_app.Activity.user.SignupActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:41:13-61
+activity#com.example.travel_app.Activity.admin.AllOderActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:43:9-45:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:45:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:44:13-57
-activity#com.example.travel_app.Activity.user.LoginActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:44:13-59
+activity#com.example.travel_app.Activity.user.SignupActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:46:9-48:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:48:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:47:13-56
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:47:13-57
+activity#com.example.travel_app.Activity.user.LoginActivity
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:49:9-51:40
+	android:exported
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:51:13-37
+	android:name
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:50:13-56
 activity#com.example.travel_app.Activity.user.TicketActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:49:9-64:20
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:52:9-67:20
 	android:label
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:52:13-42
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:55:13-42
 	android:launchMode
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:53:13-44
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:56:13-44
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:51:13-36
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:54:13-36
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:50:13-57
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:53:13-57
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:app+data:scheme:demozpdk
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:54:13-63:29
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:57:13-66:29
 action#android.intent.action.VIEW
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:55:17-69
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:58:17-69
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:55:25-66
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:58:25-66
 category#android.intent.category.DEFAULT
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:57:17-76
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:60:17-76
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:57:27-73
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:60:27-73
 category#android.intent.category.BROWSABLE
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:58:17-78
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:61:17-78
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:58:27-75
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:61:27-75
 data
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:60:17-62:49
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:63:17-65:49
 	android:host
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:61:21-39
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:64:21-39
 	android:scheme
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:62:21-46
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:65:21-46
 activity#com.example.travel_app.Activity.user.ProfileActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:65:9-67:40
-	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:67:13-37
-	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:66:13-58
-activity#com.example.travel_app.Activity.user.BookmarkActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:68:9-70:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:70:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:69:13-59
-activity#com.example.travel_app.Activity.user.DetailActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:69:13-58
+activity#com.example.travel_app.Activity.user.PurchasedActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:71:9-73:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:73:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:72:13-57
-activity#com.example.travel_app.Activity.user.ListItemsActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:72:13-60
+activity#com.example.travel_app.Activity.user.DetailActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:74:9-76:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:76:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:75:13-60
-activity#com.example.travel_app.Activity.BaseActivity
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:75:13-57
+activity#com.example.travel_app.Activity.user.ListItemsActivity
 ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:77:9-79:40
 	android:exported
 		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:79:13-37
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:78:13-50
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:78:13-60
+activity#com.example.travel_app.Activity.BaseActivity
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:80:9-82:40
+	android:exported
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:82:13-37
+	android:name
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:81:13-50
 activity#com.example.travel_app.Activity.user.IntroActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:80:9-88:20
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:83:9-91:20
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:82:13-36
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:85:13-36
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:81:13-56
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:84:13-56
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:83:13-87:29
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:86:13-90:29
 action#android.intent.action.MAIN
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:84:17-69
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:87:17-69
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:84:25-66
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:87:25-66
 category#android.intent.category.LAUNCHER
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:86:17-77
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:89:17-77
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:86:27-74
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:89:27-74
 activity#com.example.travel_app.Activity.user.MainActivity
-ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:89:9-97:20
+ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:92:9-100:20
 	android:exported
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:91:13-36
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:94:13-36
 	android:name
-		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:90:13-55
+		ADDED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:93:13-55
 uses-sdk
 INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml

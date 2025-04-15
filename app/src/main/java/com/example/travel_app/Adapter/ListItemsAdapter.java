@@ -16,9 +16,8 @@ import com.example.travel_app.databinding.ViewholderListItemBinding;
 import java.util.ArrayList;
 
 public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.Viewholder> {
-    ArrayList<ItemDomain> items;
-    Context context;
-    ViewholderListItemBinding binding;
+    private final ArrayList<ItemDomain> items;
+    private Context context;
 
     public ListItemsAdapter(ArrayList<ItemDomain> items) {
         this.items = items;
@@ -27,39 +26,59 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.View
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ViewholderListItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         context = parent.getContext();
-        return new ListItemsAdapter.Viewholder(binding);
+        ViewholderListItemBinding binding = ViewholderListItemBinding.inflate(LayoutInflater.from(context), parent, false);
+        return new Viewholder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListItemsAdapter.Viewholder holder, int position) {
-        binding.title.setText(items.get(position).getTitle());
-        binding.priceTxt.setText(items.get(position).getPrice() + "VND");
-        binding.addressTxt.setText(items.get(position).getAddress());
-        binding.scoreTxt.setText(""+items.get(position).getScore());
-
-        Glide.with(context)
-                .load(items.get(position).getPic())
-                .into(binding.pic);
-
-        holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("object", items.get(position));
-            context.startActivity(intent);
-        });
-
+    public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+        ItemDomain item = items.get(position);
+        bindDataToViewHolder(holder.binding, item);
+        setupItemClickListener(holder, item);
     }
 
+    /**
+     * Gán dữ liệu của item vào các view trong ViewHolder
+     */
+    private void bindDataToViewHolder(ViewholderListItemBinding binding, ItemDomain item) {
+        binding.title.setText(item.getTitle());
+        binding.priceTxt.setText(item.getPrice() + "VND");
+        binding.addressTxt.setText(item.getAddress());
+        binding.scoreTxt.setText(String.valueOf(item.getScore()));
+        Glide.with(context)
+                .load(item.getPic())
+                .into(binding.pic);
+    }
+
+    /**
+     * Thiết lập sự kiện click để chuyển sang màn hình chi tiết
+     */
+    private void setupItemClickListener(Viewholder holder, ItemDomain item) {
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("object", item);
+            context.startActivity(intent);
+        });
+    }
+
+    /**
+     * Trả về số lượng item trong danh sách
+     */
     @Override
     public int getItemCount() {
         return items.size();
     }
 
+    /**
+     * ViewHolder để ánh xạ các view trong layout của mỗi item
+     */
+    public static class Viewholder extends RecyclerView.ViewHolder {
+        final ViewholderListItemBinding binding;
 
-    public class Viewholder extends RecyclerView.ViewHolder {
         public Viewholder(ViewholderListItemBinding binding) {
             super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }
