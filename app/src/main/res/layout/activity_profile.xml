@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Thông tin"
+        android:text="@string/info_vie"
         android:textColor="@color/white"
         android:textSize="48sp"
         android:textStyle="bold"
@@ -47,11 +47,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="TextView"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                tools:text="This is a very long text that should scroll continuously"
                 android:textColor="@color/white"
+                android:textIsSelectable="true"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -61,7 +65,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/bottom_btn4" />
+                app:srcCompat="@drawable/bottom_btn4"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
@@ -73,7 +78,7 @@
         android:layout_marginTop="50dp"
         android:drawableEnd="@drawable/password"
         android:background="@drawable/background_btn_blue"
-        android:text="Thay đổi mật khẩu"
+        android:text="@string/change_password_vie"
         android:textSize="18sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +92,7 @@
         android:layout_marginTop="50dp"
         android:drawableEnd="@drawable/language"
         android:background="@drawable/background_btn_blue"
-        android:text="Thay đổi ngôn ngữ"
+        android:text="@string/change_language_vie"
         android:textSize="18sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

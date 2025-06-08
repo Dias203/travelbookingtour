@@ -117,7 +117,7 @@ public class AllOderActivity extends BaseActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new PurchasedAdapter(itemList);
         binding.recyclerView.setAdapter(adapter);
-        setupSwipeToDelete();
+        //setupSwipeToDelete();
     }
 
     /**

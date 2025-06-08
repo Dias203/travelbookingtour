@@ -29,11 +29,14 @@ import com.example.travel_app.Domain.Location;
 import com.example.travel_app.Domain.SliderItems;
 import com.example.travel_app.R;
 import com.example.travel_app.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -47,15 +50,23 @@ public class MainActivity extends BaseActivity {
     private final ArrayList<ItemDomain> searchList = new ArrayList<>();
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final ExecutorService mainExecutor = Executors.newFixedThreadPool(4);
+    private int favoriteTourCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         initComponents();
         loadAllData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Đảm bảo mục "home" được chọn khi quay lại MainActivity
+        binding.bottomnav.setItemSelected(R.id.home, true);
+        fetchFavoriteTourCount();
     }
 
     /**
@@ -63,7 +74,61 @@ public class MainActivity extends BaseActivity {
      */
     private void initComponents() {
         initSearchView();
+        initFavoriteTour();
+        setUI();
         initBottomNavigation();
+    }
+
+    private void setUI() {
+        // Cập nhật văn bản ban đầu, sẽ được cập nhật lại sau khi lấy số lượng tour
+        binding.listFavoriteTourTxt.setText("0");
+    }
+
+
+    private void initFavoriteTour() {
+        binding.listFavoriteTour.setOnClickListener(v -> {
+            startActivity(new Intent(this, CartActivity.class));
+        });
+        fetchFavoriteTourCount(); // Lấy số lượng tour yêu thích khi khởi tạo
+    }
+
+    /**
+     * Lấy số lượng tour yêu thích từ Firestore và cập nhật UI
+     */
+    private void fetchFavoriteTourCount() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            handler.post(() -> binding.listFavoriteTourTxt.setText(""));
+            return;
+        }
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("Cart")
+                    .whereEqualTo("userId", user.getUid())
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            favoriteTourCount = task.getResult().size();
+                            handler.post(() -> {
+                                binding.listFavoriteTourTxt.setText(String.valueOf(favoriteTourCount));
+                            });
+                        } else {
+                            handler.post(() -> {
+                                binding.listFavoriteTourTxt.setText("");
+                                showToast("Không thể tải số lượng tour đã thêm vào giỏ hàng");
+                            });
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        handler.post(() -> {
+                            binding.listFavoriteTourTxt.setText("");
+                            showToast("Lỗi: " + e.getMessage());
+                        });
+                    });
+            executor.shutdown();
+        });
     }
 
     /**
@@ -221,6 +286,8 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             }
         });
+        // Đặt mục "home" được chọn mặc định
+        binding.bottomnav.setItemSelected(R.id.home, true);
     }
 
     /**

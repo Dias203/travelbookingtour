@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Activity.admin.AdminMainActivity;
+import com.example.travel_app.Domain.ItemDomain;
 import com.example.travel_app.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,14 +66,8 @@ public class LoginActivity extends BaseActivity {
     private void checkIfUserIsLoggedIn() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            navigateToProfile();
+            checkUserAccessLevel(currentUser.getUid());
         }
-    }
-
-    private void navigateToProfile() {
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void navigateToSignup() {
@@ -134,7 +129,7 @@ public class LoginActivity extends BaseActivity {
                 })
                 .addOnFailureListener(e -> {
                     hideProgressBar();
-                    showToast(e.getMessage());
+                    showToast("Sai tên đăng nhập hoặc mật khẩu!");
                 });
     }
 
@@ -145,7 +140,7 @@ public class LoginActivity extends BaseActivity {
             if (isAdminUser(documentSnapshot)) {
                 navigateToAdminDashboard();
             } else {
-                navigateToUserDashboard();
+                navigateToCallerActivity();
             }
         });
     }
@@ -161,9 +156,24 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 
-    private void navigateToUserDashboard() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+    private void navigateToCallerActivity() {
+        String caller = getIntent().getStringExtra("caller");
+        Intent intent;
+
+        if ("TicketActivity".equals(caller)) {
+            intent = new Intent(getApplicationContext(), TicketActivity.class);
+            ItemDomain object = (ItemDomain) getIntent().getSerializableExtra("object");
+            if (object != null) {
+                intent.putExtra("object", object);
+            }
+        } else if ("PurchasedActivity".equals(caller)) {
+            intent = new Intent(getApplicationContext(), PurchasedActivity.class);
+        } else {
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+        }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        setResult(RESULT_OK, intent); // Trả về kết quả cho activity gọi
         startActivity(intent);
         finish();
     }
@@ -172,12 +182,10 @@ public class LoginActivity extends BaseActivity {
         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
-    // Phương thức stub - sẽ được triển khai sau
     private void handleFacebookLogin() {
         // Triển khai đăng nhập bằng Facebook trong tương lai
     }
 
-    // Phương thức stub - sẽ được triển khai sau
     private void handleTwitterLogin() {
         // Triển khai đăng nhập bằng Twitter trong tương lai
     }

@@ -34,6 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -92,6 +93,16 @@ public class TicketActivity extends BaseActivity {
         if (object == null) {
             showToast("Error: Object data is missing.");
             finish();
+            return;
+        }
+
+        // KIỂM TRA VÀ HIỂN THỊ SỐ LƯỢNG NGƯỜI ĐÃ MUA
+        if (object.getNumOfPeople() > 0) {
+            // Nếu có dữ liệu số lượng người đã lưu, hiển thị nó
+            binding.numOfPeople.setText(String.valueOf(object.getNumOfPeople()));
+        } else {
+            // Mặc định là 1 nếu chưa có dữ liệu
+            binding.numOfPeople.setText("1");
         }
     }
 
@@ -359,6 +370,56 @@ public class TicketActivity extends BaseActivity {
     }
 
     /**
+     * XÓA TOUR KHỎI GIỎ HÀNG SAU KHI THANH TOÁN THÀNH CÔNG
+     */
+    private void removeFromCart() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (user == null) {
+                handler.post(() -> showToast("Không thể xóa khỏi giỏ hàng: Chưa đăng nhập"));
+                return;
+            }
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            // Tìm và xóa tour khỏi collection Cart
+            db.collection("Cart")
+                    .whereEqualTo("userId", user.getUid())
+                    .whereEqualTo("title", object.getTitle()) // Sử dụng title để identify tour
+                    .whereEqualTo("id", object.getId()) // Thêm id để đảm bảo chính xác
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            // Xóa tất cả documents match (thường chỉ có 1)
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                db.collection("Cart")
+                                        .document(document.getId())
+                                        .delete()
+                                        .addOnSuccessListener(unused -> {
+                                            Log.d(TAG, "Tour đã được xóa khỏi giỏ hàng thành công");
+                                            handler.post(() -> showToast("Đã xóa tour khỏi giỏ hàng"));
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.e(TAG, "Lỗi khi xóa tour khỏi giỏ hàng: " + e.getMessage());
+                                            handler.post(() -> showToast("Lỗi khi xóa khỏi giỏ hàng: " + e.getMessage()));
+                                        });
+                            }
+                        } else {
+                            Log.w(TAG, "Không tìm thấy tour trong giỏ hàng để xóa");
+                            handler.post(() -> showToast("Không tìm thấy tour trong giỏ hàng"));
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e(TAG, "Lỗi khi tìm kiếm tour trong giỏ hàng: " + e.getMessage());
+                        handler.post(() -> showToast("Lỗi khi tìm kiếm trong giỏ hàng: " + e.getMessage()));
+                    });
+
+            executor.shutdown();
+        });
+    }
+
+    /**
      * Tạo đối tượng ItemDomain từ dữ liệu hiện tại
      */
     private ItemDomain createItemDomain() {
@@ -378,6 +439,9 @@ public class TicketActivity extends BaseActivity {
         item.setTourGuideName(object.getTourGuideName());
         item.setTourGuidePhone(object.getTourGuidePhone());
         item.setTourGuidePic(object.getTourGuidePic());
+        String numOfPeopleStr = binding.numOfPeople.getText().toString();
+        int numOfPeople = numOfPeopleStr.isEmpty() ? 1 : Integer.parseInt(numOfPeopleStr);
+        item.setNumOfPeople(numOfPeople);
         return item;
     }
 
@@ -433,14 +497,17 @@ public class TicketActivity extends BaseActivity {
         return new PayOrderListener() {
             @Override
             public void onPaymentSucceeded(String transactionId, String transToken, String appTransId) {
+                // Lưu vào Purchased
                 savePurchaseToFirebase();
                 savePurchaseToRealtime();
+
+                // XÓA KHỎI GIỎ HÀNG SAU KHI THANH TOÁN THÀNH CÔNG
+                removeFromCart();
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
-
 
             @Override
             public void onPaymentError(ZaloPayError error, String transactionId, String transToken) {
@@ -457,7 +524,6 @@ public class TicketActivity extends BaseActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
-
         };
     }
 
@@ -487,7 +553,6 @@ public class TicketActivity extends BaseActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-
     /**
      * Kiểm tra kết nối mạng
      */
@@ -496,6 +561,4 @@ public class TicketActivity extends BaseActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
     }
-
-
 }

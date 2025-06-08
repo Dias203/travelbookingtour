@@ -1,5 +1,6 @@
 package com.example.travel_app.Activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.travel_app.Utils.NetworkConnectionMonitor;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Locale;
 
 // tái sử dụng mã nguồn, quản lý logic một cách tập trung,
 // thiết lập và duy trì cấu hình chung,
@@ -24,7 +27,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkConnection
         super.onCreate(savedInstanceState);
 
         database = FirebaseDatabase.getInstance();
-
+        applySavedLanguage(); // Áp dụng ngôn ngữ trước khi gọi super.onCreate
         // hiển thị full màn
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -58,5 +61,14 @@ public class BaseActivity extends AppCompatActivity implements NetworkConnection
                 "Mất kết nối internet. Vui lòng kiểm tra lại mạng của bạn.",
                 Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
+    }
+    private void applySavedLanguage() {
+        String language = getSharedPreferences("settings", MODE_PRIVATE)
+                .getString("language", "en"); // Mặc định tiếng Anh
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 }

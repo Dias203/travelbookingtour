@@ -33,13 +33,16 @@ public final class ActivityMainBinding implements ViewBinding {
   public final EditText edtSearch;
 
   @NonNull
+  public final ImageView listFavoriteTour;
+
+  @NonNull
+  public final TextView listFavoriteTourTxt;
+
+  @NonNull
   public final Spinner locationSp;
 
   @NonNull
   public final FrameLayout main;
-
-  @NonNull
-  public final ImageView messageBtn;
 
   @NonNull
   public final ProgressBar progressBarBanner;
@@ -78,20 +81,21 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ViewPager2 viewPagerSlider;
 
   private ActivityMainBinding(@NonNull FrameLayout rootView, @NonNull ChipNavigationBar bottomnav,
-      @NonNull EditText edtSearch, @NonNull Spinner locationSp, @NonNull FrameLayout main,
-      @NonNull ImageView messageBtn, @NonNull ProgressBar progressBarBanner,
-      @NonNull ProgressBar progressBarCategory, @NonNull ProgressBar progressBarPopular,
-      @NonNull ProgressBar progressBarRecommended, @NonNull ProgressBar progressBarSearch,
-      @NonNull RecyclerView recyclerViewCategory, @NonNull RecyclerView recyclerViewPopular,
-      @NonNull RecyclerView recyclerViewRecommended, @NonNull TextView search,
-      @NonNull RecyclerView searchResults, @NonNull TextView textView3,
+      @NonNull EditText edtSearch, @NonNull ImageView listFavoriteTour,
+      @NonNull TextView listFavoriteTourTxt, @NonNull Spinner locationSp, @NonNull FrameLayout main,
+      @NonNull ProgressBar progressBarBanner, @NonNull ProgressBar progressBarCategory,
+      @NonNull ProgressBar progressBarPopular, @NonNull ProgressBar progressBarRecommended,
+      @NonNull ProgressBar progressBarSearch, @NonNull RecyclerView recyclerViewCategory,
+      @NonNull RecyclerView recyclerViewPopular, @NonNull RecyclerView recyclerViewRecommended,
+      @NonNull TextView search, @NonNull RecyclerView searchResults, @NonNull TextView textView3,
       @NonNull ViewPager2 viewPagerSlider) {
     this.rootView = rootView;
     this.bottomnav = bottomnav;
     this.edtSearch = edtSearch;
+    this.listFavoriteTour = listFavoriteTour;
+    this.listFavoriteTourTxt = listFavoriteTourTxt;
     this.locationSp = locationSp;
     this.main = main;
-    this.messageBtn = messageBtn;
     this.progressBarBanner = progressBarBanner;
     this.progressBarCategory = progressBarCategory;
     this.progressBarPopular = progressBarPopular;
@@ -145,6 +149,18 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.listFavoriteTour;
+      ImageView listFavoriteTour = ViewBindings.findChildViewById(rootView, id);
+      if (listFavoriteTour == null) {
+        break missingId;
+      }
+
+      id = R.id.listFavoriteTourTxt;
+      TextView listFavoriteTourTxt = ViewBindings.findChildViewById(rootView, id);
+      if (listFavoriteTourTxt == null) {
+        break missingId;
+      }
+
       id = R.id.locationSp;
       Spinner locationSp = ViewBindings.findChildViewById(rootView, id);
       if (locationSp == null) {
@@ -152,12 +168,6 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       FrameLayout main = (FrameLayout) rootView;
-
-      id = R.id.messageBtn;
-      ImageView messageBtn = ViewBindings.findChildViewById(rootView, id);
-      if (messageBtn == null) {
-        break missingId;
-      }
 
       id = R.id.progressBarBanner;
       ProgressBar progressBarBanner = ViewBindings.findChildViewById(rootView, id);
@@ -231,10 +241,11 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((FrameLayout) rootView, bottomnav, edtSearch, locationSp, main,
-          messageBtn, progressBarBanner, progressBarCategory, progressBarPopular,
-          progressBarRecommended, progressBarSearch, recyclerViewCategory, recyclerViewPopular,
-          recyclerViewRecommended, search, searchResults, textView3, viewPagerSlider);
+      return new ActivityMainBinding((FrameLayout) rootView, bottomnav, edtSearch, listFavoriteTour,
+          listFavoriteTourTxt, locationSp, main, progressBarBanner, progressBarCategory,
+          progressBarPopular, progressBarRecommended, progressBarSearch, recyclerViewCategory,
+          recyclerViewPopular, recyclerViewRecommended, search, searchResults, textView3,
+          viewPagerSlider);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

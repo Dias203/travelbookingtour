@@ -34,6 +34,7 @@ public class PurchasedActivity extends BaseActivity {
     private final ArrayList<ItemDomain> itemList = new ArrayList<>();
     private PurchasedAdapter adapter;
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private static final int LOGIN_REQUEST_CODE = 1002;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,6 @@ public class PurchasedActivity extends BaseActivity {
         loadPurchasedData();
     }
 
-    /**
-     * Thiết lập bottom navigation và xử lý sự kiện chuyển trang
-     */
     private void setupBottomNavigation() {
         binding.bottomnav.setOnItemSelectedListener(i -> {
             if (i == R.id.home) {
@@ -58,19 +56,14 @@ public class PurchasedActivity extends BaseActivity {
                 openGoogleInChrome();
             }
         });
+        binding.bottomnav.setItemSelected(R.id.cart, true);
     }
 
-    /**
-     * Chuyển đến Activity được chỉ định
-     */
     private void navigateTo(Class<?> activityClass) {
         Intent intent = new Intent(this, activityClass);
         startActivity(intent);
     }
 
-    /**
-     * Mở trang Google trong Chrome, fallback nếu không có Chrome
-     */
     private void openGoogleInChrome() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
         intent.setPackage("com.android.chrome");
@@ -82,14 +75,13 @@ public class PurchasedActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    /**
-     * Tải dữ liệu tour đã mua từ Firestore
-     */
     private void loadPurchasedData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user == null) {
-            redirectToLogin();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("caller", "PurchasedActivity");
+            startActivityForResult(intent, LOGIN_REQUEST_CODE);
             return;
         }
 
@@ -118,9 +110,6 @@ public class PurchasedActivity extends BaseActivity {
         });
     }
 
-    /**
-     * Xử lý khi tải dữ liệu thành công
-     */
     private void handleDataLoadSuccess(List<DocumentSnapshot> documents) {
         itemList.clear();
         for (DocumentSnapshot doc : documents) {
@@ -135,9 +124,6 @@ public class PurchasedActivity extends BaseActivity {
         });
     }
 
-    /**
-     * Thiết lập RecyclerView và adapter
-     */
     private void setupRecyclerView() {
         adapter = new PurchasedAdapter(itemList);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -145,34 +131,21 @@ public class PurchasedActivity extends BaseActivity {
         setupSwipeToDelete();
     }
 
-    /**
-     * Hiển thị hoặc ẩn loading bar
-     */
     private void showLoading(boolean show) {
         handler.post(() -> binding.progressBarListItem.setVisibility(show ? View.VISIBLE : View.GONE));
     }
 
-    /**
-     * Hiển thị thông báo lỗi
-     */
     private void showError(String message) {
         handler.post(() -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
     }
 
-    /**
-     * Chuyển về màn hình đăng nhập nếu chưa đăng nhập
-     */
     private void redirectToLogin() {
-        handler.post(() -> {
-            Toast.makeText(this, "Vui lòng đăng nhập để xem lịch sử mua", Toast.LENGTH_SHORT).show();
-            navigateTo(LoginActivity.class);
-            finish();
-        });
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("caller", "PurchasedActivity");
+        startActivityForResult(intent, LOGIN_REQUEST_CODE);
+        finish();
     }
 
-    /**
-     * Thiết lập tính năng vuốt để xóa mục đã mua
-     */
     private void setupSwipeToDelete() {
         ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -189,9 +162,6 @@ public class PurchasedActivity extends BaseActivity {
         new ItemTouchHelper(callback).attachToRecyclerView(binding.recyclerView);
     }
 
-    /**
-     * Hiển thị dialog xác nhận xóa mục
-     */
     private void confirmDelete(int position) {
         ItemDomain item = adapter.getItem(position);
 
@@ -204,9 +174,6 @@ public class PurchasedActivity extends BaseActivity {
                 .show();
     }
 
-    /**
-     * Xóa mục khỏi Firestore và cập nhật UI
-     */
     private void deleteItemFromFirestore(int position, ItemDomain item) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -216,7 +183,6 @@ public class PurchasedActivity extends BaseActivity {
 
             db.collection("Purchased")
                     .whereEqualTo("userId", user.getUid())
-                    .whereEqualTo("Title", item.getTitle()) // Giả định "Title" là duy nhất
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful() && !task.getResult().isEmpty()) {
@@ -243,5 +209,14 @@ public class PurchasedActivity extends BaseActivity {
 
             executor.shutdown();
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Người dùng đã đăng nhập thành công, tải lại dữ liệu
+            loadPurchasedData();
+        }
     }
 }

@@ -23,22 +23,27 @@
 
             <ImageView
                 android:id="@+id/backBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="24dp"
-                app:srcCompat="@drawable/baseline_arrow_back_24" />
+                android:layout_marginStart="8dp"
+                android:padding="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_arrow_back_24"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Chỉnh sửa Tour"
+                android:text="@string/edit_tour_vie"
                 android:textAlignment="center"
                 android:textColor="@color/darkBlue"
-                android:textSize="48sp"
-                android:textStyle="bold" />
+                android:textSize="32sp"
+                android:textStyle="bold"
+                tools:ignore="Autofill,TextFields"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -48,7 +53,6 @@
                     android:id="@+id/cardView"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    app:layout_constraintBottom_toTopOf="@+id/CategoryId"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -58,125 +62,139 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic"
+                        tools:ignore="ContentDescription" />
                 </androidx.cardview.widget.CardView>
 
                 <EditText
                     android:id="@+id/editCategoryId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4"
+                    android:hint="@string/category_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                    app:layout_constraintTop_toBottomOf="@+id/cardView"
+                    tools:ignore="Autofill,TextFields,UnusedAttribute" />
 
                 <EditText
                     android:id="@+id/editTitleTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tiêu đề"
+                    android:hint="@string/title_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editCategoryId" />
+                    app:layout_constraintTop_toBottomOf="@+id/editCategoryId"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editAddressTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Địa chỉ"
+                    android:hint="@string/address_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTitleTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTitleTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editBedNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Số lượng giường"
+                    android:hint="@string/hotel_quality_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editAddressTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editAddressTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editDateTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ngày khởi hành (dd/MM/yyyy)"
+                    android:hint="@string/departure_date_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editBedNum" />
+                    app:layout_constraintTop_toBottomOf="@+id/editBedNum"
+                    tools:ignore="Autofill,TextFields"/>
 
                 <EditText
                     android:id="@+id/editTimeTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Thời gian khởi hành"
+                    android:hint="@string/departure_date_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editDateTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editDateTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editDescriptionTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Mô tả"
+                    android:hint="@string/description_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTimeTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTimeTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editDurationTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Thời gian tour (D:day / N:night)"
+                    android:hint="@string/tour_duration_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editDescriptionTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editDescriptionTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editDistanceTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Khoảng cách"
+                    android:hint="@string/distance_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editDurationTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editDurationTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editPriceTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Giá"
+                    android:hint="@string/price_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editDistanceTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editDistanceTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editScoreTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Đánh giá"
+                    android:hint="@string/rating_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editPriceTour" />
+                    app:layout_constraintTop_toBottomOf="@+id/editPriceTour"
+                    tools:ignore="Autofill,TextFields" />
 
                 <EditText
                     android:id="@+id/editTourGuideName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tên hướng dẫn viên"
+                    android:hint="@string/guide_name_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="Autofill,TextFields"
                     app:layout_constraintTop_toBottomOf="@+id/editScoreTour" />
 
                 <EditText
                     android:id="@+id/editTourGuidePhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="SĐT hướng dẫn viên"
+                    android:hint="@string/guide_phone_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTourGuideName" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTourGuideName"
+                    tools:ignore="Autofill,TextFields" />
 
                 <!-- Thêm LinearLayout chứa CheckBox -->
                 <LinearLayout
@@ -193,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Recommend" />
+                        android:text="@string/recommend_vie" />
 
                     <CheckBox
                         android:id="@+id/popularCheckBox"
@@ -201,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Popular" />
+                        android:text="@string/popular_vie" />
 
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -212,7 +230,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_gravity="center_horizontal"
-                android:text="Xác nhận"
+                android:text="@string/confirm_vie"
                 android:layout_marginBottom="20dp"/>
         </LinearLayout>
     </ScrollView>

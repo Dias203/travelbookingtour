@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="title"
+        tools:text="title"
         android:textSize="15sp"
         android:textColor="@color/darkBlue"
         android:textStyle="bold"
@@ -41,14 +41,15 @@
         app:layout_constraintBottom_toTopOf="@+id/priceTxt"
         app:layout_constraintStart_toStartOf="@id/titleTxt"
         app:layout_constraintTop_toBottomOf="@id/titleTxt"
-        app:srcCompat="@drawable/location" />
+        app:srcCompat="@drawable/location"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/addressTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="address"
+        tools:text="address"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
@@ -56,7 +57,7 @@
         android:id="@+id/priceTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0VND"
+        tools:ignore="0VND"
         android:textColor="@color/blue"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -68,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="/Người"
+        android:text="@string/person_vie"
         android:textColor="@color/darkBlue"
         app:layout_constraintBottom_toBottomOf="@+id/priceTxt"
         app:layout_constraintStart_toEndOf="@+id/priceTxt" />
@@ -78,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="5"
+        tools:text="5"
         android:textColor="@color/darkBlue"
         android:textStyle="bold"
         android:textSize="12sp"
@@ -92,5 +93,6 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/scoreTxt"
         app:layout_constraintEnd_toStartOf="@+id/scoreTxt"
-        app:srcCompat="@drawable/star" />
+        app:srcCompat="@drawable/star"
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

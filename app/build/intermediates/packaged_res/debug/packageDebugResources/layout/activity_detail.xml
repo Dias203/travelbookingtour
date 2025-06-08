@@ -8,20 +8,22 @@
     android:layout_height="match_parent"
     tools:context=".Activity.user.DetailActivity">
 
+    <!-- ScrollView chứa nội dung -->
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/footerLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="50dp">
+            android:paddingBottom="50dp"> <!-- Thêm paddingBottom để tránh bị che -->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -37,33 +39,38 @@
 
                     <ImageView
                         android:id="@+id/pic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic"
+                        tools:ignore="ContentDescription" />
 
                     <ImageView
                         android:id="@+id/backBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="48dp"
+                        android:padding="4dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/back" />
+                        app:srcCompat="@drawable/back"
+                        tools:ignore="ContentDescription" />
 
                     <ImageView
-                        android:id="@+id/favBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/addShoppingCart"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginEnd="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/backBtn"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/backBtn"
-                        app:srcCompat="@drawable/fav_icon" />
+                        app:srcCompat="@drawable/add_shopping_card"
+                        tools:ignore="ContentDescription" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,7 +84,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +95,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="24dp"
-                            android:text="title"
+                            android:text="@string/title_vie"
                             android:textAlignment="center"
                             android:textColor="@color/darkBlue"
                             android:textSize="24sp"
@@ -98,22 +105,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            tools:ignore="UseCompoundDrawables">
 
                             <ImageView
                                 android:id="@+id/imageView9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/location" />
+                                app:srcCompat="@drawable/location"
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:id="@+id/addressTxt"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_weight="1"
-                                android:text="address"
+                                android:text="@string/address_vie"
                                 android:textColor="@color/darkBlue"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -160,7 +169,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="16dp"
-                                    android:text="- min"
+                                    tools:text="- min"
                                     android:textColor="@color/darkBlue"
                                     android:textStyle="bold"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +190,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
-                                    android:text="Duration"
+                                    android:text="@string/duration_vie"
                                     android:textColor="@color/darkBlue"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -205,6 +214,7 @@
                                     android:id="@+id/distanceTxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
                                     android:layout_marginTop="16dp"
                                     android:text="0"
                                     android:textColor="@color/darkBlue"
@@ -217,9 +227,11 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
                                     android:layout_marginEnd="8dp"
                                     app:layout_constraintBottom_toBottomOf="@+id/distanceTxt"
                                     app:layout_constraintEnd_toStartOf="@+id/distanceTxt"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="@+id/distanceTxt"
                                     app:srcCompat="@drawable/distance" />
 
@@ -227,7 +239,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
-                                    android:text="Distance"
+                                    android:text="@string/distance_vie"
                                     android:textColor="@color/darkBlue"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -252,6 +264,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="16dp"
+                                    android:gravity="center_vertical"
                                     android:text="0"
                                     android:textColor="@color/darkBlue"
                                     android:textStyle="bold"
@@ -261,20 +274,29 @@
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <ImageView
-                                    android:id="@+id/imageView10"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:src="@drawable/star"
+                                    app:layout_constraintBottom_toBottomOf="@+id/bedTxt"
+                                    app:layout_constraintStart_toEndOf="@+id/bedTxt"
+                                    app:layout_constraintTop_toTopOf="@+id/bedTxt" />
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:layout_marginEnd="8dp"
                                     app:layout_constraintBottom_toBottomOf="@+id/bedTxt"
                                     app:layout_constraintEnd_toStartOf="@+id/bedTxt"
                                     app:layout_constraintTop_toTopOf="@+id/bedTxt"
-                                    app:srcCompat="@drawable/bed" />
+                                    app:srcCompat="@drawable/hotel" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
-                                    android:text="Bed"
+                                    android:text="@string/hotel_vie"
                                     android:textColor="@color/darkBlue"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -303,7 +325,6 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="12dp"
                             android:text="TextView"
-                            android:maxLines="20"
                             android:textColor="@color/darkBlue"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -312,24 +333,27 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- Footer Layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:id="@+id/footerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/lightGray"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bookTour"
-            android:layout_width="180dp"
-            android:layout_height="50dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:text="Đặt Vé"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            style="@android:style/Widget.Button"
             android:background="@drawable/blue_bg"
+            android:paddingHorizontal="4dp"
+            android:text="Đặt Vé"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -338,11 +362,11 @@
             android:id="@+id/priceTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:text="000VND"
             android:textColor="@color/blue"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_marginStart="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -357,4 +381,5 @@
             app:layout_constraintStart_toEndOf="@+id/priceTxt"
             app:layout_constraintTop_toTopOf="@+id/priceTxt" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

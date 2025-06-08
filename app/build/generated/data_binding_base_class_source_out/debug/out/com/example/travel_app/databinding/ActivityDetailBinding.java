@@ -24,6 +24,9 @@ public final class ActivityDetailBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final ImageView addShoppingCart;
+
+  @NonNull
   public final TextView addressTxt;
 
   @NonNull
@@ -48,7 +51,7 @@ public final class ActivityDetailBinding implements ViewBinding {
   public final TextView durationTxt;
 
   @NonNull
-  public final ImageView favBtn;
+  public final ConstraintLayout footerLayout;
 
   @NonNull
   public final ImageView imageView10;
@@ -86,15 +89,18 @@ public final class ActivityDetailBinding implements ViewBinding {
   @NonNull
   public final View view2;
 
-  private ActivityDetailBinding(@NonNull ConstraintLayout rootView, @NonNull TextView addressTxt,
-      @NonNull ImageView backBtn, @NonNull TextView bedTxt, @NonNull AppCompatButton bookTour,
+  private ActivityDetailBinding(@NonNull ConstraintLayout rootView,
+      @NonNull ImageView addShoppingCart, @NonNull TextView addressTxt, @NonNull ImageView backBtn,
+      @NonNull TextView bedTxt, @NonNull AppCompatButton bookTour,
       @NonNull ConstraintLayout constraintLayout, @NonNull TextView descriptionTxt,
-      @NonNull TextView distanceTxt, @NonNull TextView durationTxt, @NonNull ImageView favBtn,
-      @NonNull ImageView imageView10, @NonNull ImageView imageView9, @NonNull ConstraintLayout main,
-      @NonNull ImageView pic, @NonNull TextView priceTxt, @NonNull RatingBar ratingBar,
-      @NonNull ScrollView scrollView3, @NonNull TextView textView13, @NonNull TextView textView16,
-      @NonNull TextView titleTxt, @NonNull View view1, @NonNull View view2) {
+      @NonNull TextView distanceTxt, @NonNull TextView durationTxt,
+      @NonNull ConstraintLayout footerLayout, @NonNull ImageView imageView10,
+      @NonNull ImageView imageView9, @NonNull ConstraintLayout main, @NonNull ImageView pic,
+      @NonNull TextView priceTxt, @NonNull RatingBar ratingBar, @NonNull ScrollView scrollView3,
+      @NonNull TextView textView13, @NonNull TextView textView16, @NonNull TextView titleTxt,
+      @NonNull View view1, @NonNull View view2) {
     this.rootView = rootView;
+    this.addShoppingCart = addShoppingCart;
     this.addressTxt = addressTxt;
     this.backBtn = backBtn;
     this.bedTxt = bedTxt;
@@ -103,7 +109,7 @@ public final class ActivityDetailBinding implements ViewBinding {
     this.descriptionTxt = descriptionTxt;
     this.distanceTxt = distanceTxt;
     this.durationTxt = durationTxt;
-    this.favBtn = favBtn;
+    this.footerLayout = footerLayout;
     this.imageView10 = imageView10;
     this.imageView9 = imageView9;
     this.main = main;
@@ -145,6 +151,12 @@ public final class ActivityDetailBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.addShoppingCart;
+      ImageView addShoppingCart = ViewBindings.findChildViewById(rootView, id);
+      if (addShoppingCart == null) {
+        break missingId;
+      }
+
       id = R.id.addressTxt;
       TextView addressTxt = ViewBindings.findChildViewById(rootView, id);
       if (addressTxt == null) {
@@ -193,9 +205,9 @@ public final class ActivityDetailBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.favBtn;
-      ImageView favBtn = ViewBindings.findChildViewById(rootView, id);
-      if (favBtn == null) {
+      id = R.id.footerLayout;
+      ConstraintLayout footerLayout = ViewBindings.findChildViewById(rootView, id);
+      if (footerLayout == null) {
         break missingId;
       }
 
@@ -267,10 +279,10 @@ public final class ActivityDetailBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityDetailBinding((ConstraintLayout) rootView, addressTxt, backBtn, bedTxt,
-          bookTour, constraintLayout, descriptionTxt, distanceTxt, durationTxt, favBtn, imageView10,
-          imageView9, main, pic, priceTxt, ratingBar, scrollView3, textView13, textView16, titleTxt,
-          view1, view2);
+      return new ActivityDetailBinding((ConstraintLayout) rootView, addShoppingCart, addressTxt,
+          backBtn, bedTxt, bookTour, constraintLayout, descriptionTxt, distanceTxt, durationTxt,
+          footerLayout, imageView10, imageView9, main, pic, priceTxt, ratingBar, scrollView3,
+          textView13, textView16, titleTxt, view1, view2);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -25,7 +25,7 @@ public class AdminMainActivity extends BaseActivity {
      */
     private void setupEventListeners() {
         binding.adminAllTour.setOnClickListener(v -> navigateTo(AllTourActivity.class));
-        binding.adminAddTour.setOnClickListener(v -> navigateTo(AdminAddTour.class));
+        binding.adminAddTour.setOnClickListener(v -> navigateTo(AdminAddTourActivity.class));
         binding.adminAllOrder.setOnClickListener(v -> navigateTo(AllOderActivity.class));
         binding.adminLogoutBtn.setOnClickListener(v -> logout());
     }

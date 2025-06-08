@@ -55,6 +55,9 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
   public final EditText durationTour;
 
   @NonNull
+  public final TextView hintSuggest;
+
+  @NonNull
   public final ConstraintLayout main;
 
   @NonNull
@@ -91,8 +94,8 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
       @NonNull EditText CategoryId, @NonNull Button addTourButton, @NonNull EditText addressTour,
       @NonNull ImageView backBtn, @NonNull EditText bedNum, @NonNull CardView cardView,
       @NonNull EditText dateTour, @NonNull EditText descriptionTour, @NonNull EditText distanceTour,
-      @NonNull EditText durationTour, @NonNull ConstraintLayout main, @NonNull ImageView picTour,
-      @NonNull CheckBox popularCheckBox, @NonNull EditText priceTour,
+      @NonNull EditText durationTour, @NonNull TextView hintSuggest, @NonNull ConstraintLayout main,
+      @NonNull ImageView picTour, @NonNull CheckBox popularCheckBox, @NonNull EditText priceTour,
       @NonNull CheckBox recommendCheckBox, @NonNull EditText scoreTour, @NonNull TextView textView5,
       @NonNull EditText timeTour, @NonNull EditText titleTour, @NonNull EditText tourGuideName,
       @NonNull EditText tourGuidePhone) {
@@ -107,6 +110,7 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
     this.descriptionTour = descriptionTour;
     this.distanceTour = distanceTour;
     this.durationTour = durationTour;
+    this.hintSuggest = hintSuggest;
     this.main = main;
     this.picTour = picTour;
     this.popularCheckBox = popularCheckBox;
@@ -207,6 +211,12 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.hintSuggest;
+      TextView hintSuggest = ViewBindings.findChildViewById(rootView, id);
+      if (hintSuggest == null) {
+        break missingId;
+      }
+
       ConstraintLayout main = (ConstraintLayout) rootView;
 
       id = R.id.picTour;
@@ -271,8 +281,8 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
 
       return new ActivityAdminAddTourBinding((ConstraintLayout) rootView, CategoryId, addTourButton,
           addressTour, backBtn, bedNum, cardView, dateTour, descriptionTour, distanceTour,
-          durationTour, main, picTour, popularCheckBox, priceTour, recommendCheckBox, scoreTour,
-          textView5, timeTour, titleTour, tourGuideName, tourGuidePhone);
+          durationTour, hintSuggest, main, picTour, popularCheckBox, priceTour, recommendCheckBox,
+          scoreTour, textView5, timeTour, titleTour, tourGuideName, tourGuidePhone);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

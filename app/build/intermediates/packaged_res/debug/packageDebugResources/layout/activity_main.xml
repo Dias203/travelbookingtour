@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Vị trí" />
+                    android:text="@string/location_vie" />
 
                 <Spinner
                     android:id="@+id/locationSp"
@@ -38,12 +38,39 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp" />
 
-                <ImageView
-                    android:id="@+id/messageBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="end|center_vertical"
-                    app:srcCompat="@drawable/message_bubble" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical">
+
+                    <ImageView
+                        android:id="@+id/listFavoriteTour"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/shopping_cart_fill"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/listFavoriteTourTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="14dp"
+                        tools:text="0"
+                        android:textColor="#F02828"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/listFavoriteTour"
+                        app:layout_constraintTop_toTopOf="@id/listFavoriteTour" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </FrameLayout>
 
             <FrameLayout
@@ -63,11 +90,12 @@
                     android:drawableStart="@drawable/search_icon"
                     android:drawablePadding="8dp"
                     android:ems="10"
-                    android:hint="Địa điểm"
+                    android:hint="@string/address_vie"
                     android:inputType="text"
                     android:padding="8dp"
                     android:textColor="@color/darkBlue"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="Autofill" />
 
                 <TextView
                     android:id="@+id/search"
@@ -79,7 +107,7 @@
                     android:layout_marginBottom="2dp"
                     android:background="@drawable/blue_bg"
                     android:gravity="center"
-                    android:text="Tìm kiếm"
+                    android:text="@string/find_vie"
                     android:textColor="@color/white" />
             </FrameLayout>
 
@@ -130,7 +158,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
-                    android:paddingStart="4dp" />
+                    android:paddingStart="4dp"
+                    tools:ignore="RtlSymmetry" />
 
                 <ProgressBar
                     android:id="@+id/progressBarCategory"
@@ -149,10 +178,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Điểm đến gợi ý"
+                    android:text="@string/tour_recommend_vie"
                     android:textColor="@color/darkBlue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -160,7 +189,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tất cả"
+                    android:text="@string/all_vie"
                     android:textColor="@color/blue"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -194,10 +223,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Điểm đến phổ biến"
+                    android:text="@string/tour_popular_vie"
                     android:textColor="@color/darkBlue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -205,7 +234,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tất cả"
+                    android:text="@string/all_vie"
                     android:textColor="@color/blue"
                     android:textSize="14sp" />
             </LinearLayout>

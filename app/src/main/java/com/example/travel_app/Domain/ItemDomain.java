@@ -24,6 +24,7 @@ public class ItemDomain implements Serializable {
     private boolean popular;
     private String id;
     private String userId;
+    private int numOfPeople;
 
 
     public ItemDomain() {
@@ -180,5 +181,13 @@ public class ItemDomain implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public int getNumOfPeople() {
+        return numOfPeople;
+    }
+
+    public void setNumOfPeople(int numOfPeople) {
+        this.numOfPeople = numOfPeople;
     }
 }

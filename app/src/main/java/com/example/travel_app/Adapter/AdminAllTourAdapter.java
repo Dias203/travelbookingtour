@@ -58,11 +58,15 @@ public class AdminAllTourAdapter extends RecyclerView.Adapter<AdminAllTourAdapte
     private void setupItemClickListener(ViewHolder holder, ItemDomain item) {
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, AdminEditActivity.class);
-            intent.putExtra("id", item.getId());
-            intent.putExtra("title", item.getTitle());
-            intent.putExtra("price", item.getPrice());
-            intent.putExtra("address", item.getAddress());
+            intent.putExtra("id", item.getId() != null ? item.getId() : "");
+            intent.putExtra("title", item.getTitle() != null ? item.getTitle() : "");
+            intent.putExtra("price", (double) item.getPrice()); // Chuyển int thành double để khớp với AdminEditActivity
+            intent.putExtra("address", item.getAddress() != null ? item.getAddress() : "");
             intent.putExtra("score", item.getScore());
+            intent.putExtra("duration", item.getDuration() != null ? item.getDuration() : "");
+            intent.putExtra("bed", item.getBed());
+            intent.putExtra("time", item.getTimeTour() != null ? item.getTimeTour() : "");
+            intent.putExtra("date", item.getDateTour() != null ? item.getDateTour() : "");
             context.startActivity(intent);
         });
     }

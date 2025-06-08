@@ -12,8 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <!-- Thêm quyền truy cập trạng thái mạng -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> <!-- Thêm quyền truy cập trạng thái mạng -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -42,8 +41,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.Travel_app"
         android:usesCleartextTraffic="true" >
+        <activity
+            android:name="com.example.travel_app.Activity.user.CartActivity"
+            android:exported="false" />
         <activity
             android:name="com.example.travel_app.Activity.user.ChangePasswordActivity"
             android:exported="false" />
@@ -57,7 +60,7 @@
             android:name="com.example.travel_app.Activity.admin.AllTourActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.travel_app.Activity.admin.AdminAddTour"
+            android:name="com.example.travel_app.Activity.admin.AdminAddTourActivity"
             android:exported="false" />
         <activity
             android:name="com.example.travel_app.Activity.admin.AdminMainActivity"
