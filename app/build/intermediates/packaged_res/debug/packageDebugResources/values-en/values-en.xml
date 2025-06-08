@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_tour_vie">Add Tour</string>
+    <string name="address_vie">Address</string>
+    <string name="admin_home_vie">Admin Home</string>
+    <string name="all_ordered_vie">All Orders</string>
+    <string name="all_tour_vie">All Tours</string>
+    <string name="all_vie">All</string>
+    <string name="app_name">travel_app</string>
+    <string name="cart_vie">Cart</string>
+    <string name="category_vie">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Mountain: 4</string>
+    <string name="change_language_vie">Change Language</string>
+    <string name="change_password_vie">Change Password</string>
+    <string name="click_to_login">Already have an account? <font color="#3F95EC">Log in</font></string>
+    <string name="click_to_register">Don’t have an account? <font color="#3F95EC">Register</font></string>
+    <string name="confirm_new_password_vie">Confirm New Password</string>
+    <string name="confirm_vie">Confirm</string>
+    <string name="day_vie">Day</string>
+    <string name="departure_date_vie">Departure Date (dd/MM/yyyy)</string>
+    <string name="departure_time_vie">Departure Time</string>
+    <string name="description_vie">Description</string>
+    <string name="distance_vie">Distance</string>
+    <string name="download_ticket_vie">Download Image</string>
+    <string name="duration_vie">Duration</string>
+    <string name="edit_tour_vie">Edit Tour</string>
+    <string name="email">Email</string>
+    <string name="enter_info_vie">Enter Information</string>
+    <string name="facebook_vie">Facebook</string>
+    <string name="find_vie">Search</string>
+    <string name="forgot_password"><font color="#A9A8A8"> Forgot password? </font></string>
+    <string name="guide_name_vie">Guide Name</string>
+    <string name="guide_phone_vie">Guide Phone Number</string>
+    <string name="guide_vie">Tour Guide</string>
+    <string name="hotel_quality_vie">Hotel Quality</string>
+    <string name="hotel_vie">Hotel</string>
+    <string name="info_vie">Information</string>
+    <string name="introTitle">Explore<font color="#3f95ec"> the world </font>\nwith us</string>
+    <string name="location_vie">Location</string>
+    <string name="login">Log in</string>
+    <string name="login_admin">Admin Login</string>
+    <string name="logout">Log out</string>
+    <string name="new_password_vie">New Password</string>
+    <string name="num_people_vie">Number of People</string>
+    <string name="old_password_vie">Old Password</string>
+    <string name="order_id_num_vie">Order ID:13112003</string>
+    <string name="password">Password</string>
+    <string name="payment_vie">Payment</string>
+    <string name="person_vie">/Person</string>
+    <string name="popular_vie">Popular</string>
+    <string name="price_vie">Price</string>
+    <string name="purchased">Purchased</string>
+    <string name="rating_vie">Rating</string>
+    <string name="recommend_vie">Recommended</string>
+    <string name="register">Register</string>
+    <string name="select_photo_vie">Select Photo</string>
+    <string name="show_ticket">Present this ticket to the guide before departure.</string>
+    <string name="subIntro">Travel booking app helps users book flights and hotels at convenient package prices.</string>
+    <string name="ticket_detail_vie">Ticket Details</string>
+    <string name="time_vie">Time</string>
+    <string name="title_vie">Title</string>
+    <string name="tour_duration2_vie">Trip Duration</string>
+    <string name="tour_duration_vie">Tour Duration (D:day / N:night)</string>
+    <string name="tour_management_vie">Tour Management</string>
+    <string name="tour_ordered_vie">Booked Tours</string>
+    <string name="tour_popular_vie">Popular Destinations</string>
+    <string name="tour_recommend_vie">Recommended Destinations</string>
+    <string name="twitter_vie">Twitter</string>
+    <string name="upcomming_trip_vie">Upcoming Trip</string>
+</resources>
