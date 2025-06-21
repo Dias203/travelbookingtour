@@ -7,7 +7,7 @@
     <string name="login">Đăng nhập</string>
     <string name="login_admin">Đăng nhập cho Admin</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="password">Mật khẩu</string>
     <string name="register">Đăng ký</string>
     <string name="click_to_login">Đã có tài khoản? <font color='#3F95EC'>Đăng nhập </font></string>
     <string name="click_to_register">Chưa có tài khoản? <font color='#3F95EC'>Đăng ký </font> </string>
@@ -17,19 +17,26 @@
     <string name="purchased">Đã mua</string>
     <string name="add_tour_vie">Thêm Tour</string>
     <string name="select_photo_vie">Chọn ảnh</string>
-    <string name="category_vie">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4</string>
-    <string name="title_vie">Tiêu đề</string>
-    <string name="address_vie">Địa chỉ</string>
-    <string name="hotel_quality_vie">Chất lượng khách sạn</string>
-    <string name="departure_date_vie">Ngày khởi hành (dd/MM/yyyy)</string>
-    <string name="departure_time_vie">Thời gian khởi hành</string>
-    <string name="description_vie">Mô tả</string>
-    <string name="tour_duration_vie">Thời lượng tour (D:day / N:night)</string>
-    <string name="distance_vie">Khoảng cách</string>
-    <string name="price_vie">Giá</string>
-    <string name="rating_vie">Đánh giá</string>
-    <string name="guide_name_vie">Tên hướng dẫn viên</string>
-    <string name="guide_phone_vie">SĐT hướng dẫn viên</string>
+    <string name="category_vie">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4 <font color='#E60C1B'>(*)</font></string>
+    <string name="category_vie_1" translatable="false">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4</string>
+    <string name="title_vie">Tiêu đề <font color='#E60C1B'>(*)</font></string>
+    <string name="title_vie_1">Tiêu đề</string>
+    <string name="address_vie">Địa chỉ <font color='#E60C1B'>(*)</font></string>
+    <string name="address_vie_1">Địa chỉ</string>
+    <string name="hotel_quality_vie">Chất lượng khách sạn <font color='#E60C1B'>(*)</font></string>
+    <string name="departure_date_vie">Ngày khởi hành (dd/MM/yyyy) <font color='#E60C1B'>(*)</font></string>
+    <string name="departure_time_vie">Thời gian khởi hành <font color='#E60C1B'>(*)</font></string>
+    <string name="description_vie">Mô tả <font color='#E60C1B'>(*)</font></string>
+    <string name="tour_duration_vie">Thời lượng tour (N:Ngày - Day / Đ:Đêm - Night) <font color='#E60C1B'>(*)</font></string>
+    <string name="distance_vie">Khoảng cách <font color='#E60C1B'>(*)</font></string>
+    <string name="price_vie">Giá <font color='#E60C1B'>(*)</font></string>
+    <string name="rating_vie">Đánh giá <font color='#E60C1B'>(*)</font></string>
+    <string name="guide_name_vie">Tên hướng dẫn viên <font color='#E60C1B'>(*)</font></string>
+    <string name="guide_phone_vie">SĐT hướng dẫn viên <font color='#E60C1B'>(*)</font></string>
+    <string name="description_vie_1">Mô tả <font color='#E60C1B'>(*)</font></string>
+    <string name="distance_vie_1">Khoảng cách</string>
+    <string name="guide_name_vie_1">Tên hướng dẫn viên</string>
+    <string name="guide_phone_vie_1">SĐT hướng dẫn viên</string>
     <string name="recommend_vie">Recommend</string>
     <string name="popular_vie">Popular</string>
     <string name="confirm_vie">Xác nhận</string>
@@ -67,4 +74,7 @@
     <string name="payment_vie">Thanh toán</string>
     <string name="download_ticket_vie">Tải ảnh xuống</string>
     <string name="person_vie">/Người</string>
+    <string name="required_text_vie">(*) Bắt buộc nhập</string>
+    <string name="phoneNumber_vie">Số điện thoại</string>
+    <string name="fullName_vie">Họ và tên</string>
 </resources>

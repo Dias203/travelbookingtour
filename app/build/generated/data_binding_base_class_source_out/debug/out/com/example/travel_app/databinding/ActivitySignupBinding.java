@@ -45,17 +45,31 @@ public final class ActivitySignupBinding implements ViewBinding {
   public final TextInputLayout passwordLayout;
 
   @NonNull
+  public final TextInputEditText phoneNum;
+
+  @NonNull
+  public final TextInputLayout phoneNumLayout;
+
+  @NonNull
   public final ProgressBar progressBar;
 
   @NonNull
   public final TextView titleText;
 
+  @NonNull
+  public final TextInputEditText userName;
+
+  @NonNull
+  public final TextInputLayout userNameLayout;
+
   private ActivitySignupBinding(@NonNull RelativeLayout rootView,
       @NonNull AppCompatButton btnRegister, @NonNull TextInputEditText email,
       @NonNull TextInputLayout emailLayout, @NonNull TextView loginNow,
       @NonNull RelativeLayout main, @NonNull TextInputEditText password,
-      @NonNull TextInputLayout passwordLayout, @NonNull ProgressBar progressBar,
-      @NonNull TextView titleText) {
+      @NonNull TextInputLayout passwordLayout, @NonNull TextInputEditText phoneNum,
+      @NonNull TextInputLayout phoneNumLayout, @NonNull ProgressBar progressBar,
+      @NonNull TextView titleText, @NonNull TextInputEditText userName,
+      @NonNull TextInputLayout userNameLayout) {
     this.rootView = rootView;
     this.btnRegister = btnRegister;
     this.email = email;
@@ -64,8 +78,12 @@ public final class ActivitySignupBinding implements ViewBinding {
     this.main = main;
     this.password = password;
     this.passwordLayout = passwordLayout;
+    this.phoneNum = phoneNum;
+    this.phoneNumLayout = phoneNumLayout;
     this.progressBar = progressBar;
     this.titleText = titleText;
+    this.userName = userName;
+    this.userNameLayout = userNameLayout;
   }
 
   @Override
@@ -133,6 +151,18 @@ public final class ActivitySignupBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.phoneNum;
+      TextInputEditText phoneNum = ViewBindings.findChildViewById(rootView, id);
+      if (phoneNum == null) {
+        break missingId;
+      }
+
+      id = R.id.phoneNumLayout;
+      TextInputLayout phoneNumLayout = ViewBindings.findChildViewById(rootView, id);
+      if (phoneNumLayout == null) {
+        break missingId;
+      }
+
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
@@ -145,8 +175,21 @@ public final class ActivitySignupBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.userName;
+      TextInputEditText userName = ViewBindings.findChildViewById(rootView, id);
+      if (userName == null) {
+        break missingId;
+      }
+
+      id = R.id.userNameLayout;
+      TextInputLayout userNameLayout = ViewBindings.findChildViewById(rootView, id);
+      if (userNameLayout == null) {
+        break missingId;
+      }
+
       return new ActivitySignupBinding((RelativeLayout) rootView, btnRegister, email, emailLayout,
-          loginNow, main, password, passwordLayout, progressBar, titleText);
+          loginNow, main, password, passwordLayout, phoneNum, phoneNumLayout, progressBar,
+          titleText, userName, userNameLayout);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

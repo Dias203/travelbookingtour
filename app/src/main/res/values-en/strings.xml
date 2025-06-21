@@ -18,19 +18,25 @@
     <string name="purchased">Purchased</string>
     <string name="add_tour_vie">Add Tour</string>
     <string name="select_photo_vie">Select Photo</string>
-    <string name="category_vie">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Mountain: 4</string>
-    <string name="title_vie">Title</string>
-    <string name="address_vie">Address</string>
-    <string name="hotel_quality_vie">Hotel Quality</string>
-    <string name="departure_date_vie">Departure Date (dd/MM/yyyy)</string>
-    <string name="departure_time_vie">Departure Time</string>
-    <string name="description_vie">Description</string>
-    <string name="tour_duration_vie">Tour Duration (D:day / N:night)</string>
-    <string name="distance_vie">Distance</string>
-    <string name="price_vie">Price</string>
-    <string name="rating_vie">Rating</string>
-    <string name="guide_name_vie">Guide Name</string>
-    <string name="guide_phone_vie">Guide Phone Number</string>
+    <string name="category_vie">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Mountain: 4  <font color='#E60C1B'>(*)</font></string>
+    <string name="title_vie">Title <font color='#E60C1B'>(*)</font></string>
+    <string name="title_vie_1">Title</string>
+    <string name="address_vie">Address <font color='#E60C1B'>(*)</font></string>
+    <string name="address_vie_1">Address</string>
+    <string name="hotel_quality_vie">Hotel Quality <font color='#E60C1B'>(*)</font></string>
+    <string name="departure_date_vie">Departure Date (dd/MM/yyyy) <font color='#E60C1B'>(*)</font></string>
+    <string name="departure_time_vie">Departure Time <font color='#E60C1B'>(*)</font></string>
+    <string name="description_vie">Description <font color='#E60C1B'>(*)</font></string>
+    <string name="tour_duration_vie">Tour Duration (N:Ngày - Day / Đ:Đêm - Night) <font color='#E60C1B'>(*)</font></string>
+    <string name="distance_vie">Distance <font color='#E60C1B'>(*)</font></string>
+    <string name="price_vie">Price <font color='#E60C1B'>(*)</font></string>
+    <string name="description_vie_1">Description</string>
+    <string name="distance_vie_1">Distance</string>
+    <string name="guide_name_vie_1">Guide Name</string>
+    <string name="guide_phone_vie_1">Guide Phone Number</string>
+    <string name="rating_vie">Rating <font color='#E60C1B'>(*)</font></string>
+    <string name="guide_name_vie">Guide Name <font color='#E60C1B'>(*)</font></string>
+    <string name="guide_phone_vie">Guide Phone Number <font color='#E60C1B'>(*)</font></string>
     <string name="recommend_vie">Recommended</string>
     <string name="popular_vie">Popular</string>
     <string name="confirm_vie">Confirm</string>
@@ -68,4 +74,7 @@
     <string name="payment_vie">Payment</string>
     <string name="download_ticket_vie">Download Image</string>
     <string name="person_vie">/Person</string>
+    <string name="required_text_vie">(*) Required Text</string>
+    <string name="phoneNumber_vie">Phone number</string>
+    <string name="fullName_vie">Full name</string>
 </resources>

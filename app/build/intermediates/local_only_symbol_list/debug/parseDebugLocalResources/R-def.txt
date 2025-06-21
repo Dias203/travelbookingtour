@@ -5,6 +5,7 @@ color blue
 color blueTurquoise
 color darkBlue
 color lightGray
+color red
 color white
 drawable add
 drawable add_shopping_card
@@ -21,6 +22,7 @@ drawable baseline_edit_calendar_24
 drawable baseline_home_24
 drawable bed
 drawable bell_icon
+drawable bg_disable_payment
 drawable blue_bg
 drawable blue_turquoise_bg
 drawable bottom_btn1
@@ -73,6 +75,7 @@ id addressTxt
 id adminAddTour
 id adminAllOrder
 id adminAllTour
+id adminChangeLanguage
 id adminLogoutBtn
 id backBtn
 id bedNum
@@ -151,6 +154,8 @@ id orderIdTxt
 id password
 id passwordLayout
 id paymentBtn
+id phoneNum
+id phoneNumLayout
 id pic
 id picTour
 id popularCheckBox
@@ -213,7 +218,12 @@ id tourGuideNameTxt
 id tourGuidePhone
 id tourGuidePic
 id tourGuideTxt
+id tv1
+id tv2
+id tv3
 id twitterBtn
+id userName
+id userNameLayout
 id view
 id view1
 id view2
@@ -247,6 +257,7 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 string add_tour_vie
 string address_vie
+string address_vie_1
 string admin_home_vie
 string all_ordered_vie
 string all_tour_vie
@@ -254,6 +265,7 @@ string all_vie
 string app_name
 string cart_vie
 string category_vie
+string category_vie_1
 string change_language_vie
 string change_password_vie
 string click_to_login
@@ -264,7 +276,9 @@ string day_vie
 string departure_date_vie
 string departure_time_vie
 string description_vie
+string description_vie_1
 string distance_vie
+string distance_vie_1
 string download_ticket_vie
 string duration_vie
 string edit_tour_vie
@@ -273,13 +287,16 @@ string enter_info_vie
 string facebook_vie
 string find_vie
 string forgot_password
+string fullName_vie
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
 string guide_name_vie
+string guide_name_vie_1
 string guide_phone_vie
+string guide_phone_vie_1
 string guide_vie
 string hotel_quality_vie
 string hotel_vie
@@ -296,6 +313,7 @@ string order_id_num_vie
 string password
 string payment_vie
 string person_vie
+string phoneNumber_vie
 string popular_vie
 string price_vie
 string project_id
@@ -303,12 +321,14 @@ string purchased
 string rating_vie
 string recommend_vie
 string register
+string required_text_vie
 string select_photo_vie
 string show_ticket
 string subIntro
 string ticket_detail_vie
 string time_vie
 string title_vie
+string title_vie_1
 string tour_duration2_vie
 string tour_duration_vie
 string tour_management_vie

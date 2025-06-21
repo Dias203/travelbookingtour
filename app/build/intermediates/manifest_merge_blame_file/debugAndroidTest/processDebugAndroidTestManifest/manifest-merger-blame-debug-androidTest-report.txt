@@ -3,24 +3,24 @@
 3    package="com.example.travel_app.test" >
 4
 5    <uses-sdk
-5-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:5:5-74
+5-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:5:15-41
+6-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:5:15-41
 7        android:targetSdkVersion="34" />
-7-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:5:42-71
+7-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:5:42-71
 8
 9    <instrumentation
-9-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:11:5-15:72
+9-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:11:5-15:72
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:11:22-76
+10-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:11:22-76
 11        android:functionalTest="false"
-11-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:14:22-52
+11-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:14:22-52
 12        android:handleProfiling="false"
-12-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:13:22-53
+12-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:13:22-53
 13        android:label="Tests for com.example.travel_app"
-13-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:15:22-70
+13-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:15:22-70
 14        android:targetPackage="com.example.travel_app" />
-14-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:12:22-68
+14-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:12:22-68
 15
 16    <queries>
 16-->[androidx.test:runner:1.6.1] C:\Users\Admin\.gradle\caches\transforms-4\7c59c8afa51503b494dbabe68eeed567\transformed\runner-1.6.1\AndroidManifest.xml:24:5-28:15
@@ -40,12 +40,12 @@
 22-->[androidx.test:core:1.6.1] C:\Users\Admin\.gradle\caches\transforms-4\4c2cc199813a843ffa637855f97babdf\transformed\core-1.6.1\AndroidManifest.xml:24:22-69
 23
 24    <application
-24-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:7:5-9:19
+24-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:7:5-9:19
 25        android:debuggable="true"
 26        android:extractNativeLibs="false" >
 27        <uses-library android:name="android.test.runner" />
-27-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:8:9-60
-27-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2716334626273561171.xml:8:23-57
+27-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:8:9-60
+27-->G:\Study\Android Projects\Application\TravelApp-main\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12038270073168011223.xml:8:23-57
 28
 29        <activity
 29-->[androidx.test:core:1.6.1] C:\Users\Admin\.gradle\caches\transforms-4\4c2cc199813a843ffa637855f97babdf\transformed\core-1.6.1\AndroidManifest.xml:27:9-34:20

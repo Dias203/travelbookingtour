@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -107,9 +108,24 @@ public class AdminAddTourActivity extends BaseActivity {
             binding.CategoryId.setText(prefs.getString(KEY_CATEGORY_ID, ""));
         }
         if (prefs.contains(KEY_IMAGE_URI)) {
-            imageUri = Uri.parse(prefs.getString(KEY_IMAGE_URI, ""));
-            binding.picTour.setImageURI(imageUri);
-            binding.hintSuggest.setVisibility(View.GONE);
+            String uriString = prefs.getString(KEY_IMAGE_URI, "");
+            if (!uriString.isEmpty()) {
+                try {
+                    imageUri = Uri.parse(uriString);
+                    // Kiểm tra quyền truy cập
+                    getContentResolver().openInputStream(imageUri); // Thử mở stream để kiểm tra quyền
+                    binding.picTour.setImageURI(imageUri);
+                    binding.hintSuggest.setVisibility(View.GONE);
+                } catch (SecurityException | FileNotFoundException e) {
+                    // Xử lý khi không có quyền hoặc URI không hợp lệ
+                    Log.e(TAG, "Không thể truy cập URI: " + e.getMessage());
+                    showToast("Hình ảnh không hợp lệ, vui lòng chọn lại!");
+                    imageUri = null; // Xóa URI không hợp lệ
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.remove(KEY_IMAGE_URI); // Xóa URI khỏi SharedPreferences
+                    editor.apply();
+                }
+            }
         }
         if (prefs.contains(KEY_RECOMMENDED)) {
             binding.recommendCheckBox.setChecked(prefs.getBoolean(KEY_RECOMMENDED, false));
@@ -363,9 +379,9 @@ public class AdminAddTourActivity extends BaseActivity {
             isValid = false;
         }
         isValid &= validateNumericField(binding.priceTour, priceStr, "Giá tour", 0);
-        isValid &= validateNumericField(binding.bedNum, bedNumStr, "Số giường", 0);
+        isValid &= validateNumericField(binding.bedNum, bedNumStr, "Số giường", -1);
         isValid &= validateScoreField(binding.scoreTour, scoreStr);
-        isValid &= validateNumericField(binding.CategoryId, categoryIdStr, "Category ID", Integer.MIN_VALUE);
+        isValid &= validateNumericField(binding.CategoryId, categoryIdStr, "Category ID", -1);
 
         if (!isValid) showToast("Vui lòng kiểm tra lại thông tin!");
         return isValid;
@@ -375,7 +391,7 @@ public class AdminAddTourActivity extends BaseActivity {
         try {
             int number = Integer.parseInt(value);
             if (number < minValue) {
-                field.setError(fieldName + " phải lớn hơn hoặc bằng " + minValue);
+                field.setError(fieldName + " phải lớn hơn " + minValue);
                 return false;
             }
             return true;

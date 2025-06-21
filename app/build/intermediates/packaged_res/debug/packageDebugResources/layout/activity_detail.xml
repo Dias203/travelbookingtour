@@ -95,7 +95,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="24dp"
-                            android:text="@string/title_vie"
+                            android:text="@string/title_vie_1"
                             android:textAlignment="center"
                             android:textColor="@color/darkBlue"
                             android:textSize="24sp"
@@ -122,7 +122,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_weight="1"
-                                android:text="@string/address_vie"
+                                android:text="@string/address_vie_1"
                                 android:textColor="@color/darkBlue"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -239,7 +239,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
-                                    android:text="@string/distance_vie"
+                                    android:text="@string/distance_vie_1"
                                     android:textColor="@color/darkBlue"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"

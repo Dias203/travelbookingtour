@@ -32,40 +32,32 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\sp_item.xml",
-        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\sp_item.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_profile.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\sp_item.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\sp_item.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_admin_add_tour.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_admin_add_tour.xml"
     },
     {
-        "merged": "com.example.travel_app-mergeDebugResources-55:/layout/activity_admin_add_tour.xml",
-        "source": "com.example.travel_app-main-58:/layout/activity_admin_add_tour.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_forgot_password.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_forgot_password.xml"
-    },
-    {
-        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_all_oder.xml",
-        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_all_oder.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_intro.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_intro.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_detail.xml",
-        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_detail.xml"
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_all_oder.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_all_oder.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_favorite.xml",
-        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_favorite.xml"
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_detail.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_detail.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\viewholder_popular.xml",
@@ -94,6 +86,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_change_password_acitivity.xml",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-main-58:\\layout\\activity_change_password_acitivity.xml"
+    },
+    {
+        "merged": "com.example.travel_app-mergeDebugResources-55:/layout/activity_detail.xml",
+        "source": "com.example.travel_app-main-58:/layout/activity_detail.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.7\\com.example.travel_app-mergeDebugResources-55:\\layout\\activity_admin_main.xml",

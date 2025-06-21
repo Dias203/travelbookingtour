@@ -5,16 +5,19 @@
     <color name="blueTurquoise">#00BCD4</color>
     <color name="darkBlue">#253f66</color>
     <color name="lightGray">#efefef</color>
+    <color name="red">#E60C1B</color>
     <color name="white">#FFFFFFFF</color>
     <string name="add_tour_vie">Thêm Tour</string>
-    <string name="address_vie">Địa chỉ</string>
+    <string name="address_vie">Địa chỉ <font color="#E60C1B">(*)</font></string>
+    <string name="address_vie_1">Địa chỉ</string>
     <string name="admin_home_vie">Trang chủ Admin</string>
     <string name="all_ordered_vie">Tất cả đơn hàng</string>
     <string name="all_tour_vie">Tất cả Tour</string>
     <string name="all_vie">Tất cả</string>
     <string name="app_name">travel_app</string>
     <string name="cart_vie">Giỏ hàng</string>
-    <string name="category_vie">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4</string>
+    <string name="category_vie">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4 <font color="#E60C1B">(*)</font></string>
+    <string name="category_vie_1" translatable="false">Beach: 0, Camp: 1, Jungle: 2, Desert: 3, Moutaint: 4</string>
     <string name="change_language_vie">Thay đổi ngôn ngữ</string>
     <string name="change_password_vie">Thay đổi mật khẩu</string>
     <string name="click_to_login">Đã có tài khoản? <font color="#3F95EC">Đăng nhập </font></string>
@@ -22,10 +25,12 @@
     <string name="confirm_new_password_vie">Xác nhận mật khẩu mới</string>
     <string name="confirm_vie">Xác nhận</string>
     <string name="day_vie">Ngày</string>
-    <string name="departure_date_vie">Ngày khởi hành (dd/MM/yyyy)</string>
-    <string name="departure_time_vie">Thời gian khởi hành</string>
-    <string name="description_vie">Mô tả</string>
-    <string name="distance_vie">Khoảng cách</string>
+    <string name="departure_date_vie">Ngày khởi hành (dd/MM/yyyy) <font color="#E60C1B">(*)</font></string>
+    <string name="departure_time_vie">Thời gian khởi hành <font color="#E60C1B">(*)</font></string>
+    <string name="description_vie">Mô tả <font color="#E60C1B">(*)</font></string>
+    <string name="description_vie_1">Mô tả <font color="#E60C1B">(*)</font></string>
+    <string name="distance_vie">Khoảng cách <font color="#E60C1B">(*)</font></string>
+    <string name="distance_vie_1">Khoảng cách</string>
     <string name="download_ticket_vie">Tải ảnh xuống</string>
     <string name="duration_vie">Thời lượng</string>
     <string name="edit_tour_vie">Chỉnh sửa Tour</string>
@@ -34,15 +39,18 @@
     <string name="facebook_vie">Facebook</string>
     <string name="find_vie">Tìm kiếm</string>
     <string name="forgot_password"> <font color="#A9A8A8"> Quên mật khẩu? </font> </string>
+    <string name="fullName_vie">Họ và tên</string>
     <string name="gcm_defaultSenderId" translatable="false">360431585351</string>
     <string name="google_api_key" translatable="false">AIzaSyADbu1Dae1WVtBgEu-7uaL948VaUJgoseM</string>
     <string name="google_app_id" translatable="false">1:360431585351:android:a6e157bf4ba40019c30962</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyADbu1Dae1WVtBgEu-7uaL948VaUJgoseM</string>
     <string name="google_storage_bucket" translatable="false">travel-app-51c86.appspot.com</string>
-    <string name="guide_name_vie">Tên hướng dẫn viên</string>
-    <string name="guide_phone_vie">SĐT hướng dẫn viên</string>
+    <string name="guide_name_vie">Tên hướng dẫn viên <font color="#E60C1B">(*)</font></string>
+    <string name="guide_name_vie_1">Tên hướng dẫn viên</string>
+    <string name="guide_phone_vie">SĐT hướng dẫn viên <font color="#E60C1B">(*)</font></string>
+    <string name="guide_phone_vie_1">SĐT hướng dẫn viên</string>
     <string name="guide_vie">Hướng dẫn viên</string>
-    <string name="hotel_quality_vie">Chất lượng khách sạn</string>
+    <string name="hotel_quality_vie">Chất lượng khách sạn <font color="#E60C1B">(*)</font></string>
     <string name="hotel_vie">Khách sạn</string>
     <string name="info_vie">Thông tin</string>
     <string name="introTitle">Khám phá<font color="#3f95ec"> thế giới </font>\ncùng chúng tôi</string>
@@ -54,24 +62,27 @@
     <string name="num_people_vie">Số người</string>
     <string name="old_password_vie">Mật khẩu cũ</string>
     <string name="order_id_num_vie">Order Id:13112003</string>
-    <string name="password">Password</string>
+    <string name="password">Mật khẩu</string>
     <string name="payment_vie">Thanh toán</string>
     <string name="person_vie">/Người</string>
+    <string name="phoneNumber_vie">Số điện thoại</string>
     <string name="popular_vie">Popular</string>
-    <string name="price_vie">Giá</string>
+    <string name="price_vie">Giá <font color="#E60C1B">(*)</font></string>
     <string name="project_id" translatable="false">travel-app-51c86</string>
     <string name="purchased">Đã mua</string>
-    <string name="rating_vie">Đánh giá</string>
+    <string name="rating_vie">Đánh giá <font color="#E60C1B">(*)</font></string>
     <string name="recommend_vie">Recommend</string>
     <string name="register">Đăng ký</string>
+    <string name="required_text_vie">(*) Bắt buộc nhập</string>
     <string name="select_photo_vie">Chọn ảnh</string>
     <string name="show_ticket">Xuất trình vé này cho hướng dẫn viên trước khi khởi hành.</string>
     <string name="subIntro">Ứng dụng đặt vé du lịch giúp người dùng đặt vé máy bay và khách sạn với mức giá trọn gói thuận tiện.</string>
     <string name="ticket_detail_vie">Chi tiết vé</string>
     <string name="time_vie">Thời gian</string>
-    <string name="title_vie">Tiêu đề</string>
+    <string name="title_vie">Tiêu đề <font color="#E60C1B">(*)</font></string>
+    <string name="title_vie_1">Tiêu đề</string>
     <string name="tour_duration2_vie">Thời lượng chuyến đi</string>
-    <string name="tour_duration_vie">Thời lượng tour (D:day / N:night)</string>
+    <string name="tour_duration_vie">Thời lượng tour (N:Ngày - Day / Đ:Đêm - Night) <font color="#E60C1B">(*)</font></string>
     <string name="tour_management_vie">Quản lý Tour</string>
     <string name="tour_ordered_vie">Tour được đặt</string>
     <string name="tour_popular_vie">Điểm đến phổ biến</string>

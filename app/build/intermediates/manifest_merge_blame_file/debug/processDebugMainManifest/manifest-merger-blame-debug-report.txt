@@ -20,7 +20,7 @@
 14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 14-->G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:8:5-80
 14-->G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:8:22-77
-15    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> <!-- Thêm quyền truy cập trạng thái mạng -->
+15    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 15-->G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:9:5-82
 15-->G:\Study\Android Projects\Application\TravelApp-main\app\src\main\AndroidManifest.xml:9:22-79
 16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

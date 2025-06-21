@@ -2132,6 +2132,7 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color red
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -3059,6 +3060,7 @@ drawable baseline_edit_calendar_24
 drawable baseline_home_24
 drawable bed
 drawable bell_icon
+drawable bg_disable_payment
 drawable blue_bg
 drawable blue_turquoise_bg
 drawable bottom_btn1
@@ -3315,6 +3317,7 @@ id adjust_width
 id adminAddTour
 id adminAllOrder
 id adminAllTour
+id adminChangeLanguage
 id adminLogoutBtn
 id alertTitle
 id aligned
@@ -3691,6 +3694,8 @@ id pathRelative
 id paymentBtn
 id peekHeight
 id percent
+id phoneNum
+id phoneNumLayout
 id pic
 id picTour
 id pin
@@ -3880,12 +3885,17 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tv1
+id tv2
+id tv3
 id twitterBtn
 id unchecked
 id uniform
 id unlabeled
 id up
 id useLogo
+id userName
+id userNameLayout
 id vertical
 id vertical_only
 id view
@@ -4167,6 +4177,7 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string add_tour_vie
 string address_vie
+string address_vie_1
 string admin_home_vie
 string all_ordered_vie
 string all_tour_vie
@@ -4191,6 +4202,7 @@ string call_notification_ongoing_text
 string call_notification_screening_text
 string cart_vie
 string category_vie
+string category_vie_1
 string change_language_vie
 string change_password_vie
 string character_counter_content_description
@@ -4228,7 +4240,9 @@ string default_popup_window_title
 string departure_date_vie
 string departure_time_vie
 string description_vie
+string description_vie_1
 string distance_vie
+string distance_vie_1
 string download_ticket_vie
 string dropdown_menu
 string duration_vie
@@ -4246,13 +4260,16 @@ string fallback_menu_item_open_in_browser
 string fallback_menu_item_share_link
 string find_vie
 string forgot_password
+string fullName_vie
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
 string guide_name_vie
+string guide_name_vie_1
 string guide_phone_vie
+string guide_phone_vie_1
 string guide_vie
 string hide_bottom_view_on_scroll_behavior
 string hotel_quality_vie
@@ -4383,6 +4400,7 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string payment_vie
 string person_vie
+string phoneNumber_vie
 string popular_vie
 string price_vie
 string project_id
@@ -4392,6 +4410,7 @@ string range_start
 string rating_vie
 string recommend_vie
 string register
+string required_text_vie
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
@@ -4409,6 +4428,7 @@ string template_percent
 string ticket_detail_vie
 string time_vie
 string title_vie
+string title_vie_1
 string tour_duration2_vie
 string tour_duration_vie
 string tour_management_vie

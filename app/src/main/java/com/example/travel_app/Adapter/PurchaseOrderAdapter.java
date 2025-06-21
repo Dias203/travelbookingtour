@@ -1,8 +1,8 @@
 package com.example.travel_app.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -17,11 +17,13 @@ import com.example.travel_app.databinding.ViewholderCartBinding;
 import java.util.ArrayList;
 
 public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdapter.ViewHolder> {
+    private static final String TAG = "PurchasedAdapter";
+
     private final ArrayList<ItemDomain> items;
     private Context context;
 
     public PurchaseOrderAdapter(ArrayList<ItemDomain> items) {
-        this.items = items != null ? items : new ArrayList<>(); // Khởi tạo danh sách rỗng nếu null
+        this.items = items;
     }
 
     @NonNull
@@ -34,13 +36,25 @@ public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // Kiểm tra bounds trước khi lấy item
+        if (position < 0 || position >= items.size()) {
+            Log.e(TAG, "Invalid position: " + position + ", list size: " + items.size());
+            return;
+        }
+
         ItemDomain item = items.get(position);
+        if (item == null) {
+            Log.e(TAG, "Item is null at position: " + position);
+            return;
+        }
+
         bindDataToViewHolder(holder.binding, item);
         setupItemClickListener(holder, item);
+        logItemDetails(position, item);
     }
 
     /**
-     * Gán dữ liệu của đơn hàng vào các view trong ViewHolder
+     * Gán dữ liệu của item vào các view trong ViewHolder
      */
     private void bindDataToViewHolder(ViewholderCartBinding binding, ItemDomain item) {
         binding.titleTxt.setText(item.getTitle());
@@ -59,20 +73,70 @@ public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdap
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, TicketActivity.class);
             intent.putExtra("object", item);
+            //intent.putExtra("numPeople", item.getNumOfPeople()); // thêm dòng này
             context.startActivity(intent);
+
         });
     }
 
     /**
-     * Trả về số lượng đơn hàng trong danh sách
+     * Ghi log thông tin item để kiểm tra
      */
-    @Override
-    public int getItemCount() {
-        return items.size();
+    private void logItemDetails(int position, ItemDomain item) {
+        Log.d(TAG, "Position: " + position + ", Title: " + item.getTitle());
     }
 
     /**
-     * ViewHolder để ánh xạ các view trong layout của mỗi đơn hàng
+     * Trả về số lượng item trong danh sách
+     */
+    @Override
+    public int getItemCount() {
+        return items != null ? items.size() : 0;
+    }
+
+    /**
+     * Lấy item tại vị trí cụ thể - AN TOÀN với kiểm tra bounds
+     */
+    public ItemDomain getItem(int position) {
+        if (position >= 0 && position < items.size()) {
+            return items.get(position);
+        }
+        Log.e(TAG, "getItem: Invalid position " + position + " for list size " + items.size());
+        return null;
+    }
+
+    /**
+     * Cập nhật danh sách item và thông báo thay đổi
+     */
+    public void updateItems(ArrayList<ItemDomain> newItems) {
+        if (newItems != null) {
+            items.clear();
+            items.addAll(newItems);
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Xóa item tại vị trí cụ thể
+     */
+    public void removeItem(int position) {
+        if (position >= 0 && position < items.size()) {
+            items.remove(position);
+            notifyItemRemoved(position);
+            // Cập nhật lại các position sau khi xóa
+            notifyItemRangeChanged(position, items.size());
+        }
+    }
+
+    /**
+     * Lấy danh sách items hiện tại
+     */
+    public ArrayList<ItemDomain> getItems() {
+        return items;
+    }
+
+    /**
+     * ViewHolder để ánh xạ các view trong layout của mỗi item
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final ViewholderCartBinding binding;
@@ -81,22 +145,5 @@ public class PurchaseOrderAdapter extends RecyclerView.Adapter<PurchaseOrderAdap
             super(binding.getRoot());
             this.binding = binding;
         }
-    }
-
-    /**
-     * Cập nhật danh sách đơn hàng và thông báo thay đổi
-     */
-    @SuppressLint("NotifyDataSetChanged")
-    public void updateItems(ArrayList<ItemDomain> newItems) {
-        items.clear();
-        items.addAll(newItems != null ? newItems : new ArrayList<>());
-        notifyDataSetChanged();
-    }
-
-    /**
-     * Lấy đơn hàng tại vị trí cụ thể
-     */
-    public ItemDomain getItem(int position) {
-        return items.get(position);
     }
 }

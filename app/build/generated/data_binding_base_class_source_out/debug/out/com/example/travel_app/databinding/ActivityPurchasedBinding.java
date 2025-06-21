@@ -37,16 +37,20 @@ public final class ActivityPurchasedBinding implements ViewBinding {
   @NonNull
   public final TextView textView5;
 
+  @NonNull
+  public final TextView tv1;
+
   private ActivityPurchasedBinding(@NonNull ConstraintLayout rootView,
       @NonNull ChipNavigationBar bottomnav, @NonNull ConstraintLayout main,
       @NonNull ProgressBar progressBarListItem, @NonNull RecyclerView recyclerView,
-      @NonNull TextView textView5) {
+      @NonNull TextView textView5, @NonNull TextView tv1) {
     this.rootView = rootView;
     this.bottomnav = bottomnav;
     this.main = main;
     this.progressBarListItem = progressBarListItem;
     this.recyclerView = recyclerView;
     this.textView5 = textView5;
+    this.tv1 = tv1;
   }
 
   @Override
@@ -102,8 +106,14 @@ public final class ActivityPurchasedBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv1;
+      TextView tv1 = ViewBindings.findChildViewById(rootView, id);
+      if (tv1 == null) {
+        break missingId;
+      }
+
       return new ActivityPurchasedBinding((ConstraintLayout) rootView, bottomnav, main,
-          progressBarListItem, recyclerView, textView5);
+          progressBarListItem, recyclerView, textView5, tv1);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

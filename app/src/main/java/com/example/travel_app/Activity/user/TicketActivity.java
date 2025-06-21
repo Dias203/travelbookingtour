@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Domain.ItemDomain;
+import com.example.travel_app.R;
 import com.example.travel_app.ZaloPaySdk.Api.CreateOrder;
 import com.example.travel_app.databinding.ActivityTicketBinding;
 import com.google.firebase.auth.FirebaseAuth;

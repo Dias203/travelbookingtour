@@ -87,6 +87,9 @@ public final class ActivityAdminEditBinding implements ViewBinding {
   @NonNull
   public final TextView textView5;
 
+  @NonNull
+  public final TextView tv3;
+
   private ActivityAdminEditBinding(@NonNull ConstraintLayout rootView, @NonNull ImageView backBtn,
       @NonNull CardView cardView, @NonNull EditText editAddressTour, @NonNull EditText editBedNum,
       @NonNull EditText editCategoryId, @NonNull EditText editDateTour,
@@ -96,8 +99,8 @@ public final class ActivityAdminEditBinding implements ViewBinding {
       @NonNull EditText editTitleTour, @NonNull EditText editTourGuideName,
       @NonNull EditText editTourGuidePhone, @NonNull ConstraintLayout main,
       @NonNull ImageView picTour, @NonNull CheckBox popularCheckBox,
-      @NonNull CheckBox recommendCheckBox, @NonNull Button saveButton,
-      @NonNull TextView textView5) {
+      @NonNull CheckBox recommendCheckBox, @NonNull Button saveButton, @NonNull TextView textView5,
+      @NonNull TextView tv3) {
     this.rootView = rootView;
     this.backBtn = backBtn;
     this.cardView = cardView;
@@ -120,6 +123,7 @@ public final class ActivityAdminEditBinding implements ViewBinding {
     this.recommendCheckBox = recommendCheckBox;
     this.saveButton = saveButton;
     this.textView5 = textView5;
+    this.tv3 = tv3;
   }
 
   @Override
@@ -271,11 +275,17 @@ public final class ActivityAdminEditBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv3;
+      TextView tv3 = ViewBindings.findChildViewById(rootView, id);
+      if (tv3 == null) {
+        break missingId;
+      }
+
       return new ActivityAdminEditBinding((ConstraintLayout) rootView, backBtn, cardView,
           editAddressTour, editBedNum, editCategoryId, editDateTour, editDescriptionTour,
           editDistanceTour, editDurationTour, editPriceTour, editScoreTour, editTimeTour,
           editTitleTour, editTourGuideName, editTourGuidePhone, main, picTour, popularCheckBox,
-          recommendCheckBox, saveButton, textView5);
+          recommendCheckBox, saveButton, textView5, tv3);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

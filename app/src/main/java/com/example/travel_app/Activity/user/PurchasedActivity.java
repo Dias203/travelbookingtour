@@ -81,9 +81,11 @@ public class PurchasedActivity extends BaseActivity {
         if (user == null) {
             Intent intent = new Intent(this, LoginActivity.class);
             intent.putExtra("caller", "PurchasedActivity");
+            //binding.tv1.setVisibility(View.VISIBLE);
             startActivityForResult(intent, LOGIN_REQUEST_CODE);
             return;
         }
+        binding.tv1.setVisibility(View.GONE);
 
         showLoading(true);
         ExecutorService executor = Executors.newSingleThreadExecutor();

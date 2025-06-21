@@ -66,14 +66,26 @@
                         tools:ignore="ContentDescription" />
                 </androidx.cardview.widget.CardView>
 
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/required_text_vie"
+                    android:textColor="@color/red"
+                    android:paddingHorizontal="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView"
+                    tools:ignore="Autofill,TextFields,UnusedAttribute" />
+
                 <EditText
                     android:id="@+id/editCategoryId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/category_vie"
+                    android:hint="@string/category_vie_1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@+id/tv3"
                     tools:ignore="Autofill,TextFields,UnusedAttribute" />
 
                 <EditText
@@ -120,7 +132,7 @@
                     android:id="@+id/editTimeTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/departure_date_vie"
+                    android:hint="@string/departure_time_vie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editDateTour"
@@ -130,7 +142,7 @@
                     android:id="@+id/editDescriptionTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/description_vie"
+                    android:hint="@string/description_vie_1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTimeTour"
@@ -150,7 +162,7 @@
                     android:id="@+id/editDistanceTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/distance_vie"
+                    android:hint="@string/distance_vie_1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editDurationTour"
@@ -180,7 +192,7 @@
                     android:id="@+id/editTourGuideName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/guide_name_vie"
+                    android:hint="@string/guide_name_vie_1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="Autofill,TextFields"
@@ -190,7 +202,7 @@
                     android:id="@+id/editTourGuidePhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/guide_phone_vie"
+                    android:hint="@string/guide_phone_vie_1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTourGuideName"

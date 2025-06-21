@@ -60,6 +60,20 @@
         app:layout_constraintTop_toBottomOf="@+id/adminAddTour" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/adminChangeLanguage"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_btn_blue"
+        android:drawableEnd="@drawable/language"
+        android:text="@string/change_language_vie"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/adminAllOrder"
+        app:layout_constraintStart_toStartOf="@+id/adminAllOrder"
+        app:layout_constraintTop_toBottomOf="@+id/adminAllOrder" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adminLogoutBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -68,9 +82,9 @@
         android:drawableEnd="@drawable/exit"
         android:text="@string/logout"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/adminAllOrder"
-        app:layout_constraintStart_toStartOf="@+id/adminAllOrder"
-        app:layout_constraintTop_toBottomOf="@+id/adminAllOrder" />
+        app:layout_constraintEnd_toEndOf="@+id/adminChangeLanguage"
+        app:layout_constraintStart_toStartOf="@+id/adminChangeLanguage"
+        app:layout_constraintTop_toBottomOf="@+id/adminChangeLanguage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

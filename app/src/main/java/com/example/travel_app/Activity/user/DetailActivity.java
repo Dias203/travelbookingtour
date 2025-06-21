@@ -44,6 +44,7 @@ public class DetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: 1231323");
         initializeViews();
         retrieveTourData();
         setupUI();
@@ -107,6 +108,7 @@ public class DetailActivity extends BaseActivity {
         });
 
         binding.addShoppingCart.setOnClickListener(view -> {
+            Log.i(TAG, "setupClickListeners: " + isFavClicked);
             if (!isFavClicked) {
                 isFavClicked = true;
                 binding.addShoppingCart.setImageResource(R.drawable.remove_shopping_cart);
@@ -124,6 +126,7 @@ public class DetailActivity extends BaseActivity {
     private void setEnableAddCart() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
+            showToast("Bạn chưa đăng nhập tài khoản!");
             binding.addShoppingCart.setEnabled(false);
             binding.addShoppingCart.setAlpha(0.5f);
             return;

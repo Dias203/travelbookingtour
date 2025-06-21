@@ -171,12 +171,12 @@ public class AdminEditActivity extends BaseActivity {
         boolean isValid = true;
 
         if (title.isEmpty() || !title.matches("[a-zA-ZÀ-ỹ\\s]+")) {
-            showToast("Tiêu đề chỉ được chứa chữ cái và khoảng trắng");
+            showToast("Tiêu đề không chứa ký tự đặc biệt");
             return false;
         }
 
         if (address.isEmpty() || !address.matches("[a-zA-ZÀ-ỹ0-9\\s,.]+")) {
-            showToast("Địa chỉ chỉ được chứa chữ cái, số và khoảng trắng");
+            showToast("Địa chỉ không chứa ký tự đặc biệt");
             return false;
         }
 
@@ -277,14 +277,14 @@ public class AdminEditActivity extends BaseActivity {
         if (durationStr.isEmpty()) {
             showToast("Vui lòng nhập thời lượng tour");
             return false;
-        } else if (!durationStr.matches("^\\d+D/\\d+N$")) {
-            showToast("Thời lượng tour không hợp lệ (định dạng numD/numN, ví dụ: 4D/3N)");
+        } else if (!durationStr.matches("^\\d+N/\\d+Đ$")) {
+            showToast("Thời lượng tour không hợp lệ (định dạng numN/numĐ, ví dụ: 4N/3Đ)");
             return false;
         } else {
             try {
                 String[] parts = durationStr.split("/");
-                int days = Integer.parseInt(parts[0].replace("D", ""));
-                int nights = Integer.parseInt(parts[1].replace("N", ""));
+                int days = Integer.parseInt(parts[0].replace("N", ""));
+                int nights = Integer.parseInt(parts[1].replace("Đ", ""));
                 if (days < nights) {
                     showToast("Số ngày phải lớn hơn hoặc bằng số đêm");
                     return false;
@@ -305,12 +305,12 @@ public class AdminEditActivity extends BaseActivity {
         }
         try {
             int bedNum = Integer.parseInt(bedNumStr);
-            if (bedNum < 1 || bedNum > 10) {
-                showToast("Số giường phải từ 1 đến 10");
+            if (bedNum < 1 || bedNum > 5) {
+                showToast("Chất lượng khách sạn phải từ 1 đến 10");
                 return false;
             }
         } catch (NumberFormatException e) {
-            showToast("Sai định dạng chất luượng khách sạn. Vui lòng nhập số nguyên!");
+            showToast("Sai định dạng chất lượng khách sạn. Vui lòng nhập số nguyên!");
             return false;
         }
 

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travel_app.Activity.BaseActivity;
 import com.example.travel_app.Activity.user.LoginActivity;
-import com.example.travel_app.Adapter.PurchasedAdapter;
+import com.example.travel_app.Adapter.PurchaseOrderAdapter;
 import com.example.travel_app.Domain.ItemDomain;
 import com.example.travel_app.databinding.ActivityAllOderBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +32,7 @@ public class AllOderActivity extends BaseActivity {
 
     private ActivityAllOderBinding binding;
     private ArrayList<ItemDomain> itemList = new ArrayList<>();
-    private PurchasedAdapter adapter;
+    private PurchaseOrderAdapter adapter;
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private final DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Purchased");
@@ -115,7 +115,7 @@ public class AllOderActivity extends BaseActivity {
      */
     private void setupRecyclerView() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter = new PurchasedAdapter(itemList);
+        adapter = new PurchaseOrderAdapter(itemList);
         binding.recyclerView.setAdapter(adapter);
         //setupSwipeToDelete();
     }

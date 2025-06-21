@@ -90,6 +90,9 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
   @NonNull
   public final EditText tourGuidePhone;
 
+  @NonNull
+  public final TextView tv2;
+
   private ActivityAdminAddTourBinding(@NonNull ConstraintLayout rootView,
       @NonNull EditText CategoryId, @NonNull Button addTourButton, @NonNull EditText addressTour,
       @NonNull ImageView backBtn, @NonNull EditText bedNum, @NonNull CardView cardView,
@@ -98,7 +101,7 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
       @NonNull ImageView picTour, @NonNull CheckBox popularCheckBox, @NonNull EditText priceTour,
       @NonNull CheckBox recommendCheckBox, @NonNull EditText scoreTour, @NonNull TextView textView5,
       @NonNull EditText timeTour, @NonNull EditText titleTour, @NonNull EditText tourGuideName,
-      @NonNull EditText tourGuidePhone) {
+      @NonNull EditText tourGuidePhone, @NonNull TextView tv2) {
     this.rootView = rootView;
     this.CategoryId = CategoryId;
     this.addTourButton = addTourButton;
@@ -122,6 +125,7 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
     this.titleTour = titleTour;
     this.tourGuideName = tourGuideName;
     this.tourGuidePhone = tourGuidePhone;
+    this.tv2 = tv2;
   }
 
   @Override
@@ -279,10 +283,16 @@ public final class ActivityAdminAddTourBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv2;
+      TextView tv2 = ViewBindings.findChildViewById(rootView, id);
+      if (tv2 == null) {
+        break missingId;
+      }
+
       return new ActivityAdminAddTourBinding((ConstraintLayout) rootView, CategoryId, addTourButton,
           addressTour, backBtn, bedNum, cardView, dateTour, descriptionTour, distanceTour,
           durationTour, hintSuggest, main, picTour, popularCheckBox, priceTour, recommendCheckBox,
-          scoreTour, textView5, timeTour, titleTour, tourGuideName, tourGuidePhone);
+          scoreTour, textView5, timeTour, titleTour, tourGuideName, tourGuidePhone, tv2);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

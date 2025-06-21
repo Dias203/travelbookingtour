@@ -30,6 +30,9 @@ public final class ActivityAdminMainBinding implements ViewBinding {
   public final AppCompatButton adminAllTour;
 
   @NonNull
+  public final AppCompatButton adminChangeLanguage;
+
+  @NonNull
   public final AppCompatButton adminLogoutBtn;
 
   @NonNull
@@ -40,12 +43,14 @@ public final class ActivityAdminMainBinding implements ViewBinding {
 
   private ActivityAdminMainBinding(@NonNull ConstraintLayout rootView,
       @NonNull AppCompatButton adminAddTour, @NonNull AppCompatButton adminAllOrder,
-      @NonNull AppCompatButton adminAllTour, @NonNull AppCompatButton adminLogoutBtn,
-      @NonNull ConstraintLayout main, @NonNull TextView textView5) {
+      @NonNull AppCompatButton adminAllTour, @NonNull AppCompatButton adminChangeLanguage,
+      @NonNull AppCompatButton adminLogoutBtn, @NonNull ConstraintLayout main,
+      @NonNull TextView textView5) {
     this.rootView = rootView;
     this.adminAddTour = adminAddTour;
     this.adminAllOrder = adminAllOrder;
     this.adminAllTour = adminAllTour;
+    this.adminChangeLanguage = adminChangeLanguage;
     this.adminLogoutBtn = adminLogoutBtn;
     this.main = main;
     this.textView5 = textView5;
@@ -96,6 +101,12 @@ public final class ActivityAdminMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.adminChangeLanguage;
+      AppCompatButton adminChangeLanguage = ViewBindings.findChildViewById(rootView, id);
+      if (adminChangeLanguage == null) {
+        break missingId;
+      }
+
       id = R.id.adminLogoutBtn;
       AppCompatButton adminLogoutBtn = ViewBindings.findChildViewById(rootView, id);
       if (adminLogoutBtn == null) {
@@ -111,7 +122,7 @@ public final class ActivityAdminMainBinding implements ViewBinding {
       }
 
       return new ActivityAdminMainBinding((ConstraintLayout) rootView, adminAddTour, adminAllOrder,
-          adminAllTour, adminLogoutBtn, main, textView5);
+          adminAllTour, adminChangeLanguage, adminLogoutBtn, main, textView5);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
